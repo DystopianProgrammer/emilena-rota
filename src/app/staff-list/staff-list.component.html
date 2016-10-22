@@ -1,0 +1,23 @@
+<div class="staff-list-container">
+	<div *ngFor="let s of staff" class="list-item">
+		<md-card>
+			<md-card-subtitle>{{ s.forename }}</md-card-subtitle>
+			<md-card-title>{{ s.surname }}</md-card-title>
+			<md-card-content>
+				<p>
+					<strong>Address:</strong> {{ s.address.firstLine }} {{ s.address.secondLine }}, {{ s.address.town }}, {{ s.address.postCode }}
+				</p>
+        <p>
+          <strong>Telephone:</strong> {{ s.telephoneNumber }}
+        </p>
+        <p>
+          <strong>E-mail:</strong> {{ s.email }}
+        </p>
+			</md-card-content>
+			<md-card-actions>
+				<button md-button>EDIT</button>
+				<button md-button>DELETE</button>
+			</md-card-actions>
+		</md-card>
+	</div>
+</div>

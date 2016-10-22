@@ -1,0 +1,12 @@
+<md-card>
+    <md-card-subtitle>Client Information</md-card-subtitle>
+    <md-card-content>
+        <md-input placeholder="forename" align="end" [(ngModel)]="client.forename"></md-input>
+        <md-input placeholder="surname" align="end" [(ngModel)]="client.surname"></md-input>
+        <md-input placeholder="email" align="end" [(ngModel)]="client.email"></md-input>
+        <md-input placeholder="dob" align="end" [(ngModel)]="client.dob"></md-input>
+        <md-input placeholder="telephone" align="end" [(ngModel)]="client.telephoneNumber"></md-input>
+    </md-card-content>
+</md-card>
+
+<button md-raised-button color="primary" (click)="next()">Next</button>

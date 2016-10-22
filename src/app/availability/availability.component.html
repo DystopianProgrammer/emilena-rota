@@ -1,0 +1,20 @@
+<md-card>
+	<md-card-subtitle>Add Availability</md-card-subtitle>
+	<md-card-content>
+		<label for="availability">Day:</label>
+		<select name="availability" [(ngModel)]="availability.dayOfWeek">
+			<option *ngFor="let day of days" [value]="day">{{ day | capitalizeFirst }}</option>
+		</select>
+		<label for="from">From:</label>
+		<md-input type="text" name="from" placeholder="hh:mm" [(ngModel)]="availability.fromTime">
+			<md-hint align="end">24hrs</md-hint>
+		</md-input>
+		<label for="to">To:</label>
+		<md-input type="text" name="to" placeholder="hh:mm" [(ngModel)]="availability.toTime">
+			<md-hint align="end">24hrs</md-hint>
+		</md-input>
+	</md-card-content>
+	<md-card-actions>
+		<button (click)="add()" md-button>ADD</button>
+	</md-card-actions>
+</md-card>
