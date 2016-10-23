@@ -1,12 +1,12 @@
 import { Component, OnInit, HostBinding, trigger, transition, animate, style, state } from '@angular/core';
 
-import { Staff } from '../model';
+import { Client } from '../model';
 import { PersonService } from '../person.service';
 
 @Component({
-  selector: 'app-staff-list',
-  templateUrl: './staff-list.component.html',
-  styleUrls: ['./staff-list.component.css'],
+  selector: 'app-client-summary',
+  templateUrl: './client-summary.component.html',
+  styleUrls: ['./client-summary.component.css'],
   animations: [
     trigger('routeAnimation', [
       state('*',
@@ -28,11 +28,10 @@ import { PersonService } from '../person.service';
     ])
   ]
 })
-export class StaffListComponent implements OnInit {
+export class ClientSummaryComponent implements OnInit {
 
-  staff: Staff[];
-  filtered: string;
-  
+  client: Client;
+
   @HostBinding('@routeAnimation') get routeAnimation() {
     return true;
   }
@@ -44,9 +43,7 @@ export class StaffListComponent implements OnInit {
   constructor(private personService: PersonService) { }
 
   ngOnInit() {
-    this.personService.staff().subscribe(staff => {
-      this.staff = staff;
-    });
+    this.client = <Client>this.personService.person;
   }
 
 }

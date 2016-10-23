@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { validate } from 'class-validator';
 
-import { Staff, Availability, Address } from '../model';
+import { Staff, Availability, Address, Client } from '../model';
 import { PersonService } from '../person.service';
 
 @Component({
@@ -46,12 +46,13 @@ export class StaffUpdateComponent implements OnInit {
   constructor(private personService: PersonService, private router: Router) { }
 
   ngOnInit() {
-
-    this.staff = <Staff>this.personService.person;
-    if (!this.staff) {
+    if (!this.personService.person || this.personService.person instanceof Client) {
       this.staff = new Staff();
       this.staff.availabilities = [];
       this.staff.address = new Address();
+      this.personService.person = this.staff;
+    } else {
+      this.staff = <Staff>this.personService.person;
     }
   }
 
@@ -60,7 +61,6 @@ export class StaffUpdateComponent implements OnInit {
       if (errors.length > 0) {
         console.warn(errors);
       } else {
-        this.personService.person = this.staff;
         this.router.navigate(['staff/staff-summary']);
       }
     });

@@ -5,18 +5,21 @@
 			<md-card-content>
 				<md-input placeholder="Company (disabled)" disabled value="Frances Taylor Foundation"></md-input>
 				<div>
+					<p><strong>Name:</strong></p>
 					<md-input placeholder="First name" name="forename" [(ngModel)]="staff.forename"></md-input>
 					<md-input placeholder="Surname" name="surname" [(ngModel)]="staff.surname"></md-input>
 				</div>
 				<div>
+					<p><strong>Contact:</strong></p>
 					<md-input placeholder="E-mail" name="email" [(ngModel)]="staff.email"></md-input>
 					<md-input placeholder="Telephone" name="telephone" [(ngModel)]="staff.telephoneNumber"></md-input>
 				</div>
 				<div>
-					<md-input placeholder="Address" name="address1" [(ngModel)]="staff.address.firstLine"></md-input>
-					<md-input placeholder="Address 2" name="address2" [(ngModel)]="staff.address.secondLine"></md-input>
-					<md-input placeholder="City" name="address3" [(ngModel)]="staff.address.town"></md-input>
-					<md-input #postalCode maxlength="9" placeholder="Postal Code" name="address5" [(ngModel)]="staff.address.postCode">
+					<p><strong>Address:</strong></p>
+					<md-input placeholder="First line" name="address1" [(ngModel)]="staff.address.firstLine"></md-input>
+					<md-input placeholder="Second line" name="address2" [(ngModel)]="staff.address.secondLine"></md-input>
+					<md-input placeholder="Town/city" name="address3" [(ngModel)]="staff.address.town"></md-input>
+					<md-input #postalCode maxlength="9" placeholder="Post code" name="address5" [(ngModel)]="staff.address.postCode">
 						<md-hint align="end">{{ postalCode.characterCount }} / 9</md-hint>
 					</md-input>
 				</div>

@@ -23,6 +23,7 @@ import { StaffSuccessComponent } from './staff-success/staff-success.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { CapitalizeFirstPipe } from './capitalize-first.pipe';
 import { StaffListComponent } from './staff-list/staff-list.component';
+import { ClientSummaryComponent } from './client-summary/client-summary.component';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { StaffListComponent } from './staff-list/staff-list.component';
     StaffSuccessComponent,
     AvailabilityComponent,
     CapitalizeFirstPipe,
-    StaffListComponent
+    StaffListComponent,
+    ClientSummaryComponent
   ],
   providers: [
     AuthService,

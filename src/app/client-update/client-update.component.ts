@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding, trigger, transition, animate, style, state } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Client } from '../model';
+import { Client, Address, Staff } from '../model';
 import { PersonService } from '../person.service';
 
 @Component({
@@ -44,12 +44,18 @@ export class ClientUpdateComponent implements OnInit {
   constructor(private personService: PersonService, private router: Router) { }
 
   ngOnInit() {
-    this.client = new Client();
+    if (!this.personService.person || this.personService.person instanceof Staff) {
+      this.client = new Client();
+      this.client.address = new Address();
+      this.client.availabilities = [];
+      this.personService.person = this.client;
+    } else {
+      this.client = <Client>this.personService.person;
+    }
   }
 
   next() {
-    this.personService.person = this.client;
-    // this.router.navigate(['client/address']);
+    this.router.navigate(['client/summary']);
   }
 }
 

@@ -30,7 +30,7 @@ export class AuthComponent implements OnInit {
 
     let loginAction = (isAuthorised) => {
       if (isAuthorised) {
-        this.router.navigate(['staff/update']);
+        this.router.navigate(['home']);
       } else {
         this.attempts++;
       }

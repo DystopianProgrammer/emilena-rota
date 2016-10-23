@@ -43,6 +43,11 @@ export class ClientComponent implements OnInit {
   update() {
     this.router.navigate(['client/update']);
   }
+
+  list() {
+    console.log('routing list');
+  }
+
 }
 
 
