@@ -13,17 +13,11 @@ import { AuthComponent } from './auth/auth.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HomeComponent } from './home/home.component';
 import { RotaComponent } from './rota/rota.component';
-import { StaffComponent } from './staff/staff.component';
-import { ClientComponent } from './client/client.component';
 import { PersonService } from './person.service';
-import { StaffUpdateComponent } from './staff-update/staff-update.component';
-import { ClientUpdateComponent } from './client-update/client-update.component';
-import { StaffSummaryComponent } from './staff-summary/staff-summary.component';
-import { StaffSuccessComponent } from './staff-success/staff-success.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import { CapitalizeFirstPipe } from './capitalize-first.pipe';
-import { StaffListComponent } from './staff-list/staff-list.component';
-import { ClientSummaryComponent } from './client-summary/client-summary.component';
+import { PersonComponent } from './person/person.component';
+import { PersonSummaryComponent } from './person-summary/person-summary.component';
 
 @NgModule({
   imports: [
@@ -39,16 +33,10 @@ import { ClientSummaryComponent } from './client-summary/client-summary.componen
     ErrorPageComponent,
     HomeComponent,
     RotaComponent,
-    StaffComponent,
-    ClientComponent,
-    StaffUpdateComponent,
-    ClientUpdateComponent,
-    StaffSummaryComponent,
-    StaffSuccessComponent,
     AvailabilityComponent,
     CapitalizeFirstPipe,
-    StaffListComponent,
-    ClientSummaryComponent
+    PersonComponent,
+    PersonSummaryComponent
   ],
   providers: [
     AuthService,

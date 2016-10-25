@@ -1,29 +1,11 @@
-import { Component, OnInit, HostBinding, trigger, transition, animate, style, state } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
+import { animations } from '../shared/index';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  animations: [
-    trigger('routeAnimation', [
-      state('*',
-        style({
-          opacity: 1
-        })
-      ),
-      transition('void => *', [
-        style({
-          opacity: 0
-        }),
-        animate('0.2s ease-in')
-      ]),
-      transition('* => void', [
-        animate('0.5s ease-out', style({
-          opacity: 0
-        }))
-      ])
-    ])
-  ]
+  animations
 })
 export class HomeComponent implements OnInit {
 

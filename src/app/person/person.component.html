@@ -1,0 +1,65 @@
+<div class="container">
+	<h1 class="container-item">{{ title }}</h1>
+</div>
+<div class="container">
+	<!--person details including address-->
+	<md-card>
+		<md-card-subtitle>Details</md-card-subtitle>
+		<md-card-content>
+			<div>
+				<md-input name="forename" placeholder="Forename" [(ngModel)]="person.forename"></md-input>
+				<md-input name="surname" placeholder="Surname"></md-input>
+			</div>
+			<div>
+				<md-input name="email" placeholder="E-mail"></md-input>
+				<md-input name="phone" placeholder="Telephone"></md-input>
+			</div>
+			<div>
+				<md-input name="line1" placeholder="Address Line 1"></md-input>
+				<md-input name="line2" placeholder="Address Line 2"></md-input>
+			</div>
+			<div>
+				<md-input name="city" placeholder="Town/City"></md-input>
+				<md-input name="county" placeholder="County"></md-input>
+				<md-input name="postcode" #postalCode maxlength="9" placeholder="Postal Code">
+					<md-hint align="end">{{postalCode.characterCount}} / 9</md-hint>
+				</md-input>
+			</div>
+		</md-card-content>
+	</md-card>
+	<!--notes for person-->
+	<md-card>
+		<md-card-subtitle>Notes</md-card-subtitle>
+		<md-card-content>
+			<textarea></textarea>
+		</md-card-content>
+	</md-card>
+	<!--assign availabilities-->
+	<availability></availability>
+	<!--assigned availabilities-->
+	<md-card>
+		<md-card-subtitle>Availabilities</md-card-subtitle>
+		<md-card-content>
+			<p *ngIf="person.availabilities.length < 1">None to display</p>
+		</md-card-content>
+	</md-card>
+	<!--person relationships - preferred staff assignment-->
+	<md-card *ngIf="isClient">
+		<md-card-subtitle>Preferred assignee</md-card-subtitle>
+		<md-card-content>
+			<select name="assignees" [(ngModel)]="assigneeId">
+        <option *ngFor="let p of people" [value]="p.id">{{ p.surname }}, {{ p.forename }} </option>
+      </select>
+			<button md-button (click)="addAssignee()">ADD</button>
+			<table>
+				<tr *ngFor="let staff of person.staff">
+					<td>{{ staff.surname }}, {{ staff.forename }}</td>
+					<td><button md-button>Remove</button></td>
+				</tr>
+			</table>
+		</md-card-content>
+	</md-card>
+</div>
+<div class="container">
+	<button (click)="next()" class="container-item" md-raised-button>Next</button>
+</div>
