@@ -1,19 +1,17 @@
-import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { validate } from 'class-validator';
+import { validate, ValidationError } from 'class-validator';
 
-import { Person, Client, Staff, Address } from '../model';
+import { Person, Client, Staff, Address, Availability } from '../model';
 import { PersonService } from '../person.service';
-import { animations } from '../shared/index';
 import { ErrorService } from '../error.service';
 
 
 @Component({
   selector: 'app-person',
   templateUrl: './person.component.html',
-  styleUrls: ['./person.component.css'],
-  animations
+  styleUrls: ['./person.component.css']
 })
 export class PersonComponent implements OnInit, OnDestroy {
 
@@ -22,9 +20,6 @@ export class PersonComponent implements OnInit, OnDestroy {
 
   // model object shared between staff and client (instanceof)
   person: any;
-
-  // holds any validation errors - this needs to be reset before each submit
-  errors: string[] = [];
 
   // list of clients or staff
   people: Person[];
@@ -35,14 +30,11 @@ export class PersonComponent implements OnInit, OnDestroy {
   // is client - for staff assignee
   isClient: boolean;
 
-  @HostBinding('@routeAnimation') get routeAnimation() {
-    return true;
-  }
-
   private person$: Subscription;
 
   constructor(
     private router: Router,
+    private viewContainerRef: ViewContainerRef,
     private errorService: ErrorService,
     private personService: PersonService) { }
 
@@ -56,13 +48,55 @@ export class PersonComponent implements OnInit, OnDestroy {
   }
 
   next() {
-    this.router.navigate(['summary']);
+    validate(this.person).then(errors => {
+      if (errors.length < 1) {
+        this.personService.person = this.person;
+        this.router.navigate(['summary']);
+      } else {
+        let properties = errors.map(error => {
+          return error.property;
+        }).join(', ');
+        console.log(properties);
+      }
+    });
   }
 
-  addAssignee() {
+  navigateList() {
+    if (this.isClient) {
+      this.router.navigate(['client-list', { type: 'clients' }]);
+    } else {
+      this.router.navigate(['staff-list', { type: 'staff' }]);
+    }
+  }
+
+  /**
+   * Assigns a client to staff member, if not already assigned
+   */
+  assignStaffToClient() {
     if (this.assigneeId) {
       let staff = this.people.find(p => p.id == this.assigneeId);
-      this.person.staff.push(staff);
+      let allocated = this.person.staff.find(s => s.id == this.assigneeId);
+      if (allocated == undefined) {
+        this.person.staff.push(staff);
+      }
+    }
+  }
+
+  /**
+   * Removes an assignment of staff to client
+   */
+  removeStaffAssignment(index: number) {
+    this.person.staff.splice(index, 1);
+  }
+
+  /**
+   * Assigns the single availability to the person if not a validation error.
+   */
+  updateAvailabilities(event: any) {
+    if (event instanceof Array) {
+      console.log(event);
+    } else {
+      this.person.availabilities.push(event);
     }
   }
 
@@ -99,22 +133,4 @@ export class PersonComponent implements OnInit, OnDestroy {
       this.errorService.handleError('PersonComponent: Unable to resolve context');
     }
   }
-
-  /**
-   * Validates
-   */
-  private sanitize(): void {
-    validate(this.person).then(errors => {
-      errors.forEach(validationError => this.errors.push(validationError.property));
-    });
-
-    validate(this.person.address).then(errors => {
-      errors.forEach(validationError => this.errors.push(validationError.property));
-    });
-
-    validate(this.person.availabilities).then(errors => {
-      errors.forEach(validationError => this.errors.push(validationError.property));
-    });
-  }
-
 }

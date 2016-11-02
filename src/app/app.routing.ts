@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { RotaComponent } from './rota/rota.component';
 import { PersonComponent } from './person/person.component';
 import { PersonSummaryComponent } from './person-summary/person-summary.component';
+import { PersonListComponent } from './person-list/person-list.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 
 const appRoutes: Routes = [
@@ -16,6 +17,8 @@ const appRoutes: Routes = [
     { path: 'rota', component: RotaComponent, canActivate: [AuthGuard] },
     { path: 'client', component: PersonComponent, canActivate: [AuthGuard] },
     { path: 'staff', component: PersonComponent, canActivate: [AuthGuard] },
+    { path: 'client-list', component: PersonListComponent, canActivate: [AuthGuard] },
+    { path: 'staff-list', component: PersonListComponent, canActivate: [AuthGuard] },
     { path: 'summary', component: PersonSummaryComponent, canActivate: [AuthGuard] },
     { path: 'error:text', component: ErrorPageComponent },
     { path: '**', component: ErrorPageComponent }

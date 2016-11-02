@@ -67,6 +67,7 @@ export abstract class Person {
 
     address: Address;
     availabilities: Availability[];
+    preferences: string;
 }
 
 export class Client extends Person {

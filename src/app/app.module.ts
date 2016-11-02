@@ -3,8 +3,6 @@ import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
-import { MaterialModule } from '@angular/material';
-
 import { appRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { AuthService, AuthGuard } from './auth.service';
@@ -19,13 +17,20 @@ import { CapitalizeFirstPipe } from './capitalize-first.pipe';
 import { PersonComponent } from './person/person.component';
 import { PersonSummaryComponent } from './person-summary/person-summary.component';
 
+import { AlertModule, CollapseModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { PersonListComponent } from './person-list/person-list.component';
+import { NavComponent } from './nav/nav.component';
+import { AddressPipe } from './address.pipe';
+import { AvailabilitiesPipe } from './availabilities.pipe';
+
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
     appRouting,
-    MaterialModule.forRoot()
+    AlertModule,
+    CollapseModule
   ],
   declarations: [
     AppComponent,
@@ -36,7 +41,11 @@ import { PersonSummaryComponent } from './person-summary/person-summary.componen
     AvailabilityComponent,
     CapitalizeFirstPipe,
     PersonComponent,
-    PersonSummaryComponent
+    PersonSummaryComponent,
+    PersonListComponent,
+    NavComponent,
+    AddressPipe,
+    AvailabilitiesPipe
   ],
   providers: [
     AuthService,

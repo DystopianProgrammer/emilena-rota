@@ -13,6 +13,8 @@ export class AvailabilityComponent implements OnInit {
   @Output() availabilityOutput = new EventEmitter();
   days: string[] = [];
   availability: Availability;
+  keyIndex: number = 0;
+
 
   constructor() { }
 
@@ -32,5 +34,12 @@ export class AvailabilityComponent implements OnInit {
         this.availability = new Availability();
       }
     });
+  }
+
+  onKey(event: any) {
+    console.log(event);
+    if(event.target.value.length == 2 && !isNaN(event.key)) {
+      event.target.value += ':';
+    }
   }
 }

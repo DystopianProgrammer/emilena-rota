@@ -1,65 +1,95 @@
-<div class="container">
-	<h1 class="container-item">{{ title }}</h1>
+<div class="row">
+	<div class="col-xs-12">
+		<button *ngIf="isClient" (click)="navigateList()" class="btn btn-primary float-xs-right mb-2">Client list</button>
+		<button *ngIf="!isClient" (click)="navigateList()" class="btn btn-primary float-xs-right mb-2">Staff list</button>
+	</div>
 </div>
-<div class="container">
-	<!--person details including address-->
-	<md-card>
-		<md-card-subtitle>Details</md-card-subtitle>
-		<md-card-content>
-			<div>
-				<md-input name="forename" placeholder="Forename" [(ngModel)]="person.forename"></md-input>
-				<md-input name="surname" placeholder="Surname"></md-input>
+
+<div class="row">
+	<form>
+		<!--person details including address-->
+		<div class="col-xs-12 col-sm-6">
+			<div class="card card-block">
+				<h3 *ngIf="isClient" class="card-title">Client information</h3>
+				<h3 *ngIf="!isClient" class="card-title">Staff information</h3>
+				<div class="form-group">
+					<label for="forename">Forename</label>
+					<input class="form-control" type="text" name="forename" placeholder="e.g. Linda" [(ngModel)]="person.forename">
+				</div>
+				<div class="form-group">
+					<label for="surname">Surname</label>
+					<input class="form-control" type="text" name="surname" placeholder="e.g. Lovelace" [(ngModel)]="person.surname">
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input class="form-control" type="email" name="email" placeholder="e.g. someone@domain.com" [(ngModel)]="person.email">
+				</div>
+				<div class="form-group">
+					<label for="phone">Phone</label>
+					<input class="form-control" type="text" name="phone" placeholder="Telephone" [(ngModel)]="person.telephoneNumber">
+				</div>
+				<div class="form-group">
+					<label for="line1">House number</label>
+					<input class="form-control" type="text" name="line1" placeholder="e.g. 36" [(ngModel)]="person.address.firstLine">
+				</div>
+				<div class="form-group">
+					<label for="line2">Street</label>
+					<input class="form-control" type="text" name="line2" placeholder="e.g. Chapel Street" [(ngModel)]="person.address.secondLine">
+				</div>
+				<div class="form-group">
+					<label for="city">Town</label>
+					<input class="form-control" type="text" name="city" placeholder="e.g. New York" [(ngModel)]="person.address.town">
+				</div>
+				<div class="form-group">
+					<label for="postcode">Postcode</label>
+					<input class="form-control" type="text" name="postcode" placeholder="e.g. SN11 9JT" [(ngModel)]="person.address.postCode">
+				</div>
+				<div class="form-group">
+					<label for="preferences">Preferences</label>
+					<textarea class="form-control" name="preferences" [(ngModel)]="person.preferences"></textarea>
+				</div>
 			</div>
-			<div>
-				<md-input name="email" placeholder="E-mail"></md-input>
-				<md-input name="phone" placeholder="Telephone"></md-input>
+		</div>
+
+		<!-- availabilities -->
+		<div class="col-xs-12 col-sm-6">
+			<div class="card card-block">
+				<h3 class="card-title">Availability</h3>
+				<availability (availabilityOutput)="updateAvailabilities($event)"></availability>
+				<p *ngIf="person.availabilities.length < 1">None to display</p>
+				<alert *ngFor="let a of person.availabilities" [type]="'success'" dismissible="true">
+					<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
+					<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
+				</alert>
 			</div>
-			<div>
-				<md-input name="line1" placeholder="Address Line 1"></md-input>
-				<md-input name="line2" placeholder="Address Line 2"></md-input>
+		</div>
+
+		<!--person relationships - preferred staff assignment-->
+		<div *ngIf="isClient" class="col-xs-12 col-sm-6">
+			<div class="card card-block">
+				<h3 class="card-title">Selected staff</h3>
+				<div class="form-group">
+					<label for="assignees">Staff preference</label>
+					<select class="form-control" name="assignees" [(ngModel)]="assigneeId">
+						<option *ngFor="let p of people" [value]="p.id">{{ p.surname }}, {{ p.forename }}</option>
+					</select>
+				</div>
+				<button type="button" class="btn btn-secondary mb-1" (click)="assignStaffToClient()">ADD</button>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item" *ngFor="let staff of person.staff; let i = index">
+						<span class="float-xs-right">
+							<button type="button" class="btn btn-warning btn-sm" (click)="removeStaffAssignment(i)">Remove</button>
+						</span> {{ staff.surname }}, {{ staff.forename }}
+					</li>
+				</ul>
 			</div>
-			<div>
-				<md-input name="city" placeholder="Town/City"></md-input>
-				<md-input name="county" placeholder="County"></md-input>
-				<md-input name="postcode" #postalCode maxlength="9" placeholder="Postal Code">
-					<md-hint align="end">{{postalCode.characterCount}} / 9</md-hint>
-				</md-input>
-			</div>
-		</md-card-content>
-	</md-card>
-	<!--notes for person-->
-	<md-card>
-		<md-card-subtitle>Notes</md-card-subtitle>
-		<md-card-content>
-			<textarea></textarea>
-		</md-card-content>
-	</md-card>
-	<!--assign availabilities-->
-	<availability></availability>
-	<!--assigned availabilities-->
-	<md-card>
-		<md-card-subtitle>Availabilities</md-card-subtitle>
-		<md-card-content>
-			<p *ngIf="person.availabilities.length < 1">None to display</p>
-		</md-card-content>
-	</md-card>
-	<!--person relationships - preferred staff assignment-->
-	<md-card *ngIf="isClient">
-		<md-card-subtitle>Preferred assignee</md-card-subtitle>
-		<md-card-content>
-			<select name="assignees" [(ngModel)]="assigneeId">
-        <option *ngFor="let p of people" [value]="p.id">{{ p.surname }}, {{ p.forename }} </option>
-      </select>
-			<button md-button (click)="addAssignee()">ADD</button>
-			<table>
-				<tr *ngFor="let staff of person.staff">
-					<td>{{ staff.surname }}, {{ staff.forename }}</td>
-					<td><button md-button>Remove</button></td>
-				</tr>
-			</table>
-		</md-card-content>
-	</md-card>
+		</div>
+
+	</form>
 </div>
-<div class="container">
-	<button (click)="next()" class="container-item" md-raised-button>Next</button>
+
+<div class="row">
+	<div class="col-xs-12">
+		<button type="button" class="btn btn-primary btn-lg" (click)="next()">Next</button>
+	</div>
 </div>

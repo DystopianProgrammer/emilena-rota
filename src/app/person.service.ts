@@ -33,6 +33,14 @@ export class PersonService {
       .map((r: Response) => r.json() as Staff[]);
   }
 
+  listForPersonType(type: string): Observable<any[]> {
+    if (type == 'clients') {
+      return this.clients();
+    } else {
+      return this.staff();
+    }
+  }
+
   private updateStaff(staff: Staff): Observable<Staff> {
     return this.http.post('/emilena-api/staff/update', JSON.stringify(staff), this.authService.requestOptionsWithJsonHeader())
       .map((r: Response) => r.json() as Staff);

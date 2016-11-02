@@ -1,21 +1,15 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
-import { animations } from '../shared/index';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-rota',
   templateUrl: './rota.component.html',
-  styleUrls: ['./rota.component.css'],
-  animations
+  styleUrls: ['./rota.component.css']
 })
 export class RotaComponent implements OnInit {
-
-  @HostBinding('@routeAnimation') get routeAnimation() {
-    return true;
-  }
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }
+

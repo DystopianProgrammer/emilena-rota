@@ -1,20 +1,19 @@
-<md-card>
-	<md-card-subtitle>Add Availability</md-card-subtitle>
-	<md-card-content>
-		<label for="availability">Day:</label>
-		<select name="availability" [(ngModel)]="availability.dayOfWeek">
-			<option *ngFor="let day of days" [value]="day">{{ day | capitalizeFirst }}</option>
-		</select>
-		<label for="from">From:</label>
-		<md-input type="text" name="from" placeholder="hh:mm" [(ngModel)]="availability.fromTime">
-			<md-hint align="end">24hrs</md-hint>
-		</md-input>
-		<label for="to">To:</label>
-		<md-input type="text" name="to" placeholder="hh:mm" [(ngModel)]="availability.toTime">
-			<md-hint align="end">24hrs</md-hint>
-		</md-input>
-	</md-card-content>
-	<md-card-actions>
-		<button (click)="add()" md-button>ADD</button>
-	</md-card-actions>
-</md-card>
+<div class="form-group">
+	<label for="availability">Day</label>
+	<select class="form-control" name="availability" [(ngModel)]="availability.dayOfWeek">
+	<option *ngFor="let day of days" [value]="day">{{ day | capitalizeFirst }}</option>
+</select>
+</div>
+<div class="form-group">
+	<label for="from">From</label>
+	<input class="form-control" (keyup)="onKey($event)" (blur)="keyIndex = 0" maxlength="5" type="text" name="from" placeholder="hh:mm"
+		[(ngModel)]="availability.fromTime">
+</div>
+<div class="form-group">
+	<label for="to">Until</label>
+	<input class="form-control" (keyup)="onKey($event)" (blur)="keyIndex = 0" maxlength="5" type="text" name="to" placeholder="hh:mm"
+		[(ngModel)]="availability.toTime">
+</div>
+<div class="mb-1">
+	<button type="button" class="btn btn-secondary" (click)="add()">ADD</button>
+</div>
