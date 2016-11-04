@@ -104,9 +104,7 @@ export class PersonComponent implements OnInit, OnDestroy {
    * Lists all clients or staff depending on the context.
    */
   private list(): void {
-    if (this.person instanceof Staff) {
-      this.person$ = this.personService.clients().subscribe(clients => this.people = clients);
-    } else {
+    if (this.person instanceof Client) {
       this.person$ = this.personService.staff().subscribe(staff => this.people = staff);
     }
   }

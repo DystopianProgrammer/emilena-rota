@@ -1,3 +1,25 @@
-<p>
-  person-summary works!
-</p>
+<div class="card">
+	<div class="card-block">
+		<h4 class="card-title">{{person.surname}}, {{person.forename}}</h4>
+		<p class="card-text">{{ person | address }} </p>
+	</div>
+	<ul class="list-group list-group-flush">
+		<li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{ person.telephoneNumber }}</li>
+		<li class="list-group-item"><i class="fa fa-envelope" aria-hidden="true"></i> {{person.email}}</li>
+		<li class="list-group-item">
+			<button type="button" class="btn btn-primary btn-block" (click)="isCollapsed = !isCollapsed">
+        <i class="fa fa-calendar-o" aria-hidden="true"></i> Availability
+      </button>
+			<ul [collapse]="isCollapsed" class="list-group list-group-flush mb-1" *ngFor="let a of person.availabilities">
+				<li class="list-group-item"><strong>{{a.dayOfWeek | capitalizeFirst}}</strong></li>
+				<li class="list-group-item">From: {{a.fromTime}}</li>
+				<li class="list-group-item">Until: {{a.toTime}}</li>
+			</ul>
+		</li>
+		<li class="list-group-item">Preferences: {{person.peferences}}</li>
+	</ul>
+	<div class="card-block">
+		<button class="btn btn-success" (click)="submit()">Submit</button>
+		<button class="btn btn-warning" (click)="submit()">Edit</button>
+	</div>
+</div>

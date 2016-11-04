@@ -11,6 +11,7 @@ import { AuthComponent } from './auth/auth.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HomeComponent } from './home/home.component';
 import { RotaComponent } from './rota/rota.component';
+import { RotaService } from './rota.service';
 import { PersonService } from './person.service';
 import { AvailabilityComponent } from './availability/availability.component';
 import { CapitalizeFirstPipe } from './capitalize-first.pipe';
@@ -51,7 +52,8 @@ import { AvailabilitiesPipe } from './availabilities.pipe';
     AuthService,
     AuthGuard,
     ErrorService,
-    PersonService
+    PersonService,
+    RotaService
   ],
   bootstrap: [
     AppComponent

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonService } from '../person.service';
+import { Person } from '../model';
 
 @Component({
   selector: 'app-person-summary',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonSummaryComponent implements OnInit {
 
-  constructor() { }
+  person: Person;
+  isCollapsed: boolean = true;
+  
+  constructor(private personService: PersonService) { }
 
   ngOnInit() {
+    this.person = this.personService.person;
   }
 
+  submit() {
+    this.personService.update(this.person).subscribe(res => {
+      console.log(res);
+    });
+  }
 }
+

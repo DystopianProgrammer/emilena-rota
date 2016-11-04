@@ -32,7 +32,7 @@ export enum DayOfWeek {
 }
 
 export class Availability {
-    
+
     id: number;
 
     @IsMilitaryTime()
@@ -88,3 +88,23 @@ export enum StaffType {
     SENIOR, SUPPORT
 }
 
+export class Assignment {
+    id: number;
+    staff: Staff;
+    client: Client;
+    dayOfWeek: DayOfWeek;
+    timeFrom: string;
+    timeTo: string;
+    hours: number;
+}
+
+export class Rota {
+    weekCommencing: string;
+    monday: Availability[];
+    tuesday: Availability[];
+    wednesday: Availability[];
+    thursday: Availability[];
+    friday: Availability[];
+    satuday: Availability[];
+    sunday: Availability[];
+}
