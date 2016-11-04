@@ -100,11 +100,4 @@ export class Assignment {
 
 export class Rota {
     weekCommencing: string;
-    monday: Availability[];
-    tuesday: Availability[];
-    wednesday: Availability[];
-    thursday: Availability[];
-    friday: Availability[];
-    satuday: Availability[];
-    sunday: Availability[];
 }
