@@ -18,11 +18,12 @@ import { CapitalizeFirstPipe } from './capitalize-first.pipe';
 import { PersonComponent } from './person/person.component';
 import { PersonSummaryComponent } from './person-summary/person-summary.component';
 
-import { AlertModule, CollapseModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { AlertModule, CollapseModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { PersonListComponent } from './person-list/person-list.component';
 import { NavComponent } from './nav/nav.component';
 import { AddressPipe } from './address.pipe';
 import { AvailabilitiesPipe } from './availabilities.pipe';
+import { AvailabilityModalComponent } from './availability-modal/availability-modal.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { AvailabilitiesPipe } from './availabilities.pipe';
     FormsModule,
     appRouting,
     AlertModule,
-    CollapseModule
+    CollapseModule,
+    ModalModule
   ],
   declarations: [
     AppComponent,
@@ -46,7 +48,8 @@ import { AvailabilitiesPipe } from './availabilities.pipe';
     PersonListComponent,
     NavComponent,
     AddressPipe,
-    AvailabilitiesPipe
+    AvailabilitiesPipe,
+    AvailabilityModalComponent
   ],
   providers: [
     AuthService,

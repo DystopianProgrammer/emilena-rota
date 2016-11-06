@@ -1,38 +1,22 @@
-<div class="row">
-	<div class="col-xs-12">
-		<h3>{{ type | capitalizeFirst }}</h3>
-	</div>
+<div class="col-xs-12">
+	<h3>{{ type | capitalizeFirst }}</h3>
 </div>
-<div class="card-deck-wrapper mt-2">
-	<div class="card-deck">
-		<div *ngFor="let p of people" class="card">
-			<div class="card-block">
-				<h4 class="card-title">{{p.surname}}, {{p.forename}}</h4>
-				<p class="card-text">{{ p | address }} </p>
-			</div>
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{ p.telephoneNumber }}</li>
-				<li class="list-group-item"><i class="fa fa-envelope" aria-hidden="true"></i> {{p.email}}</li>
-				<li class="list-group-item">
-					<button type="button" 
-						class="btn btn-primary btn-block" 
-						(click)="isCollapsed = !isCollapsed">
-						<i class="fa fa-calendar-o" aria-hidden="true"></i> Availability
-					</button>
-					<ul [collapse]="isCollapsed"
-						class="list-group list-group-flush mb-1" 
-						*ngFor="let a of p.availabilities">
-						<li class="list-group-item"><strong>{{a.dayOfWeek | capitalizeFirst}}</strong></li>
-						<li class="list-group-item">From: {{a.fromTime}}</li>
-						<li class="list-group-item">Until: {{a.toTime}}</li>
-					</ul>
-				</li>
-				<li class="list-group-item">Preferences: {{p.peferences}}</li>
-			</ul>
-			<div class="card-block">
-				<button class="btn btn-success btn-block">Edit</button>
-				<button class="btn btn-danger btn-block"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
-			</div>
+<div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let p of people">
+	<div class="card">
+		<div class="card-header">
+			<h4 class="card-title">{{p.surname}}, {{p.forename}}</h4>
+			<p class="card-text list-truncate">{{ p | address }} </p>
+		</div>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{ p.telephoneNumber }}</li>
+			<li class="list-group-item list-truncate"><i class="fa fa-envelope" aria-hidden="true"></i> {{p.email}}</li>
+			<li class="list-group-item"><app-availability-modal [person]="p"></app-availability-modal></li>
+			<li class="list-group-item list-truncate"><strong>Preferences:</strong> {{ p.preferences }}</li>
+		</ul>
+		<div class="card-block">
+			<button class="btn btn-secondary btn-block">Edit</button>
+			<button class="btn btn-warning btn-block"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
 		</div>
 	</div>
+	<hr>
 </div>

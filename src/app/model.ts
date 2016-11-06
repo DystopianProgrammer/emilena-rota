@@ -45,7 +45,6 @@ export class Availability {
     dayOfWeek: DayOfWeek;
 
     numberOfHours: number;
-    person: Person[];
 }
 
 export abstract class Person {
@@ -86,18 +85,4 @@ export enum ContractType {
 
 export enum StaffType {
     SENIOR, SUPPORT
-}
-
-export class Assignment {
-    id: number;
-    staff: Staff;
-    client: Client;
-    dayOfWeek: DayOfWeek;
-    timeFrom: string;
-    timeTo: string;
-    hours: number;
-}
-
-export class Rota {
-    weekCommencing: string;
 }

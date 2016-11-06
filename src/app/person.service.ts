@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 
 import { Person, Staff, Client } from './model';
 import { AuthService } from './auth.service';
+import { ErrorService } from './error.service';
 
 @Injectable()
 export class PersonService {
@@ -12,7 +13,7 @@ export class PersonService {
   // shared object
   person: Person;
 
-  constructor(private http: Http, private authService: AuthService) { }
+  constructor(private http: Http, private authService: AuthService, private errorService: ErrorService) { }
 
   update(person: Person): Observable<Person> {
     if (person instanceof Staff) {
@@ -20,7 +21,7 @@ export class PersonService {
     } else if (person instanceof Client) {
       return this.updateClient(person);
     }
-    Observable.throw({ error: 'unknown person type' });
+    Observable.onErrorResumeNext(e => this.errorService.handleError(e));
   }
 
   clients(): Observable<Client[]> {
