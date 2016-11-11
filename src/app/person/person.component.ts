@@ -61,14 +61,6 @@ export class PersonComponent implements OnInit, OnDestroy {
     });
   }
 
-  navigateList() {
-    if (this.isClient) {
-      this.router.navigate(['client-list', { type: 'clients' }]);
-    } else {
-      this.router.navigate(['staff-list', { type: 'staff' }]);
-    }
-  }
-
   /**
    * Assigns a client to staff member, if not already assigned
    */

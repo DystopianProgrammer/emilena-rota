@@ -24,6 +24,7 @@ import { NavComponent } from './nav/nav.component';
 import { AddressPipe } from './address.pipe';
 import { AvailabilitiesPipe } from './availabilities.pipe';
 import { AvailabilityModalComponent } from './availability-modal/availability-modal.component';
+import { DynamicClassDirective } from './dynamic-class.directive';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { AvailabilityModalComponent } from './availability-modal/availability-mo
     NavComponent,
     AddressPipe,
     AvailabilitiesPipe,
-    AvailabilityModalComponent
+    AvailabilityModalComponent,
+    DynamicClassDirective
   ],
   providers: [
     AuthService,

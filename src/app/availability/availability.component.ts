@@ -37,7 +37,6 @@ export class AvailabilityComponent implements OnInit {
   }
 
   onKey(event: any) {
-    console.log(event);
     if(event.target.value.length == 2 && !isNaN(event.key)) {
       event.target.value += ':';
     }

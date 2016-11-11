@@ -15,7 +15,7 @@ export class PersonService {
 
   constructor(private http: Http, private authService: AuthService, private errorService: ErrorService) { }
 
-  update(person: Person): Observable<Person> {
+  update(person: Person): Observable<Response> {
     if (person instanceof Staff) {
       return this.updateStaff(person);
     } else if (person instanceof Client) {
@@ -42,13 +42,11 @@ export class PersonService {
     }
   }
 
-  private updateStaff(staff: Staff): Observable<Staff> {
-    return this.http.post('/emilena-api/staff/update', JSON.stringify(staff), this.authService.requestOptionsWithJsonHeader())
-      .map((r: Response) => r.json() as Staff);
+  private updateStaff(staff: Staff): Observable<Response> {
+    return this.http.post('/emilena-api/staff/update', JSON.stringify(staff), this.authService.requestOptionsWithJsonHeader());
   }
 
-  private updateClient(client: Client): Observable<Client> {
-    return this.http.post('/emilena-api/client/update', JSON.stringify(client), this.authService.requestOptionsWithJsonHeader())
-      .map((r: Response) => r.json() as Client);
+  private updateClient(client: Client): Observable<Response> {
+    return this.http.post('/emilena-api/client/update', JSON.stringify(client), this.authService.requestOptionsWithJsonHeader());
   }
 }
