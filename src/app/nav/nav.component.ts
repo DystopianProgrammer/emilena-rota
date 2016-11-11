@@ -15,7 +15,7 @@ export class NavComponent implements OnInit {
   ngOnInit() {}
 
   logOut(): void {
+    this.isCollapsed =! this.isCollapsed;
     this.authService.logOut();
   }
-
 }
