@@ -1,97 +1,99 @@
-<div class="col-xs-12">
-	<div class="card-deck-wrapper">
-		<div class="card-deck">
-			<div class="card">
-				<div class="card-header">
-					Details
-				</div>
-				<div class="card-block">
-					<div class="form-group">
-						<label for="forename">Forename</label>
-						<input class="form-control" type="text" name="forename" placeholder="e.g. Emily" [(ngModel)]="person.forename">
+<div class="row">
+	<div class="col-xs-12">
+		<div class="card-deck-wrapper">
+			<div class="card-deck">
+				<div class="card">
+					<div class="card-header">
+						Details
 					</div>
-					<div class="form-group">
-						<label for="surname">Surname</label>
-						<input class="form-control" type="text" name="surname" placeholder="e.g. Boyle" [(ngModel)]="person.surname">
-					</div>
-					<div class="form-group">
-						<label for="email">Email</label>
-						<input class="form-control" type="email" name="email" placeholder="e.g. someone@domain.com" [(ngModel)]="person.email">
-					</div>
-					<div class="form-group">
-						<label for="phone">Phone</label>
-						<input class="form-control" type="text" name="phone" placeholder="e.g. 0555889999" [(ngModel)]="person.telephoneNumber">
-					</div>
-					<div class="form-group">
-						<label for="preferences">Preferences</label>
-						<textarea class="form-control" name="preferences" [(ngModel)]="person.preferences"></textarea>
-					</div>
-				</div>
-			</div>
-			<div class="card">
-				<div class="card-header">
-					Address
-				</div>
-				<div class="card-block">
-					<div class="form-group">
-						<label for="line1">House number</label>
-						<input class="form-control" type="text" name="line1" placeholder="e.g. 128" [(ngModel)]="person.address.firstLine">
-					</div>
-					<div class="form-group">
-						<label for="line2">Street</label>
-						<input class="form-control" type="text" name="line2" placeholder="e.g. Stapley Road" [(ngModel)]="person.address.secondLine">
-					</div>
-					<div class="form-group">
-						<label for="city">Town</label>
-						<input class="form-control" type="text" name="city" placeholder="e.g. Burgess Hill" [(ngModel)]="person.address.town">
-					</div>
-					<div class="form-group">
-						<label for="postcode">Postcode</label>
-						<input class="form-control" type="text" name="postcode" placeholder="e.g. SN11 9JT" [(ngModel)]="person.address.postCode">
+					<div class="card-block">
+						<div class="form-group">
+							<label for="forename">Forename</label>
+							<input class="form-control" type="text" name="forename" placeholder="e.g. Emily" [(ngModel)]="person.forename">
+						</div>
+						<div class="form-group">
+							<label for="surname">Surname</label>
+							<input class="form-control" type="text" name="surname" placeholder="e.g. Boyle" [(ngModel)]="person.surname">
+						</div>
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input class="form-control" type="email" name="email" placeholder="e.g. someone@domain.com" [(ngModel)]="person.email">
+						</div>
+						<div class="form-group">
+							<label for="phone">Phone</label>
+							<input class="form-control" type="text" name="phone" placeholder="e.g. 0555889999" [(ngModel)]="person.telephoneNumber">
+						</div>
+						<div class="form-group">
+							<label for="preferences">Preferences</label>
+							<textarea class="form-control" name="preferences" [(ngModel)]="person.preferences"></textarea>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="card">
-				<div class="card-header">
-					Availability
+				<div class="card">
+					<div class="card-header">
+						Address
+					</div>
+					<div class="card-block">
+						<div class="form-group">
+							<label for="line1">House number</label>
+							<input class="form-control" type="text" name="line1" placeholder="e.g. 128" [(ngModel)]="person.address.firstLine">
+						</div>
+						<div class="form-group">
+							<label for="line2">Street</label>
+							<input class="form-control" type="text" name="line2" placeholder="e.g. Stapley Road" [(ngModel)]="person.address.secondLine">
+						</div>
+						<div class="form-group">
+							<label for="city">Town</label>
+							<input class="form-control" type="text" name="city" placeholder="e.g. Burgess Hill" [(ngModel)]="person.address.town">
+						</div>
+						<div class="form-group">
+							<label for="postcode">Postcode</label>
+							<input class="form-control" type="text" name="postcode" placeholder="e.g. SN11 9JT" [(ngModel)]="person.address.postCode">
+						</div>
+					</div>
 				</div>
-				<div class="card-block">
-					<availability (availabilityOutput)="updateAvailabilities($event)"></availability>
-					<p *ngIf="person.availabilities.length < 1">
-						<em>None to display</em>
-					</p>
-					<alert *ngFor="let a of person.availabilities" [type]="'success'" dismissible="true">
-						<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
-						<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
-					</alert>
+				<div class="card">
+					<div class="card-header">
+						Availability
+					</div>
+					<div class="card-block">
+						<availability (availabilityOutput)="updateAvailabilities($event)"></availability>
+						<p *ngIf="person.availabilities.length < 1">
+							<em>None to display</em>
+						</p>
+						<alert *ngFor="let a of person.availabilities" [type]="'success'" dismissible="true">
+							<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
+							<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
+						</alert>
+					</div>
 				</div>
-			</div>
-			<div class="card" *ngIf="isClient">
-				<div class="card-header">
-					Preferred staff
-				</div>
-				<div class="card-block">
-					<div class="form-group">
-						<label for="assignees">Staff preference</label>
-						<select class="form-control" name="assignees" [(ngModel)]="assigneeId">
+				<div class="card" *ngIf="isClient">
+					<div class="card-header">
+						Preferred staff
+					</div>
+					<div class="card-block">
+						<div class="form-group">
+							<label for="assignees">Staff preference</label>
+							<select class="form-control" name="assignees" [(ngModel)]="assigneeId">
 						<option *ngFor="let p of people" [value]="p.id">{{ p.surname }}, {{ p.forename }}</option>
 					</select>
-					</div>
-					<button type="button" class="btn btn-secondary mb-1" (click)="assignStaffToClient()">ADD</button>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item" *ngFor="let staff of person.staff; let i = index">
-							<span class="float-xs-right">
+						</div>
+						<button type="button" class="btn btn-secondary mb-1" (click)="assignStaffToClient()">ADD</button>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item" *ngFor="let staff of person.staff; let i = index">
+								<span class="float-xs-right">
 							<button type="button" class="btn btn-warning btn-sm" (click)="removeStaffAssignment(i)">Remove</button>
 						</span> {{ staff.surname }}, {{ staff.forename }}
-						</li>
-					</ul>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="col-xs-12">
-	<button type="button" class="btn btn-outline-success" (click)="next()">Next</button>
-	<button type="button" class="btn btn-secondary" [routerLink]="['']">Cancel</button>
+	<div class="col-xs-12">
+		<button type="button" class="btn btn-outline-success" (click)="next()">Next</button>
+		<button type="button" class="btn btn-secondary" [routerLink]="['']">Cancel</button>
+	</div>
 </div>

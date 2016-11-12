@@ -4,9 +4,11 @@
 html, body {
     height: 100%;
 }
+body {
+    padding-top: 70px;
+}
 .page-wrap {
     min-height: 100%;
-    /* equal to footer height */
     margin-bottom: -142px; 
 }
 .page-wrap:after {
@@ -14,9 +16,33 @@ html, body {
     display: block;
 }
 .site-footer, .page-wrap:after {
-    height: 142px; 
+    height: 160px; 
 }
 .site-footer {
     border-top: 1px solid #eee;
     background: #0080AB;
+}
+.site-footer, .content {
+    color: #eee;
+    text-align: center;
+    font-size: 0.80em;
+    margin-top: 20px;
+}
+.site-footer-a {
+    text-decoration: none;
+    color: #eee;
+    border-bottom: 1px dotted #eee; 
+}
+.site-footer-a:hover {
+    text-decoration: none;
+    color: #eee;
+}
+.site-footer-i {
+    text-decoration: none;
+    color: #eee;
+    font-size: 2em;
+}
+.site-footer-i:hover {
+    text-decoration: none;
+    color: #eee;
 }
