@@ -2,4 +2,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-} 
+}
+
+.filter-list {
+  background-color: rgba(86, 93, 104, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(86, 93, 104, 0.3);
+}

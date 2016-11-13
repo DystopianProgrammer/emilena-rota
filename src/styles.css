@@ -6,10 +6,11 @@ html, body {
 }
 body {
     padding-top: 70px;
+    background-color: #f7f7f7 !important;
 }
 .page-wrap {
     min-height: 100%;
-    margin-bottom: -142px; 
+    margin-bottom: -142px;
 }
 .page-wrap:after {
     content: "";
@@ -45,4 +46,8 @@ body {
 .site-footer-i:hover {
     text-decoration: none;
     color: #eee;
+}
+.footer-border {
+    padding-bottom: 2px;
+    background-color: rgba(0,0,0,0.1);
 }

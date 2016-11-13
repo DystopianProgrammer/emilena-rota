@@ -79,6 +79,21 @@ export class Staff extends Person {
     systemUser: SystemUser;
 }
 
+export class Rota {
+    id: number;
+    weekStarting: string;
+    rotaItems: RotaItem[];
+}
+
+export class RotaItem {
+    id: number;
+    dayOfWeek: DayOfWeek;
+    start: string;
+    finish: string;
+    client: Client;
+    staff: Staff;
+}
+
 export enum ContractType {
     CONTRACT, BANK
 }

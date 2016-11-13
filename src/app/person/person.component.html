@@ -1,5 +1,9 @@
 <div class="row">
 	<div class="col-xs-12">
+		<div *ngIf="isClient" class="text-right"><h4>Add Client</h4></div>
+		<div *ngIf="!isClient"><h4>Add Staff</h4></div>
+	</div>
+	<div class="col-xs-12">
 		<div class="card-deck-wrapper">
 			<div class="card-deck">
 				<div class="card">
@@ -9,19 +13,19 @@
 					<div class="card-block">
 						<div class="form-group">
 							<label for="forename">Forename</label>
-							<input class="form-control" type="text" name="forename" placeholder="e.g. Emily" [(ngModel)]="person.forename">
+							<input class="form-control" type="text" name="forename" placeholder="Emily" [(ngModel)]="person.forename">
 						</div>
 						<div class="form-group">
 							<label for="surname">Surname</label>
-							<input class="form-control" type="text" name="surname" placeholder="e.g. Boyle" [(ngModel)]="person.surname">
+							<input class="form-control" type="text" name="surname" placeholder="Boyle" [(ngModel)]="person.surname">
 						</div>
 						<div class="form-group">
 							<label for="email">Email</label>
-							<input class="form-control" type="email" name="email" placeholder="e.g. someone@domain.com" [(ngModel)]="person.email">
+							<input class="form-control" type="email" name="email" placeholder="someone@domain.com" [(ngModel)]="person.email">
 						</div>
 						<div class="form-group">
 							<label for="phone">Phone</label>
-							<input class="form-control" type="text" name="phone" placeholder="e.g. 0555889999" [(ngModel)]="person.telephoneNumber">
+							<input class="form-control" type="text" name="phone" placeholder="0555889999" [(ngModel)]="person.telephoneNumber">
 						</div>
 						<div class="form-group">
 							<label for="preferences">Preferences</label>
@@ -36,19 +40,19 @@
 					<div class="card-block">
 						<div class="form-group">
 							<label for="line1">House number</label>
-							<input class="form-control" type="text" name="line1" placeholder="e.g. 128" [(ngModel)]="person.address.firstLine">
+							<input class="form-control" type="text" name="line1" placeholder="128" [(ngModel)]="person.address.firstLine">
 						</div>
 						<div class="form-group">
 							<label for="line2">Street</label>
-							<input class="form-control" type="text" name="line2" placeholder="e.g. Stapley Road" [(ngModel)]="person.address.secondLine">
+							<input class="form-control" type="text" name="line2" placeholder="Stapley Road" [(ngModel)]="person.address.secondLine">
 						</div>
 						<div class="form-group">
 							<label for="city">Town</label>
-							<input class="form-control" type="text" name="city" placeholder="e.g. Burgess Hill" [(ngModel)]="person.address.town">
+							<input class="form-control" type="text" name="city" placeholder="Burgess Hill" [(ngModel)]="person.address.town">
 						</div>
 						<div class="form-group">
 							<label for="postcode">Postcode</label>
-							<input class="form-control" type="text" name="postcode" placeholder="e.g. SN11 9JT" [(ngModel)]="person.address.postCode">
+							<input class="form-control" type="text" name="postcode" placeholder="SN11 9JT" [(ngModel)]="person.address.postCode">
 						</div>
 					</div>
 				</div>

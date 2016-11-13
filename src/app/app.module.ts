@@ -18,7 +18,7 @@ import { CapitalizeFirstPipe } from './capitalize-first.pipe';
 import { PersonComponent } from './person/person.component';
 import { PersonSummaryComponent } from './person-summary/person-summary.component';
 
-import { AlertModule, CollapseModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { AlertModule, CollapseModule, ModalModule, TooltipModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { PersonListComponent } from './person-list/person-list.component';
 import { NavComponent } from './nav/nav.component';
 import { AddressPipe } from './address.pipe';
@@ -34,7 +34,8 @@ import { DynamicClassDirective } from './dynamic-class.directive';
     appRouting,
     AlertModule,
     CollapseModule,
-    ModalModule
+    ModalModule,
+    TooltipModule
   ],
   declarations: [
     AppComponent,

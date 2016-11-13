@@ -12,10 +12,10 @@ export class NavComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   logOut(): void {
-    this.isCollapsed =! this.isCollapsed;
+    this.isCollapsed = !this.isCollapsed;
     this.authService.logOut();
   }
 }
