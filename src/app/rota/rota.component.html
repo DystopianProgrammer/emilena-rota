@@ -22,14 +22,9 @@
 					<div class="card-block">
 						<p class="card-text" *ngIf="monday.length == 0">Unallocated</p>
 						<div class="card-text rota-item-block" *ngFor="let item of monday">
-							<div><button class="btn btn-outline-secondary btn-sm float-xs-right"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
-							<div class="item-line-truncate"><strong>Staff:</strong> {{ item.staff.surname }}, {{item.staff.forename}}</div>
-							<div class="item-line-truncate"><strong>Client:</strong> {{ item.client.surname }}, {{ item.client.forename }}</div>
-							<div class="item-line-truncate"><strong>From:</strong> {{ item.start }}</div>
-							<div class="item-line-truncate"><strong>To:</strong> {{ item.finish }}</div>
-							<div class="item-line-truncate"><strong>Address:</strong> {{ item.client | address }}</div>
+							<app-rota-item-read [item]="item"></app-rota-item-read>
 						</div>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
 				</div>
 				<div class="card">
@@ -40,14 +35,9 @@
 					<div class="card-block">
 						<p class="card-text" *ngIf="tuesday.length == 0">Unallocated</p>
 						<div class="card-text rota-item-block" *ngFor="let item of tuesday">
-							<div><button class="btn btn-outline-secondary btn-sm float-xs-right"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
-							<div class="item-line-truncate"><strong>Staff:</strong> {{ item.staff.surname }}, {{item.staff.forename}}</div>
-							<div class="item-line-truncate"><strong>Client:</strong> {{ item.client.surname }}, {{ item.client.forename }}</div>
-							<div class="item-line-truncate"><strong>From:</strong> {{ item.start }}</div>
-							<div class="item-line-truncate"><strong>To:</strong> {{ item.finish }}</div>
-							<div class="item-line-truncate" [tooltip]="item.client | address"><strong>Address:</strong> {{ item.client | address }}</div>
+							<app-rota-item-read [item]="item"></app-rota-item-read>
 						</div>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
 				</div>
 				<div class="card">
@@ -57,15 +47,10 @@
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="wednesday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of tuesday">
-							<div><button class="btn btn-outline-secondary btn-sm float-xs-right"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
-							<div class="item-line-truncate"><strong>Staff:</strong> {{ item.staff.surname }}, {{item.staff.forename}}</div>
-							<div class="item-line-truncate"><strong>Client:</strong> {{ item.client.surname }}, {{ item.client.forename }}</div>
-							<div class="item-line-truncate"><strong>From:</strong> {{ item.start }}</div>
-							<div class="item-line-truncate"><strong>To:</strong> {{ item.finish }}</div>
-							<div class="item-line-truncate" [tooltip]="item.client | address"><strong>Address:</strong> {{ item.client | address }}</div>
+						<div class="card-text rota-item-block" *ngFor="let item of wednesday">
+							<app-rota-item-read [item]="item"></app-rota-item-read>
 						</div>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
 				</div>
 			</div>
@@ -81,15 +66,10 @@
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="thursday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of tuesday">
-							<div><button class="btn btn-outline-secondary btn-sm float-xs-right"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
-							<div class="item-line-truncate"><strong>Staff:</strong> {{ item.staff.surname }}, {{item.staff.forename}}</div>
-							<div class="item-line-truncate"><strong>Client:</strong> {{ item.client.surname }}, {{ item.client.forename }}</div>
-							<div class="item-line-truncate"><strong>From:</strong> {{ item.start }}</div>
-							<div class="item-line-truncate"><strong>To:</strong> {{ item.finish }}</div>
-							<div class="item-line-truncate" [tooltip]="item.client | address"><strong>Address:</strong> {{ item.client | address }}</div>
+						<div class="card-text rota-item-block" *ngFor="let item of thursday">
+							<app-rota-item-read [item]="item"></app-rota-item-read>
 						</div>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
 				</div>
 				<div class="card">
@@ -99,15 +79,10 @@
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="friday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of tuesday">
-							<div><button class="btn btn-outline-secondary btn-sm float-xs-right"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
-							<div class="item-line-truncate"><strong>Staff:</strong> {{ item.staff.surname }}, {{item.staff.forename}}</div>
-							<div class="item-line-truncate"><strong>Client:</strong> {{ item.client.surname }}, {{ item.client.forename }}</div>
-							<div class="item-line-truncate"><strong>From:</strong> {{ item.start }}</div>
-							<div class="item-line-truncate"><strong>To:</strong> {{ item.finish }}</div>
-							<div class="item-line-truncate" [tooltip]="item.client | address"><strong>Address:</strong> {{ item.client | address }}</div>
+						<div class="card-text rota-item-block" *ngFor="let item of friday">
+							<app-rota-item-read [item]="item"></app-rota-item-read>
 						</div>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
 				</div>
 				<div class="card">
@@ -117,41 +92,27 @@
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="saturday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of tuesday">
-							<div><button class="btn btn-outline-secondary btn-sm float-xs-right"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
-							<div class="item-line-truncate"><strong>Staff:</strong> {{ item.staff.surname }}, {{item.staff.forename}}</div>
-							<div class="item-line-truncate"><strong>Client:</strong> {{ item.client.surname }}, {{ item.client.forename }}</div>
-							<div class="item-line-truncate"><strong>From:</strong> {{ item.start }}</div>
-							<div class="item-line-truncate"><strong>To:</strong> {{ item.finish }}</div>
-							<div class="item-line-truncate" [tooltip]="item.client | address"><strong>Address:</strong> {{ item.client | address }}</div>
+						<div class="card-text rota-item-block" *ngFor="let item of saturday">
+							<app-rota-item-read [item]="item"></app-rota-item-read>
 						</div>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-4">
-		<div class="card-deck-wrapper">
-			<div class="card-deck">
-				<div class="card">
-					<div class="card-header mb-1">
-						<span class="card-title list-truncate"><strong>Sunday</strong></span>
-						<button class="btn btn-outline-secondary float-xs-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
-					</div>
-					<div class="card-block">
-						<p class="card-text" *ngIf="sunday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of tuesday">
-							<div><button class="btn btn-outline-secondary btn-sm float-xs-right"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
-							<div class="item-line-truncate"><strong>Staff:</strong> {{ item.staff.surname }}, {{item.staff.forename}}</div>
-							<div class="item-line-truncate"><strong>Client:</strong> {{ item.client.surname }}, {{ item.client.forename }}</div>
-							<div class="item-line-truncate"><strong>From:</strong> {{ item.start }}</div>
-							<div class="item-line-truncate"><strong>To:</strong> {{ item.finish }}</div>
-							<div class="item-line-truncate" [tooltip]="item.client | address"><strong>Address:</strong> {{ item.client | address }}</div>
-						</div>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-					</div>
+		<div class="card">
+			<div class="card-header mb-1">
+				<span class="card-title list-truncate"><strong>Sunday</strong></span>
+				<button class="btn btn-outline-secondary float-xs-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
+			</div>
+			<div class="card-block">
+				<p class="card-text" *ngIf="sunday.length == 0">Unallocated</p>
+				<div class="card-text rota-item-block" *ngFor="let item of sunday">
+					<app-rota-item-read [item]="item"></app-rota-item-read>
 				</div>
+				<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 			</div>
 		</div>
 	</div>

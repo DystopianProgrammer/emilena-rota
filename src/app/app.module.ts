@@ -25,6 +25,7 @@ import { AddressPipe } from './address.pipe';
 import { AvailabilitiesPipe } from './availabilities.pipe';
 import { AvailabilityModalComponent } from './availability-modal/availability-modal.component';
 import { DynamicClassDirective } from './dynamic-class.directive';
+import { RotaItemReadComponent } from './rota-item-read/rota-item-read.component';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { DynamicClassDirective } from './dynamic-class.directive';
     AddressPipe,
     AvailabilitiesPipe,
     AvailabilityModalComponent,
-    DynamicClassDirective
+    DynamicClassDirective,
+    RotaItemReadComponent
   ],
   providers: [
     AuthService,

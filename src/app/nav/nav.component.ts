@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { PersonService } from '../person.service';
 
 @Component({
   selector: 'app-nav',
@@ -10,12 +11,17 @@ export class NavComponent implements OnInit {
 
   public isCollapsed: boolean = true;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private personService: PersonService) { }
 
   ngOnInit() { }
 
   logOut(): void {
     this.isCollapsed = !this.isCollapsed;
     this.authService.logOut();
+  }
+
+  reset() {
+    this.isCollapsed = !this.isCollapsed;
+    this.personService.person = undefined;
   }
 }

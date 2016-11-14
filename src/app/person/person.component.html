@@ -1,7 +1,6 @@
-<div class="row">
+<div class="row" *ngIf="person">
 	<div class="col-xs-12">
-		<div *ngIf="isClient" class="text-right"><h4>Add Client</h4></div>
-		<div *ngIf="!isClient"><h4>Add Staff</h4></div>
+		<h4>{{title}}</h4>
 	</div>
 	<div class="col-xs-12">
 		<div class="card-deck-wrapper">

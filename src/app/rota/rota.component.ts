@@ -13,6 +13,7 @@ export class RotaComponent implements OnInit {
   rota: Rota;
 
   forDate: string;
+  updated: string;
 
   monday: RotaItem[] = [];
   tuesday: RotaItem[] = [];
@@ -24,10 +25,12 @@ export class RotaComponent implements OnInit {
 
   constructor(private rotaService: RotaService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.updated = moment().format('hh:mm:ss');
+  }
 
   create(): void {
-
+    this.updated = moment().format('hh:mm:ss');
     this.forDate = moment().format('D-M-YYYY');
     this.monday = [];
     this.tuesday = [];

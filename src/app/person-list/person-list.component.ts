@@ -13,6 +13,7 @@ export class PersonListComponent implements OnInit {
   people: Person[] = [];
   type: string;
   isClient: boolean;
+  title: string;
   public isCollapsed:boolean = true;
 
   constructor(private route: ActivatedRoute, private personService: PersonService) { }
@@ -21,9 +22,14 @@ export class PersonListComponent implements OnInit {
     this.route.params.forEach((params: Params) => {
       this.type = params['type'];
       this.isClient = (this.type == 'staff') ? false : true;
+      this.title = (this.isClient) ? "Clients" : "Staff";
       this.personService.listForPersonType(params['type']).subscribe(results => {
         this.people = results;
       });
     });
+  }
+
+  filter($event):void {
+    console.log($event)
   }
 }

@@ -17,6 +17,7 @@ const appRoutes: Routes = [
     { path: 'rota', component: RotaComponent, canActivate: [AuthGuard] },
     { path: 'client', component: PersonComponent, canActivate: [AuthGuard] },
     { path: 'staff', component: PersonComponent, canActivate: [AuthGuard] },
+    { path: 'person-edit', component: PersonComponent, canActivate: [AuthGuard] },
     { path: 'client-list', component: PersonListComponent, canActivate: [AuthGuard] },
     { path: 'staff-list', component: PersonListComponent, canActivate: [AuthGuard] },
     { path: 'summary', component: PersonSummaryComponent, canActivate: [AuthGuard] },

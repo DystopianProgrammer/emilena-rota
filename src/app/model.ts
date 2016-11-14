@@ -13,16 +13,12 @@ export class SystemUser {
 
 export class Address {
     houseNumber: string;
-
     @IsNotEmpty()
     firstLine: string;
-
     @IsNotEmpty()
     secondLine: string;
-
     @IsNotEmpty()
     town: string;
-
     @IsNotEmpty()
     postCode: string;
 }
@@ -32,38 +28,28 @@ export enum DayOfWeek {
 }
 
 export class Availability {
-
     id: number;
-
     @IsMilitaryTime()
     fromTime: string;
-
     @IsMilitaryTime()
     toTime: string;
-
     @IsDefined()
     dayOfWeek: DayOfWeek;
-
     numberOfHours: number;
 }
 
 export abstract class Person {
     id: number;
-
     @IsNotEmpty()
     forename: string;
-
     @IsNotEmpty()
     surname: string;
-
     @IsEmail()
     email: string;
-
+    personType: string;
     dob: string;
-
     @IsNotEmpty()
     telephoneNumber: string;
-
     address: Address;
     availabilities: Availability[];
     preferences: string;

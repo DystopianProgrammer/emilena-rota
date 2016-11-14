@@ -16,12 +16,17 @@ export class PersonService {
   constructor(private http: Http, private authService: AuthService, private errorService: ErrorService) { }
 
   update(person: Person): Observable<Response> {
-    if (person instanceof Staff) {
-      return this.updateStaff(person);
-    } else if (person instanceof Client) {
-      return this.updateClient(person);
+    if (person.personType == 'STAFF') {
+      return this.updateStaff(<Staff>person);
+    } else if (person.personType == 'CLIENT') {
+      return this.updateClient(<Client>person);
     }
     Observable.onErrorResumeNext(e => this.errorService.handleError(e));
+  }
+
+  personById(id: number): Observable<Person> {
+    return this.http.get(`/emilena-api/person/find/${id}`, this.authService.requestOptionsWithJsonHeader())
+      .map((r: Response) => r.json() as Person);
   }
 
   clients(): Observable<Client[]> {
