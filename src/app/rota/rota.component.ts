@@ -3,6 +3,11 @@ import { RotaService } from '../rota.service';
 import * as moment from 'moment';
 import { Rota, RotaItem, DayOfWeek } from '../model';
 
+export class ItemToRemove {
+  day: DayOfWeek;
+  index: number;
+}
+
 @Component({
   selector: 'app-rota',
   templateUrl: './rota.component.html',
@@ -25,7 +30,7 @@ export class RotaComponent implements OnInit {
 
   constructor(private rotaService: RotaService) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.updated = moment().format('hh:mm:ss');
   }
 
@@ -60,6 +65,23 @@ export class RotaComponent implements OnInit {
         }
       })
     });
+  }
+
+  deleteRotaItem(item: any): void {
+    switch(item.day) {
+      case 'MONDAY': this.remove(item.index, this.monday); break;
+      case 'TUESDAY': this.remove(item.index, this.tuesday); break;
+      case 'WEDESDAY': this.remove(item.index, this.wednesday); break;
+      case 'THURSDAY': this.remove(item.index, this.thursday); break;
+      case 'FRIDAY': this.remove(item.index, this.friday); break;
+      case 'SATURDAY': this.remove(item.index, this.saturday); break;
+      case 'SUNDAY': this.remove(item.index, this.sunday); break;
+      default: console.log('I dunno');
+    }
+  }
+
+  remove(index: number, rotaItem: RotaItem[]) {
+    rotaItem = rotaItem.splice(index, 1);
   }
 }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RotaItem } from '../model';
+import { ItemToRemove } from '../rota/rota.component';
 
 @Component({
   selector: 'app-rota-item-read',
@@ -9,11 +10,19 @@ import { RotaItem } from '../model';
 export class RotaItemReadComponent implements OnInit {
 
   @Input() item: RotaItem;
+  @Input() index: number;
 
+  @Output() remove: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  callToDelete(): void {
+    let itemToRemove = new ItemToRemove();
+    itemToRemove.index = this.index;
+    itemToRemove.day = this.item.dayOfWeek;
+    this.remove.emit(itemToRemove);
+  }
 }

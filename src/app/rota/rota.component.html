@@ -21,8 +21,8 @@
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="monday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of monday">
-							<app-rota-item-read [item]="item"></app-rota-item-read>
+						<div class="card-text rota-item-block" *ngFor="let item of monday; let i = index">
+							<app-rota-item-read [item]="item" [index]="i" (remove)="deleteRotaItem($event)"></app-rota-item-read>
 						</div>
 						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
@@ -34,8 +34,8 @@
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="tuesday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of tuesday">
-							<app-rota-item-read [item]="item"></app-rota-item-read>
+						<div class="card-text rota-item-block" *ngFor="let item of tuesday; let i = index">
+							<app-rota-item-read [item]="item" [index]="i" (remove)="deleteRotaItem($event)"></app-rota-item-read>
 						</div>
 						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
@@ -47,8 +47,8 @@
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="wednesday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of wednesday">
-							<app-rota-item-read [item]="item"></app-rota-item-read>
+						<div class="card-text rota-item-block" *ngFor="let item of wednesday; let i = index">
+							<app-rota-item-read [item]="item" [index]="i" (remove)="deleteRotaItem($event)"></app-rota-item-read>
 						</div>
 						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
@@ -66,8 +66,8 @@
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="thursday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of thursday">
-							<app-rota-item-read [item]="item"></app-rota-item-read>
+						<div class="card-text rota-item-block" *ngFor="let item of thursday; let i = index">
+							<app-rota-item-read [item]="item" [index]="i" (remove)="deleteRotaItem($event)"></app-rota-item-read>
 						</div>
 						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
@@ -79,8 +79,8 @@
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="friday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of friday">
-							<app-rota-item-read [item]="item"></app-rota-item-read>
+						<div class="card-text rota-item-block" *ngFor="let item of friday; let i = index">
+							<app-rota-item-read [item]="item" [index]="i" (remove)="deleteRotaItem($event)"></app-rota-item-read>
 						</div>
 						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
@@ -92,8 +92,8 @@
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="saturday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of saturday">
-							<app-rota-item-read [item]="item"></app-rota-item-read>
+						<div class="card-text rota-item-block" *ngFor="let item of saturday; let i = index">
+							<app-rota-item-read [item]="item" [index]="i" (remove)="deleteRotaItem($event)"></app-rota-item-read>
 						</div>
 						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 					</div>
@@ -109,8 +109,8 @@
 			</div>
 			<div class="card-block">
 				<p class="card-text" *ngIf="sunday.length == 0">Unallocated</p>
-				<div class="card-text rota-item-block" *ngFor="let item of sunday">
-					<app-rota-item-read [item]="item"></app-rota-item-read>
+				<div class="card-text rota-item-block" *ngFor="let item of sunday; let i = index">
+					<app-rota-item-read [item]="item" [index]="i" (remove)="deleteRotaItem($event)"></app-rota-item-read>
 				</div>
 				<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 			</div>
