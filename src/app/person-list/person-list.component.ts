@@ -22,7 +22,11 @@ export class PersonListComponent implements OnInit {
     this.route.params.forEach((params: Params) => {
       this.type = params['type'];
       this.isClient = (this.type == 'staff') ? false : true;
-      this.title = (this.isClient) ? "Clients" : "Staff";
+      if(this.type.includes('client')) {
+        this.title = 'Client Listing';
+      } else {
+        this.title = 'Staff Listing';
+      }
       this.personService.listForPersonType(params['type']).subscribe(results => {
         this.people = results;
       });

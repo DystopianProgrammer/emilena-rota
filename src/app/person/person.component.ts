@@ -89,6 +89,10 @@ export class PersonComponent implements OnInit, OnDestroy {
     }
   }
 
+  removeAvailability(index: number) {
+    this.person.availabilities.splice(index, 1);
+  }
+
   /**
    * Lists all clients or staff depending on the context.
    */
@@ -148,11 +152,15 @@ export class PersonComponent implements OnInit, OnDestroy {
     this.route.params.forEach((params: Params) => {
       type = params['type'];
       id = +params['id'];
+      if(type.includes('client')) {
+        this.title = 'Edit Client';
+      } else {
+        this.title = 'Edit Staff';
+      }
     });
 
     this.personService.personById(id).subscribe(res => {
       this.person = res;
-      console.log(this.person);
     });
   }
 

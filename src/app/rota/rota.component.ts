@@ -71,17 +71,30 @@ export class RotaComponent implements OnInit {
     switch(item.day) {
       case 'MONDAY': this.remove(item.index, this.monday); break;
       case 'TUESDAY': this.remove(item.index, this.tuesday); break;
-      case 'WEDESDAY': this.remove(item.index, this.wednesday); break;
+      case 'WEDNESDAY': this.remove(item.index, this.wednesday); break;
       case 'THURSDAY': this.remove(item.index, this.thursday); break;
       case 'FRIDAY': this.remove(item.index, this.friday); break;
       case 'SATURDAY': this.remove(item.index, this.saturday); break;
       case 'SUNDAY': this.remove(item.index, this.sunday); break;
-      default: console.log('I dunno');
+      default: console.warn('I dunno Emily'); // a little easter egg we'll probably never see. :-)
     }
   }
 
   remove(index: number, rotaItem: RotaItem[]) {
     rotaItem = rotaItem.splice(index, 1);
+  }
+
+  add(rotaItem: RotaItem): void {
+    switch(rotaItem.dayOfWeek) {
+      case DayOfWeek.MONDAY: this.monday.push(rotaItem); break;
+      case DayOfWeek.TUESDAY: this.tuesday.push(rotaItem); break;
+      case DayOfWeek.WEDNESDAY: this.wednesday.push(rotaItem); break;
+      case DayOfWeek.THURSDAY: this.thursday.push(rotaItem); break;
+      case DayOfWeek.FRIDAY: this.friday.push(rotaItem); break;
+      case DayOfWeek.SATURDAY: this.saturday.push(rotaItem); break;
+      case DayOfWeek.SUNDAY: this.sunday.push(rotaItem); break;
+      default: console.warn('I dunno Emily'); // a little easter egg we'll probably never see. :-)
+    }
   }
 }
 

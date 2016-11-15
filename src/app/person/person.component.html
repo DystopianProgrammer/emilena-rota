@@ -64,7 +64,7 @@
 						<p *ngIf="person.availabilities.length < 1">
 							<em>None to display</em>
 						</p>
-						<alert *ngFor="let a of person.availabilities" [type]="'success'" dismissible="true">
+						<alert *ngFor="let a of person.availabilities; let i = index" [type]="'success'" (click)="removeAvailability(i)" dismissible="true">
 							<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
 							<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
 						</alert>
@@ -78,8 +78,8 @@
 						<div class="form-group">
 							<label for="assignees">Staff preference</label>
 							<select class="form-control" name="assignees" [(ngModel)]="assigneeId">
-						<option *ngFor="let p of people" [value]="p.id">{{ p.surname }}, {{ p.forename }}</option>
-					</select>
+								<option *ngFor="let p of people" [value]="p.id">{{ p.surname }}, {{ p.forename }}</option>
+							</select>
 						</div>
 						<button type="button" class="btn btn-secondary mb-1" (click)="assignStaffToClient()">ADD</button>
 						<ul class="list-group list-group-flush">

@@ -17,7 +17,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Monday</strong></span>
-						<button class="btn btn-outline-secondary float-xs-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
+						<app-rota-item-write [day]="0" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="monday.length == 0">Unallocated</p>
@@ -30,7 +30,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Tuesday</strong></span>
-						<button class="btn btn-outline-secondary float-xs-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
+						<app-rota-item-write [day]="1" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="tuesday.length == 0">Unallocated</p>
@@ -43,7 +43,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Wednesday</strong></span>
-						<button class="btn btn-outline-secondary float-xs-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
+						<app-rota-item-write [day]="2" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="wednesday.length == 0">Unallocated</p>
@@ -62,7 +62,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Thursday</strong></span>
-						<button class="btn btn-outline-secondary float-xs-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
+						<app-rota-item-write [day]="3" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="thursday.length == 0">Unallocated</p>
@@ -75,7 +75,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Friday</strong></span>
-						<button class="btn btn-outline-secondary float-xs-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
+						<app-rota-item-write [day]="4" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="friday.length == 0">Unallocated</p>
@@ -88,7 +88,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Saturday</strong></span>
-						<button class="btn btn-outline-secondary float-xs-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
+						<app-rota-item-write [day]="5" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="saturday.length == 0">Unallocated</p>
@@ -105,7 +105,7 @@
 		<div class="card">
 			<div class="card-header mb-1">
 				<span class="card-title list-truncate"><strong>Sunday</strong></span>
-				<button class="btn btn-outline-secondary float-xs-right"><i class="fa fa-plus" aria-hidden="true"></i></button>
+				<app-rota-item-write [day]="6" (addRotaItem)="add($event)"></app-rota-item-write>
 			</div>
 			<div class="card-block">
 				<p class="card-text" *ngIf="sunday.length == 0">Unallocated</p>
