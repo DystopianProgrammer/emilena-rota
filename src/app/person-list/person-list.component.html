@@ -3,11 +3,14 @@
 		<h4>{{title}}</h4>
 		<div class="form-group filter-list">
 			<label for="filter">Filter <i class="fa fa-filter" aria-hidden="true"></i></label>
-			<input class="form-control" type="text" name="filter" placeholder="e.g. Emily">
+			<input class="form-control" type="text" name="filter" placeholder="e.g. Emily" [(ngModel)]="filterText" (ngModelChange)="onChange($event)">
 		</div>
 	</div>
 </div>
 <div class="row">
+	<div *ngIf="people.length == 0" class="col-xs-12">
+		<p>No results found!</p>
+	</div>
 	<div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let p of people, let i = index">
 		<div class="card">
 			<div class="card-header mb-1">

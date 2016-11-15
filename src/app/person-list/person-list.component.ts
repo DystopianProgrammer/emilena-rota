@@ -14,7 +14,9 @@ export class PersonListComponent implements OnInit {
   type: string;
   isClient: boolean;
   title: string;
-  public isCollapsed: boolean = true;
+  isCollapsed: boolean = true;
+  filterText: string;
+  filterContainer: Person[] = [];
 
   constructor(private route: ActivatedRoute, private personService: PersonService) { }
 
@@ -45,7 +47,20 @@ export class PersonListComponent implements OnInit {
     }
   }
 
-  filter($event): void {
-    console.log($event)
+  onChange(event): void {
+    
+    if(this.filterContainer.length < 1) {
+      this.filterContainer = this.people.slice();
+    }
+    if (this.filterText.length > 3) {
+      this.people = this.people.filter(p => {
+        let forename = p.forename.toLowerCase();
+        let surname = p.surname.toLowerCase();
+        let filter = this.filterText.toLowerCase();
+        return forename.includes(filter) || surname.includes(filter)
+      });
+    } else {
+      this.people = this.filterContainer.slice();
+    }
   }
 }
