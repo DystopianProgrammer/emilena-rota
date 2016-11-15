@@ -14,17 +14,16 @@ export class RotaItemWriteComponent implements OnInit {
   @ViewChild('lgModal') public childModal: ModalDirective;
   @Input() item: RotaItem;
   @Input() day: DayOfWeek;
+  @Input() clients: Client[];
+  @Input() staff: Staff[];
   @Output() addRotaItem: EventEmitter<any> = new EventEmitter();
 
   isEditMode: boolean = false;
   title: string;
   fromTime: Date;
   toTime: Date;
-  clients: Client[];
-  staff: Staff[];
   selectedClient: Client;
   selectedStaff: Staff;
-
 
   constructor(private personService: PersonService) { }
 
@@ -34,9 +33,6 @@ export class RotaItemWriteComponent implements OnInit {
       this.isEditMode = true;
     } else {
     }
-
-    this.personService.staff().subscribe(res => this.staff = res);
-    this.personService.clients().subscribe(res => this.clients = res);
   }
 
   public showChildModal(): void {

@@ -1,3 +1,9 @@
+<alert *ngIf="incorrectTimes" (close)="alertDismissed()" dismissOnTimeout="4000">
+	Start time cannot be before end time.
+</alert>
+<alert *ngIf="incorrectFormat" (close)="alertDismissed()" dismissOnTimeout="4000">
+	Please ensure time is in 24hrs format e.g. 00:00 and the day has been selected.
+</alert>
 <div class="form-group">
 	<label for="availability">Day</label>
 	<select class="form-control" name="availability" [(ngModel)]="availability.dayOfWeek">

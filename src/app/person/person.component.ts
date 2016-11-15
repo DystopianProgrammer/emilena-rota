@@ -7,7 +7,6 @@ import { Person, Client, Staff, Address, Availability } from '../model';
 import { PersonService } from '../person.service';
 import { ErrorService } from '../error.service';
 
-
 @Component({
   selector: 'app-person',
   templateUrl: './person.component.html',
@@ -27,6 +26,9 @@ export class PersonComponent implements OnInit, OnDestroy {
   isClient: boolean;
   // our person subscriber
   private person$: Subscription;
+  // validation failures
+  missingFields: boolean = false;
+  validationPrompts: string;
 
   constructor(
     private router: Router,
@@ -53,9 +55,14 @@ export class PersonComponent implements OnInit, OnDestroy {
         let properties = errors.map(error => {
           return error.property;
         }).join(', ');
-        console.log(properties);
+        this.missingFields = true;
+        this.validationPrompts = `Please ensure all fields are completed and valid - ${properties}`
       }
     });
+  }
+
+  alertDismissed() {
+    this.missingFields = false;
   }
 
   /**
@@ -82,11 +89,7 @@ export class PersonComponent implements OnInit, OnDestroy {
    * Assigns the single availability to the person if not a validation error.
    */
   updateAvailabilities(event: any) {
-    if (event instanceof Array) {
-      console.warn(event); // some validation fixes to do.
-    } else {
-      this.person.availabilities.push(event);
-    }
+    this.person.availabilities.push(event);
   }
 
   removeAvailability(index: number) {
@@ -152,7 +155,7 @@ export class PersonComponent implements OnInit, OnDestroy {
     this.route.params.forEach((params: Params) => {
       type = params['type'];
       id = +params['id'];
-      if(type.includes('client')) {
+      if (type.includes('client')) {
         this.title = 'Edit Client';
       } else {
         this.title = 'Edit Staff';

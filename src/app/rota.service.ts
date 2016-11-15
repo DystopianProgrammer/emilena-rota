@@ -16,4 +16,14 @@ export class RotaService {
     return this.http.get(`/emilena-api/rota/${date}`, this.authService.requestOptionsWithJsonHeader())
       .map((r: Response) => r.json() as Rota);
   }
+
+  update(rota: Rota): Observable<Rota> {
+    return this.http.post('/emilena-api/rota/update', JSON.stringify(rota), this.authService.requestOptionsWithJsonHeader())
+      .map((r: Response) => r.json() as Rota);
+  }
+
+  fetchAll(): Observable<Rota[]> {
+    return this.http.get('/emilena-api/rota/all', this.authService.requestOptionsWithJsonHeader())
+      .map((r: Response) => r.json() as Rota[]);
+  }
 }

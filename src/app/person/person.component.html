@@ -64,7 +64,7 @@
 						<p *ngIf="person.availabilities.length < 1">
 							<em>None to display</em>
 						</p>
-						<alert *ngFor="let a of person.availabilities; let i = index" [type]="'success'" (click)="removeAvailability(i)" dismissible="true">
+						<alert *ngFor="let a of person.availabilities; let i = index" [type]="'success'" (close)="removeAvailability(i)" dismissible="true">
 							<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
 							<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
 						</alert>
@@ -94,7 +94,11 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="col-xs-12">
+		<alert *ngIf="missingFields" (close)="alertDismissed()" dismissOnTimeout="6000">
+			{{validationPrompts}}
+		</alert>
+	</div>
 	<div class="col-xs-12">
 		<button type="button" class="btn btn-outline-success" (click)="next()">Next</button>
 		<button type="button" class="btn btn-secondary" [routerLink]="['']">Cancel</button>
