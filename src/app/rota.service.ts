@@ -26,4 +26,9 @@ export class RotaService {
     return this.http.get('/emilena-api/rota/all', this.authService.requestOptionsWithJsonHeader())
       .map((r: Response) => r.json() as Rota[]);
   }
+
+  findbyId(id: number): Observable<Rota> {
+    return this.http.get(`/emilena-api/rota/find/${id}`, this.authService.requestOptionsWithJsonHeader())
+      .map((r: Response) => r.json() as Rota);
+  }
 }

@@ -17,7 +17,6 @@ export class PersonSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.person = this.personService.person;
-    console.log(this.person);
   }
 
   submit() {

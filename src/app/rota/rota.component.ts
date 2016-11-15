@@ -83,15 +83,22 @@ export class RotaComponent implements OnInit {
   }
 
   deleteRotaItem(item: any): void {
-    switch (item.day) {
-      case 'MONDAY': this.remove(item.index, this.monday); break;
-      case 'TUESDAY': this.remove(item.index, this.tuesday); break;
-      case 'WEDNESDAY': this.remove(item.index, this.wednesday); break;
-      case 'THURSDAY': this.remove(item.index, this.thursday); break;
-      case 'FRIDAY': this.remove(item.index, this.friday); break;
-      case 'SATURDAY': this.remove(item.index, this.saturday); break;
-      case 'SUNDAY': this.remove(item.index, this.sunday); break;
-      default: console.warn('I dunno Emily'); // a little easter egg we'll probably never see. :-)
+    if (item.day == 'MONDAY' || item.day == 0) {
+      this.remove(item.index, this.monday)
+    } else if (item.day == 'TUESDAY' || item.day == 1) {
+      this.remove(item.index, this.tuesday);
+    } else if (item.day == 'WEDNESDAY' || item.day == 2) {
+      this.remove(item.index, this.wednesday);
+    } else if (item.day == 'THURSDAY' || item.day == 3) {
+      this.remove(item.index, this.thursday);
+    } else if (item.day == 'FRIDAY' || item.day == 4) {
+      this.remove(item.index, this.friday);
+    } else if (item.day == 'SATURDAY' || item.day == 5) {
+      this.remove(item.index, this.saturday);
+    } else if (item.day == 'SUNDAY' || item.day == 6) {
+      this.remove(item.index, this.sunday);
+    } else {
+      console.warn('I dunno Emily');
     }
   }
 
@@ -99,38 +106,26 @@ export class RotaComponent implements OnInit {
     rotaItem = rotaItem.splice(index, 1);
   }
 
-  add(rotaItem: RotaItem): void {
-    switch (rotaItem.dayOfWeek) {
-      case DayOfWeek.MONDAY: this.monday.push(rotaItem); break;
-      case DayOfWeek.TUESDAY: this.tuesday.push(rotaItem); break;
-      case DayOfWeek.WEDNESDAY: this.wednesday.push(rotaItem); break;
-      case DayOfWeek.THURSDAY: this.thursday.push(rotaItem); break;
-      case DayOfWeek.FRIDAY: this.friday.push(rotaItem); break;
-      case DayOfWeek.SATURDAY: this.saturday.push(rotaItem); break;
-      case DayOfWeek.SUNDAY: this.sunday.push(rotaItem); break;
-      default: console.warn('I dunno Emily'); // a little easter egg we'll probably never see. :-)
+  add(item: any): void {
+    if (item.dayOfWeek == 'MONDAY' || item.dayOfWeek == 0 || item.dayOfWeek == DayOfWeek.MONDAY) {
+      this.monday.push(item);
+    } else if (item.dayOfWeek == 'TUESDAY' || item.dayOfWeek == 1 || item.dayOfWeek == DayOfWeek.MONDAY) {
+      this.tuesday.push(item);
+    } else if (item.dayOfWeek == 'WEDNESDAY' || item.dayOfWeek == 2 || item.dayOfWeek == DayOfWeek.MONDAY) {
+      this.wednesday.push(item);
+    } else if (item.dayOfWeek == 'THURSDAY' || item.dayOfWeek == 3 || item.dayOfWeek == DayOfWeek.MONDAY) {
+      this.thursday.push(item);
+    } else if (item.dayOfWeek == 'FRIDAY' || item.dayOfWeek == 4 || item.dayOfWeek == DayOfWeek.MONDAY) {
+      this.friday.push(item);
+    } else if (item.dayOfWeek == 'SATURDAY' || item.dayOfWeek == 5 || item.dayOfWeek == DayOfWeek.MONDAY) {
+      this.saturday.push(item);
+    } else if (item.dayOfWeek == 'SUNDAY' || item.dayOfWeek == 6 || item.dayOfWeek == DayOfWeek.MONDAY) {
+      this.sunday.push(item);
+    } else {
+      console.warn('I dunno Emily');
     }
   }
 
-  addStupidTypeScript(rotaItem): void {
-    switch (rotaItem.dayOfWeek) {
-      case 'MONDAY': this.doesContain(rotaItem, this.monday); break;
-      case 'TUESDAY': this.doesContain(rotaItem, this.tuesday); break;
-      case 'WEDNESDAY': this.doesContain(rotaItem, this.wednesday); break;
-      case 'THURSDAY': this.doesContain(rotaItem, this.thursday); break;
-      case 'FRIDAY': this.doesContain(rotaItem, this.friday); break;
-      case 'SATURDAY': this.doesContain(rotaItem, this.saturday); break;
-      case 'SUNDAY': this.doesContain(rotaItem, this.sunday); break;
-      default: console.warn('I dunno Emily'); // a little easter egg we'll probably never see. :-)
-    }
-  }
-
-  private doesContain(rotaItem, collection): void {
-    let found = collection.find(item => item.id == rotaItem.id);
-    if(!found) {
-      collection.push(rotaItem);
-    }
-  }
 
   save(): void {
     let items = this.monday.concat(this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday);
@@ -141,6 +136,24 @@ export class RotaComponent implements OnInit {
       this.rota = res;
       this.rotas.push(this.rota);
     });
+  }
+
+  alertDismissed(): void {
+    this.saved = false;
+  }
+
+  onChange(event: any) {
+    this.reset();
+    this.rotaService.findbyId(event).subscribe(res => {
+      this.rota = res;
+      this.rota.rotaItems.forEach(item => {
+        this.add(item);
+      });
+    });
+  }
+
+  view(): void {
+    console.log('TODO unallocated');
   }
 
   private transform(item): any {
@@ -159,28 +172,19 @@ export class RotaComponent implements OnInit {
     } else if (item.dayOfWeek == DayOfWeek.SUNDAY) {
       item.dayOfWeek = 'SUNDAY';
     } else {
-      console.warn('I dunno Emily'); // a little easter egg we'll probably never see. :-)
+      console.warn('I dunno Emily');
     }
     return item;
   }
 
-  alertDismissed(): void {
-    this.saved = false;
-  }
-
-  onChange(event: any) {
-    this.rotas.forEach(r => {
-      if (r.id == event) {
-        this.rota = r;
-        this.rota.rotaItems.forEach(item => {
-          this.addStupidTypeScript(item);
-        });
-      }
-    });
-  }
-
-  view(): void {
-    console.log('TODO unallocated');
+  reset() {
+    this.monday = [];
+    this.tuesday = [];
+    this.wednesday = [];
+    this.thursday = [];
+    this.friday = [];
+    this.saturday = [];
+    this.sunday = [];
   }
 }
 

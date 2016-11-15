@@ -8,7 +8,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let p of people">
+	<div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let p of people, let i = index">
 		<div class="card">
 			<div class="card-header mb-1">
 				<h4 class="card-title list-truncate">{{p.surname}}, {{p.forename}}</h4>
@@ -26,7 +26,7 @@
 				<!-- TODO put this logic in the component -->
 				<button *ngIf="isClient" class="btn btn-secondary btn-block" [routerLink]="['/person-edit', { type: 'client', id: p.id }]">Edit</button>
 				<button *ngIf="!isClient" class="btn btn-secondary btn-block" [routerLink]="['/person-edit', { type: 'staff', id: p.id }]">Edit</button>
-				<button class="btn btn-outline-danger btn-block"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+				<button (click)="remove(i)" class="btn btn-outline-danger btn-block"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
 			</div>
 		</div>
 	</div>

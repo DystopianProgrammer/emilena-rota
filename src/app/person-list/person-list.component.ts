@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PersonService } from '../person.service';
-import { Person } from '../model';
+import { Person, Client, Staff } from '../model';
 
 @Component({
   selector: 'app-person-list',
@@ -14,7 +14,7 @@ export class PersonListComponent implements OnInit {
   type: string;
   isClient: boolean;
   title: string;
-  public isCollapsed:boolean = true;
+  public isCollapsed: boolean = true;
 
   constructor(private route: ActivatedRoute, private personService: PersonService) { }
 
@@ -22,7 +22,7 @@ export class PersonListComponent implements OnInit {
     this.route.params.forEach((params: Params) => {
       this.type = params['type'];
       this.isClient = (this.type == 'staff') ? false : true;
-      if(this.type.includes('client')) {
+      if (this.type.includes('client')) {
         this.title = 'Client Listing';
       } else {
         this.title = 'Staff Listing';
@@ -33,7 +33,19 @@ export class PersonListComponent implements OnInit {
     });
   }
 
-  filter($event):void {
+  remove(index: number) {
+    if (this.isClient) {
+      this.personService.removeClient(<Client>this.people[index]).subscribe(res => {
+        this.people = this.people.splice[index, 1]
+      });
+    } else {
+      this.personService.removeStaff(<Staff>this.people[index]).subscribe(res => {
+        this.people = this.people.splice[index, 1]
+      });
+    }
+  }
+
+  filter($event): void {
     console.log($event)
   }
 }

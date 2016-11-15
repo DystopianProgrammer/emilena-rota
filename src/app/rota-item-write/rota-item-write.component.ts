@@ -49,8 +49,8 @@ export class RotaItemWriteComponent implements OnInit {
       let staffId = +this.selectedStaff;
 
       let entry = new RotaItem();
-      entry.start = moment(this.fromTime).format('hh:mm');
-      entry.finish = moment(this.toTime).format('hh:mm');
+      entry.start = moment(this.fromTime).format('HH:mm');
+      entry.finish = moment(this.toTime).format('HH:mm');
       entry.dayOfWeek = this.day;
 
       this.clients.forEach(c => {

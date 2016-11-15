@@ -39,6 +39,14 @@ export class PersonService {
       .map((r: Response) => r.json() as Staff[]);
   }
 
+  removeClient(client: Client): Observable<Response> {
+    return this.http.post('/emilena-api/client/delete', JSON.stringify(client), this.authService.requestOptionsWithJsonHeader());
+  }
+
+  removeStaff(staff: Staff): Observable<Response> {
+    return this.http.post('/emilena-api/staff/delete', JSON.stringify(staff), this.authService.requestOptionsWithJsonHeader());
+  }
+
   listForPersonType(type: string): Observable<any[]> {
     if (type == 'clients') {
       return this.clients();
