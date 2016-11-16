@@ -1,0 +1,13 @@
+<alert *ngIf="incorrectTimes" (close)="alertDismissed()" dismissOnTimeout="4000">
+	Start time cannot be before end time.
+</alert>
+<div class="time-container">
+  <label for="from">From <small>(24hrs)</small></label>
+  <input [(ngModel)]="fromHours" class="time-item" name="fromHours" type="text" placeholder="HH" maxlength="2" (ngModelChange)="fromHrs($event)"/> :
+  <input [(ngModel)]="fromMinutes" class="time-item" name="fromMinutes"type="text" placeholder="MM" maxlength="2" (ngModelChange)="frmMins($event)"/>
+</div>
+<div class="time-container">
+  <label for="until">Until <small>(24hrs)</small></label>
+  <input [(ngModel)]="untilHours" class="time-item" name="untilHours" type="text" placeholder="HH" maxlength="2" (ngModelChange)="tilHrs($event)"/> :
+  <input [(ngModel)]="untilMinutes" class="time-item" name="untilMinutes" type="text" placeholder="MM" maxlength="2" (ngModelChange)="tilMins($event)"/>
+</div>

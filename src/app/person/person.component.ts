@@ -89,11 +89,13 @@ export class PersonComponent implements OnInit, OnDestroy {
    * Assigns the single availability to the person if not a validation error.
    */
   updateAvailabilities(event: any) {
-    this.person.availabilities.push(event);
+    if (event instanceof Availability) {
+      this.person.availabilities.push(event);
+    }
   }
 
   removeAvailability(index: number) {
-    this.person.availabilities.splice(index, 1);
+    this.person.availabilities = this.person.availabilities.splice(index, 1);
   }
 
   /**

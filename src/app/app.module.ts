@@ -27,6 +27,7 @@ import { AvailabilityModalComponent } from './availability-modal/availability-mo
 import { DynamicClassDirective } from './dynamic-class.directive';
 import { RotaItemReadComponent } from './rota-item-read/rota-item-read.component';
 import { RotaItemWriteComponent } from './rota-item-write/rota-item-write.component';
+import { TimeComponent } from './time/time.component';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { RotaItemWriteComponent } from './rota-item-write/rota-item-write.compon
     AvailabilityModalComponent,
     DynamicClassDirective,
     RotaItemReadComponent,
-    RotaItemWriteComponent
+    RotaItemWriteComponent,
+    TimeComponent
   ],
   providers: [
     AuthService,

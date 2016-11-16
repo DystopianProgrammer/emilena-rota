@@ -31,8 +31,8 @@ export class RotaComponent implements OnInit {
   sunday: RotaItem[] = [];
 
   saved: boolean = false;
-  staff: Staff[];
-  clients: Client[];
+  staff: Staff[] = [];
+  clients: Client[] = [];
 
   // the selected saved rota from the dropdown 
   rotaId: string;
@@ -40,8 +40,7 @@ export class RotaComponent implements OnInit {
   constructor(private rotaService: RotaService, private personService: PersonService) { }
 
   ngOnInit() {
-    this.updated = moment().format('hh:mm:ss');
-
+    this.updated = moment().format('HH:mm:ss');
     this.personService.staff().subscribe(res => this.staff = res);
     this.personService.clients().subscribe(res => this.clients = res);
     this.rotaService.fetchAll().subscribe(res => {
@@ -50,7 +49,7 @@ export class RotaComponent implements OnInit {
   }
 
   create(): void {
-    this.updated = moment().format('hh:mm:ss');
+    this.updated = moment().format('HH:mm:ss');
     this.forDate = moment().format('D-M-YYYY');
     this.monday = [];
     this.tuesday = [];
@@ -152,9 +151,7 @@ export class RotaComponent implements OnInit {
     });
   }
 
-  view(): void {
-    console.log('TODO unallocated');
-  }
+  view(): void {}
 
   private transform(item): any {
     if (item.dayOfWeek == DayOfWeek.MONDAY) {

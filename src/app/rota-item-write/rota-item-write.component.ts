@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angu
 import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 import { RotaItem, DayOfWeek, Client, Staff } from '../model';
 import { PersonService } from '../person.service';
-import * as moment from 'moment';
+import { Time } from '../time/time.component';
 
 @Component({
   selector: 'app-rota-item-write',
@@ -20,18 +20,24 @@ export class RotaItemWriteComponent implements OnInit {
 
   isEditMode: boolean = false;
   title: string;
-  fromTime: Date;
-  toTime: Date;
-  selectedClient: Client;
-  selectedStaff: Staff;
+  fromTime: string;
+  toTime: string;
+  selectedClient: number;
+  selectedStaff: number;
+  isValid: boolean = true;
 
   constructor(private personService: PersonService) { }
 
   ngOnInit() {
-    this.title = DayOfWeek[this.day];
     if (this.item) {
       this.isEditMode = true;
+      this.fromTime = this.item.start;
+      this.toTime = this.item.finish;
+      this.title = this.item.dayOfWeek.toLocaleString();
+      this.selectedClient = this.item.client.id;
+      this.selectedStaff = this.item.staff.id;
     } else {
+      this.title = DayOfWeek[this.day];
     }
   }
 
@@ -44,30 +50,43 @@ export class RotaItemWriteComponent implements OnInit {
   }
 
   create(): void {
-    if (this.fromTime && this.toTime && this.selectedClient && this.selectedStaff) {
-      let clientId = +this.selectedClient;
-      let staffId = +this.selectedStaff;
+    if (!this.isEditMode) {
+      console.log('new mode');
+      if (this.fromTime && this.toTime && this.selectedClient && this.selectedStaff) {
+        let clientId = +this.selectedClient;
+        let staffId = +this.selectedStaff;
 
-      let entry = new RotaItem();
-      entry.start = moment(this.fromTime).format('HH:mm');
-      entry.finish = moment(this.toTime).format('HH:mm');
-      entry.dayOfWeek = this.day;
+        let entry = new RotaItem();
+        entry.start = this.fromTime;
+        entry.finish = this.toTime;
+        entry.dayOfWeek = this.day;
 
-      this.clients.forEach(c => {
-        if (c.id == clientId) {
-          entry.client = c;
-        }
-      });
+        this.clients.forEach(c => {
+          if (c.id == clientId) { entry.client = c; }
+        });
 
-      this.staff.forEach(s => {
-        if (s.id == staffId) {
-          entry.staff = s;
-        }
-      });
+        this.staff.forEach(s => {
+          if (s.id == staffId) {
+            entry.staff = s;
+          }
+        });
 
-      this.addRotaItem.emit(entry);
+        this.addRotaItem.emit(entry);
+        this.hideChildModal();
+      } 
+    } else {
+      console.log('edit mode');
+      this.item.start = this.fromTime;
+      this.item.finish = this.toTime;
+      this.item.client = this.clients.find(c => c.id == this.selectedClient);
+      this.item.staff = this.staff.find(s => s.id == this.selectedStaff);
+      this.addRotaItem.emit(this.item);
       this.hideChildModal();
     }
   }
 
+  updateTime(time: Time): void {
+    this.fromTime = time.start;
+    this.toTime = time.finish;
+  }
 }

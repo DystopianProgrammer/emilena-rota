@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { validate } from 'class-validator';
 
 import { DayOfWeek, Availability } from '../model';
+import { Time } from '../time/time.component';
 
 import * as moment from 'moment';
 
@@ -18,6 +19,8 @@ export class AvailabilityComponent implements OnInit {
   keyIndex: number = 0;
   incorrectTimes: boolean = false;
   incorrectFormat: boolean = false;
+  start: string;
+  finish: string;
 
   constructor() { }
 
@@ -29,6 +32,8 @@ export class AvailabilityComponent implements OnInit {
   }
 
   add(): void {
+    this.availability.fromTime = this.start;
+    this.availability.toTime = this.finish;
     validate(this.availability).then(errors => {
       if (errors.length > 0) {
         this.availabilityOutput.emit(errors);
@@ -46,14 +51,13 @@ export class AvailabilityComponent implements OnInit {
     });
   }
 
+  updateTime(time: Time) {
+    this.start = time.start;
+    this.finish = time.finish;
+  }
+
   alertDismissed() {
     this.incorrectTimes = false;
     this.incorrectFormat = false;
-  }
-
-  onKey(event: any) {
-    if (event.target.value.length == 2 && !isNaN(event.key)) {
-      event.target.value += ':';
-    }
   }
 }

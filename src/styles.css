@@ -8,6 +8,11 @@ body {
     padding-top: 70px;
     background-color: #f7f7f7 !important;
 }
+body .item-line-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .page-wrap {
     min-height: 100%;
     margin-bottom: -142px;

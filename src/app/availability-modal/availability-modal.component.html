@@ -10,9 +10,22 @@
 				<p>{{person.surname}}, {{person.forename}}</p>
 			</div>
 			<div class="modal-body">
-				<ul class="list-group list-group-flush mb-1" *ngFor="let a of person.availabilities">
-					<li class="list-group-item"><strong>{{a.dayOfWeek | capitalizeFirst}}</strong> {{a.fromTime}} - {{a.toTime}}</li>
-				</ul>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Day</th>
+								<th>From</th>
+								<th>To</th>
+							</tr>
+						</thead>
+						<tr *ngFor="let a of person.availabilities">
+							<td>{{a.dayOfWeek}}</td>
+							<td>{{a.fromTime}}</td>
+							<td>{{a.toTime}}</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -85,8 +85,11 @@
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item" *ngFor="let staff of person.staff; let i = index">
 								<span class="float-xs-right">
-							<button type="button" class="btn btn-warning btn-sm" (click)="removeStaffAssignment(i)">Remove</button>
-						</span> {{ staff.surname }}, {{ staff.forename }}
+									<button type="button" class="btn btn-warning btn-sm" (click)="removeStaffAssignment(i)">
+										<i class="fa fa-minus" aria-hidden="true"></i>
+									</button>
+								</span> 
+						       <div class="item-line-truncate">{{ staff.surname }}, {{ staff.forename }}</div>
 							</li>
 						</ul>
 					</div>
