@@ -5,3 +5,10 @@
 <div class="item-line-truncate"><strong>From:</strong> {{ item.start }}</div>
 <div class="item-line-truncate"><strong>To:</strong> {{ item.finish }}</div>
 <div class="item-line-truncate"><strong>Address:</strong> {{ item.client | address }}</div>
+<hr>
+<div class="form-check">
+  <label class="form-check-label">
+    <input class="form-check-input" name="isComplete" type="checkbox" (click)="markComplete()" [(ngModel)]="item.isComplete">
+    Check completed
+  </label>
+</div>

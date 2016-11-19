@@ -16,7 +16,6 @@ export class AvailabilityModalComponent implements OnInit {
 
   ngOnInit() {
     let a = this.person.availabilities.sort();
-    console.log(a);
     this.person.availabilities = a;
   }
 

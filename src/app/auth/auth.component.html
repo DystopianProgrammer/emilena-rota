@@ -2,25 +2,26 @@
 	<h1 class="display-3">Rota</h1>
 	<hr class="my-2">
 	<div class="container">
-		<form>
-			<div class="row">
-				<div class="col-xs-12 col-md-6">
-					<p><strong>Login</strong></p>
-					<div class="form-group">
-						<label for="user">Username</label>
-						<input class="form-control" name="user" type="text" placeholder="username" align="end" [(ngModel)]="systemUser.userName">
-					</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-6">
+				<alert *ngIf="attempts > 0" dismissOnTimeout="6000" type="danger">
+					Invalid credentials, please try again.
+				</alert>
+				<p><strong>Login</strong></p>
+				<div class="form-group">
+					<label for="user">Username</label>
+					<input class="form-control" name="user" type="text" placeholder="username" align="end" [(ngModel)]="systemUser.userName">
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
-						<label for="password">Password</label>
-						<input class="form-control" name="password" type="password" placeholder="password" align="end" [(ngModel)]="systemUser.password">
-					</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-md-6">
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input class="form-control" name="password" type="password" placeholder="password" align="end" [(ngModel)]="systemUser.password">
 				</div>
 			</div>
-			<button class="btn btn-primary" (click)="login()">Login</button>
-		</form>
+		</div>
+		<button class="btn btn-primary" (click)="login()">Login</button>
 	</div>
 </div>

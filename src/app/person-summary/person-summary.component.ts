@@ -21,6 +21,7 @@ export class PersonSummaryComponent implements OnInit {
 
   submit() {
     this.personService.update(this.person).subscribe(res => {
+      this.personService.person = undefined;
     });
   }
 

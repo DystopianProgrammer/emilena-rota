@@ -15,6 +15,7 @@ export class RotaItemReadComponent implements OnInit {
   @Input() staff: Staff[];
 
   @Output() remove: EventEmitter<any> = new EventEmitter();
+  @Output() complete: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -26,6 +27,11 @@ export class RotaItemReadComponent implements OnInit {
     itemToRemove.index = this.index;
     itemToRemove.day = this.item.dayOfWeek;
     this.remove.emit(itemToRemove);
+  }
+
+  markComplete() {
+    this.item.isComplete = true;
+    this.complete.emit(this.item);
   }
 
   editRotaItem(event: RotaItem): void {

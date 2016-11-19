@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
@@ -33,6 +33,7 @@ import { TimeComponent } from './time/time.component';
   imports: [
     BrowserModule,
     HttpModule,
+    JsonpModule,
     FormsModule,
     appRouting,
     AlertModule,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions, Jsonp, URLSearchParams } from '@angular/http';
 import { CanActivate, CanActivateChild, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
@@ -14,7 +14,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/catch';
 
-import { SystemUser } from './model';
+import { SystemUser, Traffic } from './model';
 
 /**
  * AuthService is responsible for accessing the application using Basic Credentials. It holds the credentials in session storage
@@ -26,7 +26,7 @@ export class AuthService {
   _systemUser: SystemUser;
   _systemUserSubject = new Subject<SystemUser>();
 
-  constructor(private _http: Http, private router: Router) { }
+  constructor(private _http: Http, private router: Router, private jsonp: Jsonp) { }
 
   /**
    * The login method accepts an optional SystemUser argument. If this is not supplied, the method attempts to restore the
@@ -38,7 +38,9 @@ export class AuthService {
   login(systemUser?: SystemUser): Observable<SystemUser> {
     let headers = undefined;
     if (systemUser) {
-      headers = this.headers(systemUser.userName, systemUser.password);
+      let user = systemUser.userName.trim();
+      let password = systemUser.password.trim();
+      headers = this.headers(user, password);
     } else {
       this._systemUser = JSON.parse(window.sessionStorage.getItem('system_user'));
       headers = this.headers(this._systemUser.userName, this._systemUser.password);
@@ -89,7 +91,35 @@ export class AuthService {
     headers.append('Authorization', 'Basic ' + btoa(`${username}:${password}`));
     return headers;
   }
+
+  /**
+   * Used for capturing traffic IPs
+   */
+  public logClient() {
+    let jsonip = 'https://jsonip.com';
+    let params = new URLSearchParams();
+    params.append('callback', 'JSONP_CALLBACK');
+    return this.jsonp
+      .get(jsonip, { search: params })
+      .map(response => <string>response.json().ip);
+  }
+
+  /**
+   * call to store captured IPs to the backend.
+   */
+  public postClient(ip: string) {
+    let traffic = new Traffic();
+    traffic.ipAddress = ip;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/JSON');
+    let options = new RequestOptions({ 'headers': headers });
+    return this._http.post('/emilena-api/traffic/update', JSON.stringify(traffic), options);
+  }
+
+
+
 }
+
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {

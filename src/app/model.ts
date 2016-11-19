@@ -74,6 +74,7 @@ export class Rota {
 export class RotaItem {
     id: number;
     dayOfWeek: DayOfWeek;
+    isComplete: boolean;
     start: string;
     finish: string;
     client: Client;
@@ -86,4 +87,9 @@ export enum ContractType {
 
 export enum StaffType {
     SENIOR, SUPPORT
+}
+
+export class Traffic {
+    id: number;
+    ipAddress: string;
 }

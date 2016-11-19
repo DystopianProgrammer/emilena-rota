@@ -51,7 +51,6 @@ export class RotaItemWriteComponent implements OnInit {
 
   create(): void {
     if (!this.isEditMode) {
-      console.log('new mode');
       if (this.fromTime && this.toTime && this.selectedClient && this.selectedStaff) {
         let clientId = +this.selectedClient;
         let staffId = +this.selectedStaff;
@@ -75,7 +74,6 @@ export class RotaItemWriteComponent implements OnInit {
         this.hideChildModal();
       } 
     } else {
-      console.log('edit mode');
       this.item.start = this.fromTime;
       this.item.finish = this.toTime;
       this.item.client = this.clients.find(c => c.id == this.selectedClient);

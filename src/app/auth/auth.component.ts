@@ -24,6 +24,11 @@ export class AuthComponent implements OnInit {
     } catch (error) {
       // do nothing, let the service handle any login failure
     }
+
+    this._authService.logClient().subscribe(ip => {
+      this._authService.postClient(ip).subscribe(() => {
+      })
+    })
   }
 
   login() {
@@ -37,10 +42,15 @@ export class AuthComponent implements OnInit {
     };
 
     let errorHandler = (error) => {
-      this.errorService.handleError(error.status);
+      if (error.status == '418') {
+        this.attempts++;
+      } else {
+        this.errorService.handleError(error.status);
+      }
     };
 
     if (this.systemUser.userName && this.systemUser.password) {
+      this.attempts = 0;
       this._authService.login(this.systemUser).subscribe(loginAction, errorHandler);
     } else {
       this._authService.login().subscribe(loginAction);

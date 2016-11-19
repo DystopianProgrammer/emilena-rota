@@ -20,6 +20,7 @@ export class RotaComponent implements OnInit {
   rotas: Rota[];
 
   forDate: string;
+  version: number;
   updated: string;
 
   monday: RotaItem[] = [];
@@ -45,6 +46,28 @@ export class RotaComponent implements OnInit {
     this.personService.clients().subscribe(res => this.clients = res);
     this.rotaService.fetchAll().subscribe(res => {
       this.rotas = res;
+      if (this.rotas.length > 1) {
+        this.rotas.reduce((a, b) => {
+          if (a.id > b.id) {
+            return b;
+          }
+          this.rota = b;
+          this.forDate = b.weekStarting;
+          this.version = b.id;
+          this.rota.rotaItems.forEach(item => {
+            this.add(item);
+          });
+        });
+      } else {
+        if (res.length == 1) {
+          this.rota = res[0];
+          this.forDate = res[0].weekStarting;
+          this.version = res[0].id;
+          this.rota.rotaItems.forEach(item => {
+            this.add(item);
+          });
+        }
+      }
     });
   }
 
@@ -125,6 +148,11 @@ export class RotaComponent implements OnInit {
     }
   }
 
+  completeRotaItem(event): void {
+    // TODO
+    console.log(event);
+  }
+
 
   save(): void {
     let items = this.monday.concat(this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday);
@@ -151,7 +179,7 @@ export class RotaComponent implements OnInit {
     });
   }
 
-  view(): void {}
+  view(): void { }
 
   private transform(item): any {
     if (item.dayOfWeek == DayOfWeek.MONDAY) {
