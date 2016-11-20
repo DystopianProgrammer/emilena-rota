@@ -32,13 +32,10 @@ export class PersonSummaryComponent implements OnInit {
     });
 
     setTimeout(() => {
-      console.log(this.person);
       if (this.person instanceof Staff) {
-        console.log('navd to staff');
         this.router.navigate(['staff-list', { type: 'staff' }]);
       } else {
         this.router.navigate(['client-list', { type: 'client' }]);
-        console.log('navd to client');
       }
     }, 2000)
 
