@@ -16,7 +16,7 @@
 	<div class="col-xs-12 mb-1">
 		<button (click)="create()" class="btn btn-outline-danger float-xs-right"><i class="fa fa-calendar-o" aria-hidden="true"></i> New</button>
 		<button (click)="save()" class="btn btn-success">Save</button>
-		<button (click)="view()" class="btn btn-secondary">Unallocated</button>
+		<app-allocation-modal *ngIf="rota" [rotaId]="rota.id"></app-allocation-modal>
 	</div>
 	<div class="col-xs-12">
 		<alert *ngIf="saved" (close)="alertDismissed()" type="success" dismissOnTimeout="3000">

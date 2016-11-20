@@ -18,6 +18,7 @@ export class RotaComponent implements OnInit {
 
   rota: Rota;
   rotas: Rota[];
+  unallocated: any[];
 
   forDate: string;
   version: number;
@@ -48,7 +49,6 @@ export class RotaComponent implements OnInit {
       this.rotas = res;
 
       let initialise = (index) => {
-          console.log(index);
           this.rota = res[index];
           this.forDate = res[index].weekStarting;
           this.version = res[index].id;
@@ -143,7 +143,6 @@ export class RotaComponent implements OnInit {
     // TODO
     console.log(event);
   }
-
 
   save(): void {
     let items = this.monday.concat(this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday);

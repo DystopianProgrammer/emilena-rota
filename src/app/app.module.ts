@@ -30,6 +30,7 @@ import { RotaItemWriteComponent } from './rota-item-write/rota-item-write.compon
 import { TimeComponent } from './time/time.component';
 import { HelpComponent } from './help/help.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { AllocationModalComponent } from './allocation-modal/allocation-modal.component';
 
 @NgModule({
   imports: [
@@ -63,7 +64,8 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
     RotaItemWriteComponent,
     TimeComponent,
     HelpComponent,
-    DeleteModalComponent
+    DeleteModalComponent,
+    AllocationModalComponent
   ],
   providers: [
     AuthService,
