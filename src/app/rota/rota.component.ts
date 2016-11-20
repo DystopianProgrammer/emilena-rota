@@ -46,27 +46,18 @@ export class RotaComponent implements OnInit {
     this.personService.clients().subscribe(res => this.clients = res);
     this.rotaService.fetchAll().subscribe(res => {
       this.rotas = res;
+
+      let initialise = (index) => {
+          console.log(index);
+          this.rota = res[index];
+          this.forDate = res[index].weekStarting;
+          this.version = res[index].id;
+          this.rota.rotaItems.forEach(item => {
+            this.add(item);
+          });
+      }
       if (this.rotas.length > 1) {
-        this.rotas.reduce((a, b) => {
-          if (a.id > b.id) {
-            return b;
-          }
-          this.rota = b;
-          this.forDate = b.weekStarting;
-          this.version = b.id;
-          this.rota.rotaItems.forEach(item => {
-            this.add(item);
-          });
-        });
-      } else {
-        if (res.length == 1) {
-          this.rota = res[0];
-          this.forDate = res[0].weekStarting;
-          this.version = res[0].id;
-          this.rota.rotaItems.forEach(item => {
-            this.add(item);
-          });
-        }
+        initialise(this.rotas.length - 1)
       }
     });
   }
@@ -125,7 +116,7 @@ export class RotaComponent implements OnInit {
   }
 
   remove(index: number, rotaItem: RotaItem[]) {
-    rotaItem = rotaItem.splice(index, 1);
+    rotaItem.splice(index, 1);
   }
 
   add(item: any): void {

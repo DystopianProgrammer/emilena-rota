@@ -9,6 +9,7 @@ import { PersonComponent } from './person/person.component';
 import { PersonSummaryComponent } from './person-summary/person-summary.component';
 import { PersonListComponent } from './person-list/person-list.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { HelpComponent } from './help/help.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
     { path: 'client-list', component: PersonListComponent, canActivate: [AuthGuard] },
     { path: 'staff-list', component: PersonListComponent, canActivate: [AuthGuard] },
     { path: 'summary', component: PersonSummaryComponent, canActivate: [AuthGuard] },
+    { path: 'info', component: HelpComponent, canActivate: [AuthGuard] },
     { path: 'error:text', component: ErrorPageComponent },
     { path: '**', component: ErrorPageComponent }
 ];

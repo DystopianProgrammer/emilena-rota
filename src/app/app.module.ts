@@ -18,7 +18,7 @@ import { CapitalizeFirstPipe } from './capitalize-first.pipe';
 import { PersonComponent } from './person/person.component';
 import { PersonSummaryComponent } from './person-summary/person-summary.component';
 
-import { AlertModule, CollapseModule, ModalModule, TooltipModule, TimepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { AlertModule, CollapseModule, ModalModule, TooltipModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { PersonListComponent } from './person-list/person-list.component';
 import { NavComponent } from './nav/nav.component';
 import { AddressPipe } from './address.pipe';
@@ -28,6 +28,8 @@ import { DynamicClassDirective } from './dynamic-class.directive';
 import { RotaItemReadComponent } from './rota-item-read/rota-item-read.component';
 import { RotaItemWriteComponent } from './rota-item-write/rota-item-write.component';
 import { TimeComponent } from './time/time.component';
+import { HelpComponent } from './help/help.component';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 
 @NgModule({
   imports: [
@@ -39,8 +41,7 @@ import { TimeComponent } from './time/time.component';
     AlertModule,
     CollapseModule,
     ModalModule,
-    TooltipModule,
-    TimepickerModule
+    TooltipModule
   ],
   declarations: [
     AppComponent,
@@ -60,7 +61,9 @@ import { TimeComponent } from './time/time.component';
     DynamicClassDirective,
     RotaItemReadComponent,
     RotaItemWriteComponent,
-    TimeComponent
+    TimeComponent,
+    HelpComponent,
+    DeleteModalComponent
   ],
   providers: [
     AuthService,

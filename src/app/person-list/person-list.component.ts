@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PersonService } from '../person.service';
 import { Person, Client, Staff } from '../model';
@@ -8,7 +8,7 @@ import { Person, Client, Staff } from '../model';
   templateUrl: './person-list.component.html',
   styleUrls: ['./person-list.component.css']
 })
-export class PersonListComponent implements OnInit {
+export class PersonListComponent implements OnInit, OnDestroy {
 
   people: Person[] = [];
   type: string;
@@ -17,6 +17,7 @@ export class PersonListComponent implements OnInit {
   isCollapsed: boolean = true;
   filterText: string;
   filterContainer: Person[] = [];
+  deleteError: boolean = false;
 
   constructor(private route: ActivatedRoute, private personService: PersonService) { }
 
@@ -35,21 +36,27 @@ export class PersonListComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.people = undefined;
+  }
+
   remove(index: number) {
     if (this.isClient) {
-      this.personService.removeClient(<Client>this.people[index]).subscribe(res => {
-        this.people = this.people.splice[index, 1]
-      });
+      this.personService.removeClient(<Client>this.people[index])
+        .subscribe(res => this.people.splice(index, 1), err => this.deleteError = true);
     } else {
-      this.personService.removeStaff(<Staff>this.people[index]).subscribe(res => {
-        this.people = this.people.splice[index, 1]
-      });
+      this.personService.removeStaff(<Staff>this.people[index])
+        .subscribe(res => this.people.splice(index, 1), err => this.deleteError = true);
     }
   }
 
+  notified(event) {
+    this.deleteError = event;
+  }
+
   onChange(event): void {
-    
-    if(this.filterContainer.length < 1) {
+
+    if (this.filterContainer.length < 1) {
       this.filterContainer = this.people.slice();
     }
     if (this.filterText.length > 3) {

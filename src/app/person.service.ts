@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, ResponseOptions } from '@angular/http';
 
 import { Observable } from 'rxjs';
 
@@ -40,18 +40,20 @@ export class PersonService {
   }
 
   removeClient(client: Client): Observable<Response> {
-    return this.http.post('/emilena-api/client/delete', JSON.stringify(client), this.authService.requestOptionsWithJsonHeader());
+    return this.http.post('/emilena-api/client/delete', JSON.stringify(client), this.authService.requestOptionsWithJsonHeader())
+      .catch(this.handleError);
   }
 
   removeStaff(staff: Staff): Observable<Response> {
-    return this.http.post('/emilena-api/staff/delete', JSON.stringify(staff), this.authService.requestOptionsWithJsonHeader());
+    return this.http.post('/emilena-api/staff/delete', JSON.stringify(staff), this.authService.requestOptionsWithJsonHeader())
+      .catch(this.handleError);
   }
 
   listForPersonType(type: string): Observable<any[]> {
-    if (type == 'clients') {
-      return this.clients();
-    } else {
+    if (type == 'staff') {
       return this.staff();
+    } else {
+      return this.clients();
     }
   }
 
@@ -61,5 +63,17 @@ export class PersonService {
 
   private updateClient(client: Client): Observable<Response> {
     return this.http.post('/emilena-api/client/update', JSON.stringify(client), this.authService.requestOptionsWithJsonHeader());
+  }
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    return Observable.throw(errMsg);
   }
 }

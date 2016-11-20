@@ -13,7 +13,7 @@ export class ErrorPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    let text = this.route.queryParams.map(params => params['text'] || 'None');
+    let text = this.route.queryParams.map(params => params['text'] || '404 - Page not found');
     text.forEach(value => this.errorText = value);
   }
 }

@@ -95,7 +95,7 @@ export class PersonComponent implements OnInit, OnDestroy {
   }
 
   removeAvailability(index: number) {
-    this.person.availabilities = this.person.availabilities.splice(index, 1);
+    this.person.availabilities.splice(index, 1);
   }
 
   /**

@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-12" *ngIf="rota">
-		<h4>Rota <small class="text-muted">Created: {{forDate}} version: {{version}}</small></h4>
+		<h4>Rota</h4>
 	</div>
 	<div class="col-xs-12" *ngIf="!rota">
 		<h4>Rota</h4>
@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	<div class="col-xs-12 mb-1">
-		<button (click)="create()" class="btn btn-outline-danger float-xs-right">New</button>
+		<button (click)="create()" class="btn btn-outline-danger float-xs-right"><i class="fa fa-calendar-o" aria-hidden="true"></i> New</button>
 		<button (click)="save()" class="btn btn-success">Save</button>
 		<button (click)="view()" class="btn btn-secondary">Unallocated</button>
 	</div>
@@ -22,6 +22,11 @@
 		<alert *ngIf="saved" (close)="alertDismissed()" type="success" dismissOnTimeout="3000">
 			Successfully saved!
 		</alert>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<h5 *ngIf="rota">Week starting: <small class="text-muted">{{ rota.weekStarting }}</small></h5>
 	</div>
 </div>
 <div class="row">
