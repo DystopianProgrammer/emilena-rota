@@ -20,7 +20,7 @@
 							</tr>
 						</thead>
 						<tr *ngFor="let a of person.availabilities">
-							<td>{{a.dayOfWeek}}</td>
+							<td>{{a.dayOfWeek | capitalizeFirst}}</td>
 							<td>{{a.fromTime}}</td>
 							<td>{{a.toTime}}</td>
 						</tr>

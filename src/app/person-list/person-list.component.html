@@ -1,13 +1,20 @@
-<div class="row">
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="row" *ngIf="!loading">
 	<div class="col-xs-12">
-		<h4>{{title}}</h4>
+		<div class="page-header">
+			<h4>{{title}}</h4>
+			<p>Filterable and edittable contacts lists. Managing clients &amp; staff is required for accurate scheduling with the rota.
+				Any person currently set to active will be picked up during the scheduling process. If a person cannot be deleted due
+				to a linked relationship in the system, mark them as inactive.
+			</p>
+		</div>
 		<div class="form-group filter-list">
 			<label for="filter">Filter <i class="fa fa-filter" aria-hidden="true"></i></label>
 			<input class="form-control" type="text" name="filter" placeholder="e.g. Emily" [(ngModel)]="filterText" (ngModelChange)="onChange($event)">
 		</div>
 	</div>
 </div>
-<div class="row">
+<div class="row" *ngIf="!loading">
 	<div *ngIf="!people || people.length == 0" class="col-xs-12">
 		<p>No results found!</p>
 	</div>

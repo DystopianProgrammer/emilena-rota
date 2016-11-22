@@ -3,6 +3,7 @@ import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 import { RotaItem, DayOfWeek, Client, Staff } from '../model';
 import { PersonService } from '../person.service';
 import { Time } from '../time/time.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-rota-item-write',
@@ -16,6 +17,7 @@ export class RotaItemWriteComponent implements OnInit {
   @Input() day: DayOfWeek;
   @Input() clients: Client[];
   @Input() staff: Staff[];
+  @Input() weekStarting: string;
   @Output() addRotaItem: EventEmitter<any> = new EventEmitter();
 
   isEditMode: boolean = false;
@@ -37,6 +39,7 @@ export class RotaItemWriteComponent implements OnInit {
       this.selectedClient = this.item.client.id;
       this.selectedStaff = this.item.staff.id;
     } else {
+      // new mode
       this.title = DayOfWeek[this.day];
     }
   }
@@ -54,11 +57,12 @@ export class RotaItemWriteComponent implements OnInit {
       if (this.fromTime && this.toTime && this.selectedClient && this.selectedStaff) {
         let clientId = +this.selectedClient;
         let staffId = +this.selectedStaff;
-
+        
         let entry = new RotaItem();
         entry.start = this.fromTime;
         entry.finish = this.toTime;
         entry.dayOfWeek = this.day;
+        entry.supportDate = this.determineDate();
 
         this.clients.forEach(c => {
           if (c.id == clientId) { entry.client = c; }
@@ -86,5 +90,10 @@ export class RotaItemWriteComponent implements OnInit {
   updateTime(time: Time): void {
     this.fromTime = time.start;
     this.toTime = time.finish;
+  }
+
+  private determineDate(): string {
+    let pattern = 'YYYY-MM-DD';
+    return moment(this.weekStarting, pattern).add(this.day, 'd').format(pattern);
   }
 }

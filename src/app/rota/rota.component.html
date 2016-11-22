@@ -1,42 +1,55 @@
-<div class="row">
-	<div class="col-xs-12" *ngIf="rota">
-		<h4>Rota</h4>
-	</div>
-	<div class="col-xs-12" *ngIf="!rota">
-		<h4>Rota</h4>
-	</div>
-	<div class="col-xs-12 col-sm-4 mb-1">
-		<div class="form-group">
-			<label for="rotas">Saved Rotas</label>
-			<select class="form-control" name="rotas" [(ngModel)]="rotaId" (ngModelChange)="onChange($event)">
-				<option *ngFor="let r of rotas" [value]="r.id">{{ r.weekStarting }}, Revision: {{ r.id }}</option>
-			</select>
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="row" *ngIf="!loading">
+	<div class="col-xs-12">
+		<div class="page-header">
+			<h4>Rota <small class="text-muted" *ngIf="rota"> Week {{ rota.weekStarting }}</small></h4>
+			<p>Ensure client and staff availability information is entered accurately and that any unavailable person has their availability
+				status updated from the clients/staff listing. Manual updates from generated rota entries are possible.
+			</p>
 		</div>
 	</div>
 	<div class="col-xs-12 mb-1">
-		<button (click)="create()" class="btn btn-outline-danger float-xs-right"><i class="fa fa-calendar-o" aria-hidden="true"></i> New</button>
-		<button (click)="save()" class="btn btn-success">Save</button>
-		<app-allocation-modal *ngIf="rota" [rotaId]="rota.id"></app-allocation-modal>
+		<div class="ctrl-panel">
+			<div class="form-group">
+				<label for="rotas">Saved Rotas</label>
+				<select class="form-control" name="rotas" [(ngModel)]="rotaId" (ngModelChange)="onChange($event)">
+				<option *ngFor="let r of rotas" [value]="r.id">{{ r.weekStarting }}, Revision: {{ r.id }}</option>
+			</select>
+			</div>
+			<button (click)="create()" class="btn btn-outline-danger float-xs-right"><i class="fa fa-calendar-o" aria-hidden="true"></i> New</button>
+			<button (click)="save()" class="btn btn-success">Save</button>
+			<app-allocation-modal *ngIf="rota" [rotaId]="rota.id"></app-allocation-modal>
+		</div>
 	</div>
 	<div class="col-xs-12">
 		<alert *ngIf="saved" (close)="alertDismissed()" type="success" dismissOnTimeout="3000">
 			Successfully saved!
 		</alert>
 	</div>
-</div>
-<div class="row">
 	<div class="col-xs-12">
-		<h5 *ngIf="rota">Week starting: <small class="text-muted">{{ rota.weekStarting }}</small></h5>
+		<alert *ngIf="alreadyExists" (close)="alertDismissed()" dismissible="true" type="danger">
+			<p>
+				A rota for <strong>{{rota.weekStarting}} </strong> already exists. If you wish to recreate it, please delete it first.
+				Otherwise make manual amendments to the existing rota.
+			</p>
+			<div>
+				<p>
+					Do you wish to delete it?
+				</p>
+				<button (click)="delete(rota)" class="btn btn-outline-danger">Yes</button>
+				<button (click)="noDelete(rota)" class="btn btn-outline-danger">No</button>
+			</div>
+		</alert>
 	</div>
 </div>
-<div class="row">
+<div class="row" *ngIf="!loading && rota">
 	<div class="col-xs-12">
 		<div class="card-deck-wrapper">
 			<div class="card-deck">
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Monday</strong></span>
-						<app-rota-item-write [clients]="clients" [staff]="staff" [day]="0" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="0" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="monday.length == 0">Unallocated</p>
@@ -49,7 +62,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Tuesday</strong></span>
-						<app-rota-item-write [clients]="clients" [staff]="staff" [day]="1" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="1" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="tuesday.length == 0">Unallocated</p>
@@ -62,7 +75,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Wednesday</strong></span>
-						<app-rota-item-write [clients]="clients" [staff]="staff" [day]="2" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="2" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="wednesday.length == 0">Unallocated</p>
@@ -81,7 +94,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Thursday</strong></span>
-						<app-rota-item-write [clients]="clients" [staff]="staff" [day]="3" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="3" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="thursday.length == 0">Unallocated</p>
@@ -94,7 +107,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Friday</strong></span>
-						<app-rota-item-write [clients]="clients" [staff]="staff" [day]="4" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="4" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="friday.length == 0">Unallocated</p>
@@ -107,7 +120,8 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Saturday</strong></span>
-						<app-rota-item-write [clients]="clients" [staff]="staff" [clients]="clients" [staff]="staff" [day]="5" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [clients]="clients" [staff]="staff"
+							[day]="5" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="saturday.length == 0">Unallocated</p>
@@ -124,7 +138,7 @@
 		<div class="card">
 			<div class="card-header mb-1">
 				<span class="card-title list-truncate"><strong>Sunday</strong></span>
-				<app-rota-item-write [clients]="clients" [staff]="staff" [day]="6" (addRotaItem)="add($event)"></app-rota-item-write>
+				<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="6" (addRotaItem)="add($event)"></app-rota-item-write>
 			</div>
 			<div class="card-block">
 				<p class="card-text" *ngIf="sunday.length == 0">Unallocated</p>

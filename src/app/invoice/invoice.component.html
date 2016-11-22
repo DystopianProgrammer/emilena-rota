@@ -1,0 +1,56 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<div class="row" *ngIf="!loading">
+	<div *ngIf="isCurrent" class="col-xs-12">
+		<alert type="success">All invoices are up to date</alert>
+	</div>
+	<div class="col-xs-12">
+		<div class="page-header">
+			<h4>Invoices</h4>
+			<p>The invoice control panel generates invoices prior to <strong>{{ currentDate }}</strong></p>
+			<button class="btn btn-sm btn-outline-primary" [disabled]="isCurrent" (click)="produce()">Generate Invoices</button>
+			<button class="btn btn-sm btn-outline-primary" (click)="issued()">View issued</button>
+		</div>
+	</div>
+</div>
+<div class="row" *ngIf="invoices.length > 0">
+	<div class="col-xs-12">
+		<div class="table-bg">
+			<table class="table table-hover table-responsive">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Created</th>
+						<th>Hours</th>
+						<th>Support date</th>
+						<th>Invoice date</th>
+						<th>Amount</th>
+						<th>Issue</th>
+						<th *ngIf="isReadOnly">View</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let invoice of invoices; let i = index" [ngClass]="{ 'tr-hover': isReadOnly }">
+						<th scope="row">{{i}}</th>
+						<td>{{invoice.rotaItem.client.forename}}</td>
+						<td>{{invoice.rotaItem.client.surname}}</td>
+						<td>{{invoice.created}}</td>
+						<td>{{invoice.duration}}</td>
+						<td>{{invoice.rotaItem.supportDate}}</td>
+						<td *ngIf="isReadOnly">{{invoice.issued}}</td>
+						<td *ngIf="!isReadOnly">Not issued</td>
+						<td *ngIf="!isReadOnly">
+							<div class="input-group input-group-sm">
+								<input class="form-control" [disabled]="isReadOnly" [money-mask-options]="{ prefix: '£ '}" [(ngModel)]="invoice.amount" [(moneyModel)]="moneyValue" mask-money />
+							</div>
+						</td>
+						<td *ngIf="isReadOnly">{{invoice.amount}}</td>
+						<td><button (click)="submit(invoice, i)" [disabled]="isReadOnly" class="btn btn-outline-success btn-sm">Issue</button></td>
+						<td *ngIf="isReadOnly"><app-invoice-item [invoice]="invoice"></app-invoice-item></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

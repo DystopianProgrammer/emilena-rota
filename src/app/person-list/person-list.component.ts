@@ -18,10 +18,12 @@ export class PersonListComponent implements OnInit, OnDestroy {
   filterText: string;
   filterContainer: Person[] = [];
   deleteError: boolean = false;
+  loading: boolean = false;
 
   constructor(private route: ActivatedRoute, private personService: PersonService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.route.params.forEach((params: Params) => {
       this.type = params['type'];
       this.isClient = (this.type == 'staff') ? false : true;
@@ -31,6 +33,7 @@ export class PersonListComponent implements OnInit, OnDestroy {
         this.title = 'Staff Listing';
       }
       this.personService.listForPersonType(params['type']).subscribe(results => {
+        this.loading = false;
         this.people = results;
       });
     });

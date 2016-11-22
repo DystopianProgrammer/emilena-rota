@@ -1,6 +1,9 @@
 <div class="row" *ngIf="person">
 	<div class="col-xs-12">
-		<h4>{{title}}</h4>
+		<div class="page-header">
+			<h4>{{title}}</h4>
+			<p>Add/Edit personal details such as preferences and contact information. Specify availability in order for automated scheduling.</p>
+		</div>
 	</div>
 	<div class="col-xs-12">
 		<div class="card-deck-wrapper">
@@ -39,11 +42,11 @@
 					<div class="card-block">
 						<div class="form-group">
 							<label for="line1">House number</label>
-							<input class="form-control" type="text" name="line1" placeholder="12A" [(ngModel)]="person.address.firstLine">
+							<input class="form-control" type="text" name="line1" placeholder="128" [(ngModel)]="person.address.firstLine">
 						</div>
 						<div class="form-group">
 							<label for="line2">Street</label>
-							<input class="form-control" type="text" name="line2" placeholder="Southville Road" [(ngModel)]="person.address.secondLine">
+							<input class="form-control" type="text" name="line2" placeholder="Stapley Road" [(ngModel)]="person.address.secondLine">
 						</div>
 						<div class="form-group">
 							<label for="city">Town</label>
@@ -88,8 +91,8 @@
 									<button type="button" class="btn btn-warning btn-sm" (click)="removeStaffAssignment(i)">
 										<i class="fa fa-minus" aria-hidden="true"></i>
 									</button>
-								</span> 
-						       <div class="item-line-truncate">{{ staff.surname }}, {{ staff.forename }}</div>
+								</span>
+								<div class="item-line-truncate">{{ staff.surname }}, {{ staff.forename }}</div>
 							</li>
 						</ul>
 					</div>
@@ -98,8 +101,13 @@
 		</div>
 	</div>
 	<div class="col-xs-12">
-		<alert *ngIf="missingFields" (close)="alertDismissed()" dismissOnTimeout="6000">
+		<alert *ngIf="missingFields" type="danger" (close)="alertDismissed()" dismissOnTimeout="6000">
 			{{validationPrompts}}
+		</alert>
+	</div>
+	<div class="col-xs-12">
+		<alert *ngIf="availabilityMsg" type="danger" (close)="alertDismissed()" dismissOnTimeout="6000">
+			You must provide at least one availability. This can be modified at a later time.
 		</alert>
 	</div>
 	<div class="col-xs-12">

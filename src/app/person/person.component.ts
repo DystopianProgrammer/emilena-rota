@@ -30,6 +30,9 @@ export class PersonComponent implements OnInit, OnDestroy {
   missingFields: boolean = false;
   validationPrompts: string;
 
+  availabilityMsg: boolean = false;
+
+
   constructor(
     private router: Router,
     private viewContainerRef: ViewContainerRef,
@@ -47,6 +50,10 @@ export class PersonComponent implements OnInit, OnDestroy {
   }
 
   next() {
+    if(this.person.availabilities.length == 0) {
+      this.availabilityMsg = true;
+      return;
+    }
     validate(this.person).then(errors => {
       if (errors.length < 1) {
         this.personService.person = this.person;

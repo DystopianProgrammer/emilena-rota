@@ -14,6 +14,6 @@
 	<div class="card-block">
 		<alert *ngIf="notification" type="success">Successfully created item!</alert>
 		<button class="btn btn-success" [disabled]="disableBtn" (click)="submit()">Submit</button>
-		<button class="btn btn-warning" (click)="back()">Edit</button>
+		<button class="btn btn-warning" [disabled]="disableBtn" (click)="back()">Edit</button>
 	</div>
 </div>

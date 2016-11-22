@@ -3,6 +3,8 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
+import { MoneyMaskModule } from 'ng2-money-mask';
+
 import { appRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { AuthService, AuthGuard } from './auth.service';
@@ -13,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { RotaComponent } from './rota/rota.component';
 import { RotaService } from './rota.service';
 import { PersonService } from './person.service';
+import { InvoiceService } from './invoice.service';
 import { AvailabilityComponent } from './availability/availability.component';
 import { CapitalizeFirstPipe } from './capitalize-first.pipe';
 import { PersonComponent } from './person/person.component';
@@ -31,6 +34,9 @@ import { TimeComponent } from './time/time.component';
 import { HelpComponent } from './help/help.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { AllocationModalComponent } from './allocation-modal/allocation-modal.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
 
 @NgModule({
   imports: [
@@ -42,7 +48,8 @@ import { AllocationModalComponent } from './allocation-modal/allocation-modal.co
     AlertModule,
     CollapseModule,
     ModalModule,
-    TooltipModule
+    TooltipModule,
+    MoneyMaskModule
   ],
   declarations: [
     AppComponent,
@@ -65,14 +72,18 @@ import { AllocationModalComponent } from './allocation-modal/allocation-modal.co
     TimeComponent,
     HelpComponent,
     DeleteModalComponent,
-    AllocationModalComponent
+    AllocationModalComponent,
+    InvoiceComponent,
+    SpinnerComponent,
+    InvoiceItemComponent
   ],
   providers: [
     AuthService,
     AuthGuard,
     ErrorService,
     PersonService,
-    RotaService
+    RotaService,
+    InvoiceService
   ],
   bootstrap: [
     AppComponent

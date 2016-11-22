@@ -14,12 +14,18 @@ export class RotaService {
 
   create(date: string): Observable<Rota> {
     return this.http.get(`/emilena-api/rota/${date}`, this.authService.requestOptionsWithJsonHeader())
-      .map((r: Response) => r.json() as Rota);
+      .map((r: Response) => r.json() as Rota).catch(err => Observable.throw('rota for this date already exists'));
   }
 
   update(rota: Rota): Observable<Rota> {
     return this.http.post('/emilena-api/rota/update', JSON.stringify(rota), this.authService.requestOptionsWithJsonHeader())
       .map((r: Response) => r.json() as Rota);
+  }
+
+  delete(rota: Rota): Observable<Response> {
+    return this.http.post('/emilena-api/rota/delete', 
+      JSON.stringify(rota), this.authService.requestOptionsWithJsonHeader())
+      .catch(err => Observable.throw('Could not delete rota. Invoices have already been issued for it for this week.'));
   }
 
   fetchAll(): Observable<Rota[]> {

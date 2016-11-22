@@ -30,7 +30,6 @@ export class RotaItemReadComponent implements OnInit {
   }
 
   markComplete() {
-    this.item.isComplete = true;
     this.complete.emit(this.item);
   }
 

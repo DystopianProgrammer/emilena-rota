@@ -4,6 +4,24 @@ export enum RoleType {
     STAFF, ADMIN
 }
 
+export enum ContractType {
+    CONTRACT, BANK
+}
+
+export enum StaffType {
+    SENIOR, SUPPORT
+}
+
+export enum DayOfWeek {
+    MONDAY, 
+    TUESDAY, 
+    WEDNESDAY, 
+    THURSDAY, 
+    FRIDAY, 
+    SATURDAY, 
+    SUNDAY
+}
+
 export class SystemUser {
     id: number;
     userName: string;
@@ -21,10 +39,6 @@ export class Address {
     town: string;
     @IsNotEmpty()
     postCode: string;
-}
-
-export enum DayOfWeek {
-    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 }
 
 export class Availability {
@@ -74,19 +88,20 @@ export class Rota {
 export class RotaItem {
     id: number;
     dayOfWeek: DayOfWeek;
-    isComplete: boolean;
+    supportDate: string;
     start: string;
     finish: string;
     client: Client;
     staff: Staff;
 }
 
-export enum ContractType {
-    CONTRACT, BANK
-}
-
-export enum StaffType {
-    SENIOR, SUPPORT
+export class Invoice {
+    id: number;
+    rotaItem: RotaItem;
+    amount: string;
+    issued: string;
+    created: string;
+    duration: string;
 }
 
 export class Traffic {

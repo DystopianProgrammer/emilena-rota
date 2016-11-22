@@ -27,6 +27,7 @@ body .item-line-truncate {
 .site-footer {
     border-top: 1px solid #eee;
     background: #0080AB;
+    z-index: 1030;
 }
 .site-footer, .content {
     color: #eee;
@@ -55,4 +56,11 @@ body .item-line-truncate {
 .footer-border {
     padding-bottom: 2px;
     background-color: rgba(0,0,0,0.1);
+}
+.page-header {
+    background-color: rgba(217, 212, 0, 0.04);
+    padding: 20px;
+    border-radius: .25rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(0,0,0,.125);
 }

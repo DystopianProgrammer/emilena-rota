@@ -3,6 +3,7 @@ import { RotaService } from '../rota.service';
 import * as moment from 'moment';
 import { Rota, RotaItem, DayOfWeek, Staff, Client } from '../model';
 import { PersonService } from '../person.service';
+import { ErrorService } from '../error.service';
 
 export class ItemToRemove {
   day: DayOfWeek;
@@ -35,34 +36,52 @@ export class RotaComponent implements OnInit {
   saved: boolean = false;
   staff: Staff[] = [];
   clients: Client[] = [];
-
-  // the selected saved rota from the dropdown 
   rotaId: string;
 
-  constructor(private rotaService: RotaService, private personService: PersonService) { }
+  loading: boolean = false;
+  alreadyExists = false;
+
+  constructor(private rotaService: RotaService,
+    private errorService: ErrorService,
+    private personService: PersonService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.updated = moment().format('HH:mm:ss');
     this.personService.staff().subscribe(res => this.staff = res);
     this.personService.clients().subscribe(res => this.clients = res);
     this.rotaService.fetchAll().subscribe(res => {
+      this.loading = false;
       this.rotas = res;
 
       let initialise = (index) => {
-          this.rota = res[index];
-          this.forDate = res[index].weekStarting;
-          this.version = res[index].id;
-          this.rota.rotaItems.forEach(item => {
-            this.add(item);
-          });
+        this.rota = res[index];
+        this.forDate = res[index].weekStarting;
+        this.version = res[index].id;
+        this.rota.rotaItems.forEach(item => {
+          this.add(item);
+        });
       }
-      if (this.rotas.length > 1) {
+      if (this.rotas.length > 0) {
         initialise(this.rotas.length - 1)
       }
     });
   }
 
+  delete(rota: Rota) {
+    this.rotaService.delete(rota).subscribe(res => {
+      this.alreadyExists = false;
+      let index = this.rotas.findIndex(r => r.id === rota.id);
+      this.rotas.splice(index, 1);
+    }, err => this.errorService.handleError(err));
+  }
+
+  noDelete(rota: Rota) {
+    this.alreadyExists = false;
+  }
+
   create(): void {
+    this.loading = true
     this.updated = moment().format('HH:mm:ss');
     this.forDate = moment().format('D-M-YYYY');
     this.monday = [];
@@ -92,6 +111,10 @@ export class RotaComponent implements OnInit {
           this.sunday.push(item);
         }
       })
+      this.loading = false;
+    }, err => {
+      this.loading = false;
+      this.alreadyExists = true;
     });
   }
 
@@ -139,10 +162,6 @@ export class RotaComponent implements OnInit {
     }
   }
 
-  completeRotaItem(event): void {
-    // TODO
-    console.log(event);
-  }
 
   save(): void {
     let items = this.monday.concat(this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday);
@@ -151,25 +170,13 @@ export class RotaComponent implements OnInit {
     this.rotaService.update(this.rota).subscribe(res => {
       this.saved = true;
       this.rota = res;
-      this.rotas.push(this.rota);
+      let item = this.rotas.filter(r => r.id === this.rota.id);
+      if (item.length === 0) {
+        this.rotas.push(this.rota);
+      }
     });
   }
 
-  alertDismissed(): void {
-    this.saved = false;
-  }
-
-  onChange(event: any) {
-    this.reset();
-    this.rotaService.findbyId(event).subscribe(res => {
-      this.rota = res;
-      this.rota.rotaItems.forEach(item => {
-        this.add(item);
-      });
-    });
-  }
-
-  view(): void { }
 
   private transform(item): any {
     if (item.dayOfWeek == DayOfWeek.MONDAY) {
@@ -190,6 +197,20 @@ export class RotaComponent implements OnInit {
       console.warn('I dunno Emily');
     }
     return item;
+  }
+
+  alertDismissed(): void {
+    this.saved = false;
+  }
+
+  onChange(event: any) {
+    this.reset();
+    this.rotaService.findbyId(event).subscribe(res => {
+      this.rota = res;
+      this.rota.rotaItems.forEach(item => {
+        this.add(item);
+      });
+    });
   }
 
   reset() {

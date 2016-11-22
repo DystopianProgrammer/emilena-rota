@@ -3,6 +3,7 @@ import { PersonService } from '../person.service';
 import { Person, Staff } from '../model';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { ErrorService } from '../error.service';
 
 @Component({
   selector: 'app-person-summary',
@@ -18,6 +19,7 @@ export class PersonSummaryComponent implements OnInit {
 
   constructor(private personService: PersonService,
     private router: Router,
+    private errorService: ErrorService,
     private location: Location) { }
 
   ngOnInit() {
@@ -25,20 +27,20 @@ export class PersonSummaryComponent implements OnInit {
   }
 
   submit() {
+    this.personService.person = undefined;
     this.disableBtn = true;
     this.personService.update(this.person).subscribe(res => {
-      this.personService.person = undefined;
       this.notification = true;
+      setTimeout(() => {
+        if (this.person instanceof Staff) {
+          this.router.navigate(['staff-list', { type: 'staff' }]);
+        } else {
+          this.router.navigate(['client-list', { type: 'client' }]);
+        }
+      }, 2000)
+    }, err => {
+      this.errorService.handleError(err);
     });
-
-    setTimeout(() => {
-      if (this.person instanceof Staff) {
-        this.router.navigate(['staff-list', { type: 'staff' }]);
-      } else {
-        this.router.navigate(['client-list', { type: 'client' }]);
-      }
-    }, 2000)
-
   }
 
   back(): void {

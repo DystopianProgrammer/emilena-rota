@@ -1,0 +1,22 @@
+<button (click)="lgModal.show()" class="btn btn-sm btn-outline-secondary"><i class="fa fa-binoculars" aria-hidden="true"></i></button>
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+				<h4 class="modal-title">Invoice <small>Created {{invoice.created}}</small></h4>
+			</div>
+			<div class="modal-body">
+				<p><strong>Invoice ID:</strong> {{invoice.id}}</p>
+				<p><strong>Client:</strong> {{ invoice.rotaItem.client.forename }} {{ invoice.rotaItem.client.surname }}</p>
+				<p><strong>Address:</strong> {{ invoice.rotaItem.client | address }}</p>
+				<p><strong>Date of support:</strong> {{ invoice.rotaItem.supportDate }}</p>
+				<p><strong>Date of issue:</strong> {{ invoice.issued }}</p>
+				<p><strong>Total amount:</strong> {{ invoice.amount }}</p>
+				<p><strong>Total hours:</strong> {{ invoice.duration }}</p>
+			</div>
+		</div>
+	</div>
+</div>

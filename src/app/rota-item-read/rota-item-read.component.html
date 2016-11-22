@@ -2,13 +2,8 @@
 <app-rota-item-write [day]="item.dayOfWeek" [clients]="clients" [staff]="staff" [item]="item" (addRotaItem)="editRotaItem($event)"></app-rota-item-write>
 <div class="item-line-truncate"><strong>Staff:</strong> {{ item.staff.surname }}, {{item.staff.forename}}</div>
 <div class="item-line-truncate"><strong>Client:</strong> {{ item.client.surname }}, {{ item.client.forename }}</div>
+<div class="item-line-truncate"><strong>Date:</strong> {{ item.supportDate }}</div>
 <div class="item-line-truncate"><strong>From:</strong> {{ item.start }}</div>
 <div class="item-line-truncate"><strong>To:</strong> {{ item.finish }}</div>
 <div class="item-line-truncate"><strong>Address:</strong> {{ item.client | address }}</div>
-<hr>
-<div class="form-check">
-  <label class="form-check-label">
-    <input class="form-check-input" name="isComplete" type="checkbox" (click)="markComplete()" [(ngModel)]="item.isComplete">
-    Check completed
-  </label>
-</div>
+<div class="item-line-truncate"><strong>Telephone:</strong> {{ item.client.telephoneNumber }}</div>

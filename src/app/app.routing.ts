@@ -10,6 +10,7 @@ import { PersonSummaryComponent } from './person-summary/person-summary.componen
 import { PersonListComponent } from './person-list/person-list.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HelpComponent } from './help/help.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
     { path: 'staff-list', component: PersonListComponent, canActivate: [AuthGuard] },
     { path: 'summary', component: PersonSummaryComponent, canActivate: [AuthGuard] },
     { path: 'info', component: HelpComponent, canActivate: [AuthGuard] },
+    { path: 'invoicing', component: InvoiceComponent, canActivate: [AuthGuard] },
     { path: 'error:text', component: ErrorPageComponent },
     { path: '**', component: ErrorPageComponent }
 ];
