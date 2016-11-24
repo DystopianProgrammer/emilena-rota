@@ -64,3 +64,16 @@ body .item-line-truncate {
     margin-bottom: 1rem;
     border: 1px solid rgba(0,0,0,.125);
 }
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+.app-loading {
+    position: absolute;
+    display: block;
+    top: 40%;
+    left: 40%;
+}

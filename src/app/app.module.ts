@@ -37,6 +37,7 @@ import { AllocationModalComponent } from './allocation-modal/allocation-modal.co
 import { InvoiceComponent } from './invoice/invoice.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -75,7 +76,8 @@ import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
     AllocationModalComponent,
     InvoiceComponent,
     SpinnerComponent,
-    InvoiceItemComponent
+    InvoiceItemComponent,
+    FooterComponent
   ],
   providers: [
     AuthService,

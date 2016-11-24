@@ -3,7 +3,7 @@
 </alert>
 <div class="form-group">
 	<label for="availability">Day</label>
-	<select class="form-control" name="availability" [(ngModel)]="availability.dayOfWeek">
+	<select class="form-control" name="availability" required [(ngModel)]="availability.dayOfWeek">
 	<option *ngFor="let day of days" [value]="day">{{ day | capitalizeFirst }}</option>
 </select>
 </div>

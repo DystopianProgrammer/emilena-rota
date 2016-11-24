@@ -10,7 +10,12 @@
 				<p><strong>Login</strong></p>
 				<div class="form-group">
 					<label for="user">Username</label>
-					<input class="form-control" name="user" type="text" placeholder="username" align="end" [(ngModel)]="systemUser.userName">
+					<input class="form-control" 
+						name="user" type="text" 
+						placeholder="username" 
+						align="end" 
+						[(ngModel)]="systemUser.userName" 
+						(ngModelChange)="onChangeUsername($event)">
 				</div>
 			</div>
 		</div>
@@ -18,7 +23,13 @@
 			<div class="col-xs-12 col-md-6">
 				<div class="form-group">
 					<label for="password">Password</label>
-					<input class="form-control" name="password" type="password" placeholder="password" align="end" [(ngModel)]="systemUser.password">
+					<input class="form-control" 
+						name="password" 
+						type="password" 
+						placeholder="password" 
+						align="end" 
+						[(ngModel)]="systemUser.password" 
+						(ngModelChange)="onChangePassword($event)">
 				</div>
 			</div>
 		</div>

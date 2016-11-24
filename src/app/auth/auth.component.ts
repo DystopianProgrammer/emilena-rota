@@ -31,8 +31,15 @@ export class AuthComponent implements OnInit {
     })
   }
 
-  login() {
+  onChangeUsername(event) {
+    this.systemUser.userName = event.toLowerCase();
+  }
 
+  onChangePassword(event) {
+    this.systemUser.password = event.toLowerCase();
+  }
+
+  login() {
     let loginAction = (isAuthorised) => {
       if (isAuthorised) {
         this.router.navigate(['home']);

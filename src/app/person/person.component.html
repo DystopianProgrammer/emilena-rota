@@ -1,4 +1,5 @@
 <div class="row" *ngIf="person">
+	<form (ngSubmit)="onSubmit()" #personForm="ngForm">
 	<div class="col-xs-12">
 		<div class="page-header">
 			<h4>{{title}}</h4>
@@ -15,19 +16,51 @@
 					<div class="card-block">
 						<div class="form-group">
 							<label for="forename">Forename</label>
-							<input class="form-control" type="text" name="forename" placeholder="Jane" [(ngModel)]="person.forename">
+							<input class="form-control" 
+								type="text" 
+								name="forename" 
+								placeholder="Jane" 
+								required 
+								[(ngModel)]="person.forename"
+								#forename="ngModel">
+							<div [hidden]="forename.valid || forename.pristine" class="alert alert-danger">
+          						Forename is required
+        					</div>
 						</div>
 						<div class="form-group">
 							<label for="surname">Surname</label>
-							<input class="form-control" type="text" name="surname" placeholder="Smith" [(ngModel)]="person.surname">
+							<input class="form-control" 
+								type="text" 
+								name="surname" 
+								required
+								placeholder="Smith" 
+								[ngModel]="person.surname"
+								(ngModelChange)="onChange($event)"
+								#surname="ngModel">
+							<div [hidden]="surname.valid || surname.pristine" class="alert alert-danger">
+          						Surname is required
+        					</div>
 						</div>
 						<div class="form-group">
 							<label for="email">Email</label>
-							<input class="form-control" type="email" name="email" placeholder="someone@domain.com" [(ngModel)]="person.email">
+							<input class="form-control" 
+								type="email" 
+								name="email" 
+								placeholder="someone@domain.com" 
+								[(ngModel)]="person.email">
 						</div>
 						<div class="form-group">
 							<label for="phone">Phone</label>
-							<input class="form-control" type="text" name="phone" [(ngModel)]="person.telephoneNumber">
+							<input class="form-control" 
+								type="text" 
+								name="phone" 
+								required
+								pattern="^[0-9]*$"
+								[(ngModel)]="person.telephoneNumber"
+								#tel="ngModel">
+							<div [hidden]="tel.valid || tel.pristine" class="alert alert-danger">
+          						A telephone number is required
+        					</div>
 						</div>
 						<div class="form-group">
 							<label for="preferences">Preferences</label>
@@ -42,19 +75,55 @@
 					<div class="card-block">
 						<div class="form-group">
 							<label for="line1">House number</label>
-							<input class="form-control" type="text" name="line1" placeholder="12" [(ngModel)]="person.address.firstLine">
+							<input class="form-control" 
+								type="text" 
+								name="line1" 
+								placeholder="12" 
+								required
+								[(ngModel)]="person.address.firstLine"
+								#firstLine="ngModel">
+							<div [hidden]="firstLine.valid || firstLine.pristine" class="alert alert-danger">
+          						House number or name is required
+        					</div>
 						</div>
 						<div class="form-group">
 							<label for="line2">Street</label>
-							<input class="form-control" type="text" name="line2" placeholder="Stapley Road" [(ngModel)]="person.address.secondLine">
+							<input class="form-control" 
+								type="text" 
+								name="line2" 
+								required
+								placeholder="Stapley Road" 
+								[(ngModel)]="person.address.secondLine"
+								#secondLine="ngModel">
+							<div [hidden]="secondLine.valid || secondLine.pristine" class="alert alert-danger">
+          						Street is required
+        					</div>
 						</div>
 						<div class="form-group">
 							<label for="city">Town</label>
-							<input class="form-control" type="text" name="city" placeholder="Burgess Hill" [(ngModel)]="person.address.town">
+							<input class="form-control" 
+								type="text" 
+								name="city" 
+								required
+								placeholder="Burgess Hill" 
+								[(ngModel)]="person.address.town"
+								#town="ngModel">
+							<div [hidden]="town.valid || town.pristine" class="alert alert-danger">
+          						Town or city is required
+        					</div>
 						</div>
 						<div class="form-group">
 							<label for="postcode">Postcode</label>
-							<input class="form-control" type="text" name="postcode" placeholder="SN## #JT" [(ngModel)]="person.address.postCode">
+							<input class="form-control" 
+								type="text" 
+								name="postcode" 
+								required
+								placeholder="e.g. AA11 1AA" 
+								[(ngModel)]="person.address.postCode"
+								#postCode="ngModel">
+							<div [hidden]="postCode.valid || postCode.pristine" class="alert alert-danger">
+          						Postcode is required
+        					</div>
 						</div>
 					</div>
 				</div>
@@ -111,7 +180,8 @@
 		</alert>
 	</div>
 	<div class="col-xs-12">
-		<button type="button" class="btn btn-outline-success" (click)="next()">Next</button>
+		<button type="submit" class="btn btn-outline-success" [disabled]="!personForm.form.valid">Next</button>
 		<button type="button" class="btn btn-secondary" [routerLink]="['']">Cancel</button>
 	</div>
+	</form>
 </div>

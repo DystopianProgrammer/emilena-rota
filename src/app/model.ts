@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsDefined, IsMilitaryTime, IsEmail } from 'class-validator';
+import { IsNotEmpty, IsDefined, IsMilitaryTime, IsEmail, IsMobilePhone, IsNumber } from 'class-validator';
 
 export enum RoleType {
     STAFF, ADMIN
@@ -58,11 +58,10 @@ export abstract class Person {
     forename: string;
     @IsNotEmpty()
     surname: string;
-    @IsEmail()
     email: string;
     personType: string;
     dob: string;
-    @IsNotEmpty()
+    @IsNumber()
     telephoneNumber: string;
     address: Address;
     availabilities: Availability[];

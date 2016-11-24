@@ -49,8 +49,15 @@ export class PersonComponent implements OnInit, OnDestroy {
     if (this.person$) { this.person$.unsubscribe() };
   }
 
-  next() {
-    if(this.person.availabilities.length == 0) {
+  onChange(event) {
+    console.log(event);
+    if (event) {
+      event = event[0].toUpperCase();
+    }
+  }
+
+  onSubmit() {
+    if (this.person.availabilities.length == 0) {
       this.availabilityMsg = true;
       return;
     }
