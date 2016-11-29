@@ -3,7 +3,7 @@
 </alert>
 <div class="form-group">
 	<label for="availability">Day</label>
-	<select class="form-control" name="availability" required [(ngModel)]="availability.dayOfWeek">
+	<select class="form-control" name="availability" [(ngModel)]="availability.dayOfWeek">
 	<option *ngFor="let day of days" [value]="day">{{ day | capitalizeFirst }}</option>
 </select>
 </div>
@@ -11,5 +11,5 @@
 	<app-time (outputTime)="updateTime($event)"></app-time>
 </div>
 <div class="mb-1">
-	<button type="button" class="btn btn-outline-success" (click)="add()">ADD</button>
+	<button type="button" class="btn btn-secondary" (click)="add()">ADD</button>
 </div>

@@ -11,6 +11,7 @@ import { PersonListComponent } from './person-list/person-list.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HelpComponent } from './help/help.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/auth', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
     { path: 'summary', component: PersonSummaryComponent, canActivate: [AuthGuard] },
     { path: 'info', component: HelpComponent, canActivate: [AuthGuard] },
     { path: 'invoicing', component: InvoiceComponent, canActivate: [AuthGuard] },
+    { path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard] },
     { path: 'error:text', component: ErrorPageComponent },
     { path: '**', component: ErrorPageComponent }
 ];

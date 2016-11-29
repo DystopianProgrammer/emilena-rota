@@ -1,43 +1,53 @@
 <app-spinner *ngIf="loading"></app-spinner>
-<div class="row" *ngIf="!loading">
-	<div class="col-xs-12">
-		<div class="page-header">
-			<h4>{{title}}</h4>
-			<p>Filterable and edittable contacts lists. Managing clients &amp; staff is required for accurate scheduling with the rota.
-				Any person currently set to active will be picked up during the scheduling process. If a person cannot be deleted due
-				to a linked relationship in the system, mark them as inactive.
-			</p>
-		</div>
-		<div class="form-group filter-list">
-			<label for="filter">Filter <i class="fa fa-filter" aria-hidden="true"></i></label>
-			<input class="form-control" type="text" name="filter" placeholder="e.g. Emily" [(ngModel)]="filterText" (ngModelChange)="onChange($event)">
-		</div>
-	</div>
-</div>
-<div class="row" *ngIf="!loading">
-	<div *ngIf="!people || people.length == 0" class="col-xs-12">
-		<p>No results found!</p>
-	</div>
-	<div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let p of people, let i = index">
-		<div class="card">
-			<div class="card-header mb-1">
-				<h4 class="card-title list-truncate">{{p.surname}}, {{p.forename}}</h4>
-				<p class="card-text list-truncate">{{ p | address }} </p>
+<div [@navigationState]="navigationState">
+	<div class="row" *ngIf="!loading">
+		<div class="col-xs-12">
+			<div class="page-header">
+				<h4>{{title}}</h4>
+				<p>Filterable and edittable contacts lists. Managing clients &amp; staff is required for accurate scheduling with the rota.
+					Any person currently set to active will be picked up during the scheduling process. If a person cannot be deleted due
+					to a linked relationship in the system, mark them as inactive. This will prevent them from being scheduled for an appointment.
+				</p>
 			</div>
-			<ul class="list-group list-group-flush">
-				<li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{ p.telephoneNumber }}</li>
-				<li class="list-group-item list-truncate"><i class="fa fa-envelope" aria-hidden="true"></i> {{p.email}}</li>
-				<li class="list-group-item">
-					<app-availability-modal [person]="p"></app-availability-modal>
-				</li>
-				<li class="list-group-item list-truncate"><strong>Prefs:</strong> {{ p.preferences }}</li>
-			</ul>
-			<app-delete-modal *ngIf="deleteError" (closedNotification)="notified($event)" [person]="p"></app-delete-modal>
-			<div class="card-block">
-				<!-- TODO put this logic in the component -->
-				<button *ngIf="isClient" class="btn btn-secondary btn-block" [routerLink]="['/person-edit', { type: 'client', id: p.id }]">Edit</button>
-				<button *ngIf="!isClient" class="btn btn-secondary btn-block" [routerLink]="['/person-edit', { type: 'staff', id: p.id }]">Edit</button>
-				<button (click)="remove(i)" class="btn btn-outline-danger btn-block"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+			<div class="form-group filter-list">
+				<label for="filter">Filter <i class="fa fa-filter" aria-hidden="true"></i></label>
+				<input class="form-control" type="text" name="filter" placeholder="Phrase e.g. active, or part of the person's name" [(ngModel)]="filterText"
+					(ngModelChange)="onChange($event)">
+			</div>
+		</div>
+	</div>
+	<div class="row" *ngIf="!loading">
+		<div *ngIf="!people || people.length == 0" class="col-xs-12">
+			<p>No results found!</p>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let p of people, let i = index">
+			<div class="card">
+				<div class="card-header mb-1">
+					<h4 class="card-title list-truncate">{{p.surname}}, {{p.forename}}</h4>
+					<p class="card-text list-truncate">{{ p | address }} </p>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item"><i [ngClass]="{'active': p.active}" class="fa fa-circle" aria-hidden="true"></i>
+						<span [ngSwitch]="p.active">
+							<span *ngSwitchCase="true"> Active</span>
+							<span *ngSwitchCase="false"> Inactive</span>
+							<span *ngSwitchDefault> Inactive</span>
+						</span>
+					</li>
+					<li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{ p.telephoneNumber }}</li>
+					<li class="list-group-item list-truncate"><i class="fa fa-envelope" aria-hidden="true"></i> {{ p.email | unspecified }}</li>
+					<li class="list-group-item">
+						<app-availability-modal [person]="p"></app-availability-modal>
+					</li>
+					<li class="list-group-item list-truncate"><strong>Prefs:</strong> {{ p.preferences | unspecified }}</li>
+				</ul>
+				<app-delete-modal *ngIf="deleteError" (closedNotification)="notified($event)" [person]="p"></app-delete-modal>
+				<div class="card-block">
+					<!-- TODO put this logic in the component -->
+					<button *ngIf="isClient" class="btn btn-secondary btn-block" [routerLink]="['/person-edit', { type: 'client', id: p.id }]">Edit</button>
+					<button *ngIf="!isClient" class="btn btn-secondary btn-block" [routerLink]="['/person-edit', { type: 'staff', id: p.id }]">Edit</button>
+					<button (click)="remove(i)" class="btn btn-outline-danger btn-block"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+				</div>
 			</div>
 		</div>
 	</div>

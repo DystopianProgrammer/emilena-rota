@@ -1,9 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component, OnInit, state,
+  style,
+  transition,
+  animate,
+  trigger
+} from '@angular/core';
 
 @Component({
   selector: 'app-help',
   templateUrl: './help.component.html',
-  styleUrls: ['./help.component.css']
+  styleUrls: ['./help.component.css'],
+  animations: [
+    trigger('navigationState', [
+      state('*',
+        style({
+          opacity: 1
+        })
+      ),
+      transition('void => *', [
+        style({
+          opacity: 0
+        }),
+        animate('0.3s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.5s ease-out', style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class HelpComponent implements OnInit {
 

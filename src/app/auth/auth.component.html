@@ -2,37 +2,30 @@
 	<h1 class="display-3">Rota</h1>
 	<hr class="my-2">
 	<div class="container">
-		<div class="row">
-			<div class="col-xs-12 col-md-6">
-				<alert *ngIf="attempts > 0" dismissOnTimeout="6000" type="danger">
-					Invalid credentials, please try again.
-				</alert>
-				<p><strong>Login</strong></p>
-				<div class="form-group">
-					<label for="user">Username</label>
-					<input class="form-control" 
-						name="user" type="text" 
-						placeholder="username" 
-						align="end" 
-						[(ngModel)]="systemUser.userName" 
-						(ngModelChange)="onChangeUsername($event)">
+		<form (ngSubmit)="login()">
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<alert *ngIf="attempts > 0" dismissOnTimeout="6000" type="danger">
+						Invalid credentials, please try again.
+					</alert>
+					<p><strong>Login</strong></p>
+					<div class="form-group">
+						<label for="user">Username</label>
+						<input class="form-control" name="user" type="text" placeholder="username" align="end" [(ngModel)]="systemUser.userName"
+							(ngModelChange)="onChangeUsername($event)">
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-md-6">
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input class="form-control" 
-						name="password" 
-						type="password" 
-						placeholder="password" 
-						align="end" 
-						[(ngModel)]="systemUser.password" 
-						(ngModelChange)="onChangePassword($event)">
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input class="form-control" name="password" type="password" placeholder="password" align="end" [(ngModel)]="systemUser.password"
+							(ngModelChange)="onChangePassword($event)">
+					</div>
 				</div>
 			</div>
-		</div>
-		<button class="btn btn-primary" (click)="login()">Login</button>
+			<input type="submit" class="btn btn-primary" value="Login">
+		</form>
 	</div>
 </div>

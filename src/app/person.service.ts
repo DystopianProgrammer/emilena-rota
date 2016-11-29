@@ -3,7 +3,7 @@ import { Http, Response, ResponseOptions } from '@angular/http';
 
 import { Observable } from 'rxjs';
 
-import { Person, Staff, Client } from './model';
+import { Person, Staff, Client, PersonType } from './model';
 import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
 
@@ -15,18 +15,14 @@ export class PersonService {
 
   constructor(private http: Http, private authService: AuthService, private errorService: ErrorService) { }
 
-  update(person: Person): Observable<Response> {
-    if (person.personType == 'STAFF') {
-      return this.updateStaff(<Staff>person);
-    } else if (person.personType == 'CLIENT') {
-      return this.updateClient(<Client>person);
-    }
-    Observable.onErrorResumeNext(e => this.errorService.handleError(e));
+  clientById(id: number): Observable<Client> {
+    return this.http.get(`/emilena-api/client/find/${id}`, this.authService.requestOptionsWithJsonHeader())
+      .map((r: Response) => r.json() as Client).catch(this.handleError);
   }
 
-  personById(id: number): Observable<Person> {
-    return this.http.get(`/emilena-api/person/find/${id}`, this.authService.requestOptionsWithJsonHeader())
-      .map((r: Response) => r.json() as Person);
+  staffById(id: number): Observable<Staff> {
+    return this.http.get(`/emilena-api/staff/find/${id}`, this.authService.requestOptionsWithJsonHeader())
+      .map((r: Response) => r.json() as Staff).catch(this.handleError);
   }
 
   clients(): Observable<Client[]> {
@@ -57,12 +53,16 @@ export class PersonService {
     }
   }
 
-  private updateStaff(staff: Staff): Observable<Response> {
-    return this.http.post('/emilena-api/staff/update', JSON.stringify(staff), this.authService.requestOptionsWithJsonHeader());
+  updateStaff(staff: Staff): Observable<Response> {
+    return this.http.post('/emilena-api/staff/update',
+      JSON.stringify(staff),
+      this.authService.requestOptionsWithJsonHeader()).catch(this.handleError);
   }
 
-  private updateClient(client: Client): Observable<Response> {
-    return this.http.post('/emilena-api/client/update', JSON.stringify(client), this.authService.requestOptionsWithJsonHeader());
+  updateClient(client: Client): Observable<Response> {
+    return this.http.post('/emilena-api/client/update',
+      JSON.stringify(client),
+      this.authService.requestOptionsWithJsonHeader()).catch(this.handleError);
   }
 
   private handleError(error: Response | any) {

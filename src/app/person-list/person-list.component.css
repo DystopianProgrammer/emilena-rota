@@ -10,3 +10,11 @@
   border-radius: 5px;
   border: 1px solid rgba(86, 93, 104, 0.3);
 }
+
+.fa-circle {
+  color: #ff0000;
+}
+
+.fa-circle.active {
+  color: #45d436;
+}

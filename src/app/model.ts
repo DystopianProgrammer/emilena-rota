@@ -1,71 +1,137 @@
-import { IsNotEmpty, IsDefined, IsMilitaryTime, IsEmail, IsMobilePhone, IsNumber } from 'class-validator';
+import { 
+        IsNotEmpty, 
+        IsDefined, 
+        IsMilitaryTime, 
+        IsEmail, 
+        IsMobilePhone, 
+        IsNumber
+    } from 'class-validator';
 
-export enum RoleType {
-    STAFF, ADMIN
+export class Days {
+    private static  _MONDAY: string = 'MONDAY';
+    private static _TUESDAY: string = 'TUESDAY';
+    private static _WEDNESDAY: string = 'WEDNESDAY';
+    private static _THURSDAY: string = 'THURSDAY';
+    private static _FRIDAY: string = 'FRIDAY';
+    private static _SATURDAY: string = 'SATURDAY';
+    private static _SUNDAY: string = 'SUNDAY';
+
+    static get monday() {
+        return this._MONDAY;
+    }
+
+    static get tuesday() {
+        return this._TUESDAY;
+    }
+
+    static get wednesday() {
+        return this._WEDNESDAY;
+    }
+
+    static get thursday() {
+        return this._THURSDAY;
+    }
+
+    static get friday() {
+        return this._FRIDAY;
+    }
+
+    static get saturday() {
+        return this._SATURDAY;
+    }
+
+    static get sunday() {
+        return this._SUNDAY;
+    }
 }
 
-export enum ContractType {
-    CONTRACT, BANK
-}
+export class PersonType {
+    private static _STAFF = 'STAFF';
+    private static _CLIENT = 'CLIENT';
 
-export enum StaffType {
-    SENIOR, SUPPORT
-}
+    static get staff() {
+        return this._STAFF;
+    }
 
-export enum DayOfWeek {
-    MONDAY, 
-    TUESDAY, 
-    WEDNESDAY, 
-    THURSDAY, 
-    FRIDAY, 
-    SATURDAY, 
-    SUNDAY
+    static get client() {
+        return this._CLIENT;
+    }
 }
 
 export class SystemUser {
     id: number;
     userName: string;
     password: string;
-    roleType: RoleType;
+    roleType: string;
 }
 
 export class Address {
-    houseNumber: string;
     @IsNotEmpty()
     firstLine: string;
+
     @IsNotEmpty()
     secondLine: string;
+
     @IsNotEmpty()
     town: string;
+
     @IsNotEmpty()
     postCode: string;
+
+    @IsNotEmpty()
+    location: Location;
+}
+
+export class Location {
+    id: number;
+    longitude: number;
+    latitude: number;
 }
 
 export class Availability {
+
     id: number;
+    
     @IsMilitaryTime()
     fromTime: string;
+    
     @IsMilitaryTime()
     toTime: string;
+    
     @IsDefined()
-    dayOfWeek: DayOfWeek;
+    dayOfWeek: string;
+    
     numberOfHours: number;
 }
 
 export abstract class Person {
+
     id: number;
+
     @IsNotEmpty()
     forename: string;
+
     @IsNotEmpty()
     surname: string;
+
     email: string;
+
     personType: string;
+
     dob: string;
-    @IsNumber()
+
+    @IsNotEmpty()
     telephoneNumber: string;
+
+    @IsNotEmpty()
     address: Address;
+
+    @IsNotEmpty()
     availabilities: Availability[];
+
     preferences: string;
+
+    active: boolean;
 }
 
 export class Client extends Person {
@@ -73,8 +139,8 @@ export class Client extends Person {
 }
 
 export class Staff extends Person {
-    contractType: ContractType;
-    staffType: StaffType;
+    contractType: string;
+    staffType: string;
     systemUser: SystemUser;
 }
 
@@ -86,7 +152,7 @@ export class Rota {
 
 export class RotaItem {
     id: number;
-    dayOfWeek: DayOfWeek;
+    dayOfWeek: string;
     supportDate: string;
     start: string;
     finish: string;

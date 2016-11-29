@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component, OnInit, trigger,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/core';
 import { InvoiceService, SortType } from '../invoice.service';
 import { ErrorService } from '../error.service';
 import { Invoice } from '../model';
@@ -7,7 +13,27 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
-  styleUrls: ['./invoice.component.css']
+  styleUrls: ['./invoice.component.css'],
+  animations: [
+    trigger('navigationState', [
+      state('*',
+        style({
+          opacity: 1
+        })
+      ),
+      transition('void => *', [
+        style({
+          opacity: 0
+        }),
+        animate('0.3s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.5s ease-out', style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class InvoiceComponent implements OnInit {
 
@@ -16,6 +42,8 @@ export class InvoiceComponent implements OnInit {
   invoices: Invoice[] = [];
   isCurrent: boolean;
   isReadOnly: boolean;
+    // animating 
+  navigationState = true;
 
   constructor(private invoiceService: InvoiceService, private errorService: ErrorService) { }
 

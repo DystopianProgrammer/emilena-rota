@@ -1,5 +1,5 @@
 <app-spinner *ngIf="loading"></app-spinner>
-<div class="row" *ngIf="!loading">
+<div class="row" *ngIf="!loading" [@navigationState]="navigationState">
 	<div class="col-xs-12">
 		<div class="page-header">
 			<h4>Rota <small class="text-muted" *ngIf="rota"> Week {{ rota.weekStarting }}</small></h4>
@@ -49,7 +49,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Monday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="0" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'MONDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="monday.length == 0">Unallocated</p>
@@ -62,7 +62,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Tuesday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="1" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'TUESDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="tuesday.length == 0">Unallocated</p>
@@ -75,7 +75,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Wednesday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="2" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'WEDNESDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="wednesday.length == 0">Unallocated</p>
@@ -94,7 +94,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Thursday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="3" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'THURSDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="thursday.length == 0">Unallocated</p>
@@ -107,7 +107,7 @@
 				<div class="card">
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Friday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="4" (addRotaItem)="add($event)"></app-rota-item-write>
+						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'FRIDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="friday.length == 0">Unallocated</p>
@@ -121,7 +121,7 @@
 					<div class="card-header mb-1">
 						<span class="card-title list-truncate"><strong>Saturday</strong></span>
 						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [clients]="clients" [staff]="staff"
-							[day]="5" (addRotaItem)="add($event)"></app-rota-item-write>
+							[day]="'SATURDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
 					</div>
 					<div class="card-block">
 						<p class="card-text" *ngIf="saturday.length == 0">Unallocated</p>
@@ -138,7 +138,7 @@
 		<div class="card">
 			<div class="card-header mb-1">
 				<span class="card-title list-truncate"><strong>Sunday</strong></span>
-				<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="6" (addRotaItem)="add($event)"></app-rota-item-write>
+				<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'SUNDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
 			</div>
 			<div class="card-block">
 				<p class="card-text" *ngIf="sunday.length == 0">Unallocated</p>

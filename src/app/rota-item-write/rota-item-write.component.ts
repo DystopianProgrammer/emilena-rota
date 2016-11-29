@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
-import { RotaItem, DayOfWeek, Client, Staff } from '../model';
+import { RotaItem, Days, Client, Staff } from '../model';
 import { PersonService } from '../person.service';
 import { Time } from '../time/time.component';
 import * as moment from 'moment';
@@ -14,7 +14,7 @@ export class RotaItemWriteComponent implements OnInit {
 
   @ViewChild('lgModal') public childModal: ModalDirective;
   @Input() item: RotaItem;
-  @Input() day: DayOfWeek;
+  @Input() day: string;
   @Input() clients: Client[];
   @Input() staff: Staff[];
   @Input() weekStarting: string;
@@ -35,12 +35,12 @@ export class RotaItemWriteComponent implements OnInit {
       this.isEditMode = true;
       this.fromTime = this.item.start;
       this.toTime = this.item.finish;
-      this.title = this.item.dayOfWeek.toLocaleString();
+      this.title = this.item.dayOfWeek;
       this.selectedClient = this.item.client.id;
       this.selectedStaff = this.item.staff.id;
     } else {
       // new mode
-      this.title = DayOfWeek[this.day];
+      this.title = this.day;
     }
   }
 

@@ -1,12 +1,39 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component, OnInit, OnDestroy, trigger,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PersonService } from '../person.service';
 import { Person, Client, Staff } from '../model';
+import { ErrorService } from '../error.service';
 
 @Component({
   selector: 'app-person-list',
   templateUrl: './person-list.component.html',
-  styleUrls: ['./person-list.component.css']
+  styleUrls: ['./person-list.component.css'],
+  animations: [
+    trigger('navigationState', [
+      state('*',
+        style({
+          opacity: 1
+        })
+      ),
+      transition('void => *', [
+        style({
+          opacity: 0
+        }),
+        animate('0.3s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.5s ease-out', style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class PersonListComponent implements OnInit, OnDestroy {
 
@@ -19,8 +46,11 @@ export class PersonListComponent implements OnInit, OnDestroy {
   filterContainer: Person[] = [];
   deleteError: boolean = false;
   loading: boolean = false;
+  navigationState: boolean = true;
 
-  constructor(private route: ActivatedRoute, private personService: PersonService) { }
+  constructor(private route: ActivatedRoute,
+    private errorService: ErrorService,
+    private personService: PersonService) { }
 
   ngOnInit() {
     this.loading = true;
@@ -35,12 +65,16 @@ export class PersonListComponent implements OnInit, OnDestroy {
       this.personService.listForPersonType(params['type']).subscribe(results => {
         this.loading = false;
         this.people = results;
+      }, err => {
+        this.loading = false;
+        this.errorService.handleError(err);
       });
     });
   }
 
   ngOnDestroy() {
     this.people = undefined;
+    this.navigationState = false;
   }
 
   remove(index: number) {
@@ -62,7 +96,7 @@ export class PersonListComponent implements OnInit, OnDestroy {
     if (this.filterContainer.length < 1) {
       this.filterContainer = this.people.slice();
     }
-    if (this.filterText.length > 3) {
+    if (this.filterText.length > 2) {
       this.people = this.people.filter(p => {
         let forename = p.forename.toLowerCase();
         let surname = p.surname.toLowerCase();

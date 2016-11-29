@@ -16,6 +16,8 @@ import { RotaComponent } from './rota/rota.component';
 import { RotaService } from './rota.service';
 import { PersonService } from './person.service';
 import { InvoiceService } from './invoice.service';
+import { ConfigurationService } from './configuration.service';
+import { AddressService } from './address.service';
 import { AvailabilityComponent } from './availability/availability.component';
 import { CapitalizeFirstPipe } from './capitalize-first.pipe';
 import { PersonComponent } from './person/person.component';
@@ -38,6 +40,9 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
 import { FooterComponent } from './footer/footer.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
+import { UnspecifiedPipe } from './unspecified.pipe';
+import { TimePipe } from './time.pipe';
 
 @NgModule({
   imports: [
@@ -77,7 +82,10 @@ import { FooterComponent } from './footer/footer.component';
     InvoiceComponent,
     SpinnerComponent,
     InvoiceItemComponent,
-    FooterComponent
+    FooterComponent,
+    ConfigurationComponent,
+    UnspecifiedPipe,
+    TimePipe
   ],
   providers: [
     AuthService,
@@ -85,7 +93,9 @@ import { FooterComponent } from './footer/footer.component';
     ErrorService,
     PersonService,
     RotaService,
-    InvoiceService
+    InvoiceService,
+    AddressService,
+    ConfigurationService
   ],
   bootstrap: [
     AppComponent

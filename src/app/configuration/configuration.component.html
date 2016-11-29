@@ -1,0 +1,59 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<div [@navigationState]="navigationState" *ngIf="config">
+	<div class="row" *ngIf="!loading">
+		<div class="col-xs-12">
+			<div class="page-header">
+				<h4>Configuration Settings</h4>
+				<p>The following properties are all configurable in the application's yaml configuration file. This is typically configured
+					by a System Administrator</p>
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="card">
+			<div class="card-block">
+				<h4 class="card-title">System settings</h4>
+			</div>
+			<div class="card-block">
+				<div class="form-group">
+					<label for="postCodeServiceUrl">Post Code Service URL</label>
+					<input class="form-control" type="text" name="postCodeServiceUrl" [disabled]="true" [value]="config.postCodeServiceUrl">
+				</div>
+				<div class="form-group">
+					<label for="apiKey">Post Code Service API key</label>
+					<input class="form-control" type="text" name="apiKey" [disabled]="true" [value]="config.apiKey">
+				</div>
+				<div class="form-group">
+					<label for="googleMapsDistanceMatrixApiUrl">Google Distance Matrix API URL</label>
+					<input class="form-control" type="text" name="googleMapsDistanceMatrixApiUrl" [disabled]="true" [value]="config.googleMapsDistanceMatrixApiUrl">
+				</div>
+				<div class="form-group">
+					<label for="googleMapsDistanceMatrixApiKey">Google Distance Matrix API Key</label>
+					<input class="form-control" type="text" name="googleMapsDistanceMatrixApiKey" [disabled]="true" [value]="config.googleMapsDistanceMatrixApiKey">
+				</div>
+				<div class="form-group">
+					<label for="maxDistanceRadius">Maximum Appointment Travelling Distance</label>
+					<input class="form-control" type="text" name="maxDistanceRadius" [disabled]="true" [value]="config.maxDistanceRadius">
+				</div>
+				<div class="form-group">
+					<label for="minDistanceRadius">Minimum Appointment Travelling Distance</label>
+					<input class="form-control" type="text" name="minDistanceRadius" [disabled]="true" [value]="config.minDistanceRadius">
+				</div>
+				<div class="form-group">
+					<label for="defaultAddress">Appointment Default Address</label>
+					<input class="form-control" type="text" name="defaultAddress" [disabled]="true" [value]="config.defaultAddress">
+				</div>
+				<div class="form-group">
+					<label for="theme">Application Theme</label>
+					<input class="form-control" type="text" name="theme" [disabled]="true" [value]="config.theme">
+				</div>
+				<div class="form-group">
+					<label for="organisation">Licensed To</label>
+					<input class="form-control" type="text" name="organisation" [disabled]="true" [value]="config.organisation">
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" [routerLink]="['']">Home</button>
+				</div>
+			</div>
+		</div>
+	</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { validate } from 'class-validator';
 
-import { DayOfWeek, Availability } from '../model';
+import { Availability, Days } from '../model';
 import { Time } from '../time/time.component';
 
 import * as moment from 'moment';
@@ -25,9 +25,7 @@ export class AvailabilityComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    for (let day in DayOfWeek) {
-      if (typeof DayOfWeek[day] === 'number') { this.days.push(day); }
-    }
+    this.days.push(Days.monday, Days.tuesday, Days.wednesday, Days.thursday, Days.friday, Days.saturday, Days.sunday);
     this.availability = new Availability();
   }
 

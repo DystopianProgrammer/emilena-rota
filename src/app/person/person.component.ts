@@ -1,43 +1,91 @@
-import { Component, OnInit, OnDestroy, HostBinding, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  HostBinding,
+  ViewContainerRef,
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from '@angular/core';
+
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { validate, ValidationError } from 'class-validator';
-
-import { Person, Client, Staff, Address, Availability } from '../model';
+import { Person, Client, Staff, Address, Availability, PersonType, Location } from '../model';
 import { PersonService } from '../person.service';
 import { ErrorService } from '../error.service';
+import { AddressService } from '../address.service';
 
 @Component({
   selector: 'app-person',
   templateUrl: './person.component.html',
-  styleUrls: ['./person.component.css']
+  styleUrls: ['./person.component.css'],
+  animations: [
+    trigger('navigationState', [
+      state('*',
+        style({
+          opacity: 1
+        })
+      ),
+      transition('void => *', [
+        style({
+          opacity: 0
+        }),
+        animate('0.3s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.5s ease-out', style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class PersonComponent implements OnInit, OnDestroy {
 
   // title - Staff Management or Client Management
   title: string;
+
   // model object shared between staff and client (instanceof)
   person: any;
+
   // list of clients or staff
   people: Person[];
+
   // temporary assignee
   assigneeId: number;
+
   // is client - for staff assignee
   isClient: boolean;
-  // our person subscriber
-  private person$: Subscription;
+
   // validation failures
   missingFields: boolean = false;
   validationPrompts: string;
-
   availabilityMsg: boolean = false;
 
+  // animating 
+  navigationState = true;
+
+  // used to map to an address object
+  // see https://getaddress.io/Documentation
+  addresses: string[];
+
+  // for address selection with the postcode lookup
+  selectedAddress: Address;
+  selectedLocation: Location;
+
+  // our person subscriber
+  private person$: Subscription;
 
   constructor(
     private router: Router,
     private viewContainerRef: ViewContainerRef,
     private route: ActivatedRoute,
     private errorService: ErrorService,
+    private addressService: AddressService,
     private personService: PersonService) { }
 
   ngOnInit() {
@@ -47,20 +95,13 @@ export class PersonComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.person$) { this.person$.unsubscribe() };
+    this.navigationState = false;
   }
 
-  onChange(event) {
-    console.log(event);
-    if (event) {
-      event = event[0].toUpperCase();
-    }
-  }
-
+  /**
+   * The main submit - submits the form and runs a validation sweep over the person object.
+   */
   onSubmit() {
-    if (this.person.availabilities.length == 0) {
-      this.availabilityMsg = true;
-      return;
-    }
     validate(this.person).then(errors => {
       if (errors.length < 1) {
         this.personService.person = this.person;
@@ -108,8 +149,35 @@ export class PersonComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Event handler for removing an availability from a person
+   */
   removeAvailability(index: number) {
     this.person.availabilities.splice(index, 1);
+  }
+
+  addressFromPostCode() {
+    if (this.person.address.postCode) {
+      this.addressService.address(this.person.address.postCode).subscribe(res => {
+        this.selectedLocation = new Location();
+        this.selectedLocation.longitude = res.Longitude;
+        this.selectedLocation.latitude = res.Latitude;
+        this.addresses = res.Addresses;
+      }, err => this.errorService.handleError(err));
+    }
+  }
+
+  selectAddress(event) {
+    let parts: string =
+      event.split(',')
+        .filter(p => p !== null)
+        .filter(p => p !== undefined)
+        .filter(p => p.trim() !== '');
+
+    this.person.address.firstLine = parts[0];
+    this.person.address.secondLine = parts[1];
+    this.person.address.town = parts[2];
+    this.person.address.location = this.selectedLocation;
   }
 
   /**
@@ -145,26 +213,27 @@ export class PersonComponent implements OnInit, OnDestroy {
     }
   }
 
-  initStaff(): void {
+  private initStaff(): void {
     this.person = new Staff();
     this.person.address = new Address();
     this.person.availabilities = [];
-    this.person.personType = 'STAFF';
+    this.person.personType = PersonType.staff;
     this.title = 'Staff Management';
     this.isClient = false;
   }
 
-  initClient(): void {
+  private initClient(): void {
     this.person = new Client();
     this.person.address = new Address();
     this.person.availabilities = [];
-    this.person.personType = 'CLIENT';
+    this.person.personType = PersonType.client;
     this.person.staff = [];
     this.title = 'Client Management';
     this.isClient = true;
   }
 
-  initEditMode(): void {
+  private initEditMode(): void {
+
     let type: string;
     let id: number;
 
@@ -173,13 +242,15 @@ export class PersonComponent implements OnInit, OnDestroy {
       id = +params['id'];
       if (type.includes('client')) {
         this.title = 'Edit Client';
+        this.personService.clientById(id).subscribe(res => {
+          this.person = res;
+        }, err => this.errorService.handleError(err));
       } else {
         this.title = 'Edit Staff';
+        this.personService.staffById(id).subscribe(res => {
+          this.person = res;
+        }, err => this.errorService.handleError(err));
       }
-    });
-
-    this.personService.personById(id).subscribe(res => {
-      this.person = res;
     });
   }
 

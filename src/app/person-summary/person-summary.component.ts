@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component, OnInit, state,
+  style,
+  transition,
+  animate,
+  trigger
+} from '@angular/core';
 import { PersonService } from '../person.service';
-import { Person, Staff } from '../model';
+import { Person, Staff, PersonType, Client } from '../model';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { ErrorService } from '../error.service';
@@ -8,7 +14,27 @@ import { ErrorService } from '../error.service';
 @Component({
   selector: 'app-person-summary',
   templateUrl: './person-summary.component.html',
-  styleUrls: ['./person-summary.component.css']
+  styleUrls: ['./person-summary.component.css'],
+  animations: [
+    trigger('navigationState', [
+      state('*',
+        style({
+          opacity: 1
+        })
+      ),
+      transition('void => *', [
+        style({
+          opacity: 0
+        }),
+        animate('0.3s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.5s ease-out', style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class PersonSummaryComponent implements OnInit {
 
@@ -27,20 +53,30 @@ export class PersonSummaryComponent implements OnInit {
   }
 
   submit() {
-    this.personService.person = undefined;
-    this.disableBtn = true;
-    this.personService.update(this.person).subscribe(res => {
-      this.notification = true;
+
+    let notificationCb = (personType: PersonType) => {
       setTimeout(() => {
-        if (this.person instanceof Staff) {
+        this.notification = false;
+        if (personType === PersonType.staff) {
           this.router.navigate(['staff-list', { type: 'staff' }]);
         } else {
           this.router.navigate(['client-list', { type: 'client' }]);
         }
-      }, 2000)
-    }, err => {
-      this.errorService.handleError(err);
-    });
+      }, 3000);
+      this.notification = true;
+      this.disableBtn = true;
+    }
+
+    this.personService.person = undefined;
+    if (this.person.personType === PersonType.staff) {
+      this.personService.updateStaff(<Staff>this.person).subscribe(res => {
+        notificationCb(PersonType.staff);
+      }, err => this.errorService.handleError(err));
+    } else {
+      this.personService.updateClient(<Client>this.person).subscribe(res => {
+        notificationCb(PersonType.client);
+      }, err => this.errorService.handleError(err));
+    }
   }
 
   back(): void {
