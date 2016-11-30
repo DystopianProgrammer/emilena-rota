@@ -94,6 +94,9 @@ export class RotaComponent implements OnInit {
       if (this.rotas.length > 0) {
         initialise(this.rotas.length - 1)
       }
+    }, err => {
+      this.loading = false;
+      this.errorService.handleError(err);
     });
   }
 
@@ -102,7 +105,9 @@ export class RotaComponent implements OnInit {
       this.alreadyExists = false;
       let index = this.rotas.findIndex(r => r.id === rota.id);
       this.rotas.splice(index, 1);
-    }, err => this.errorService.handleError(err));
+    }, err => {
+      this.errorService.handleError(err);
+    });
   }
 
   noDelete(rota: Rota) {
