@@ -124,6 +124,7 @@
         					</div>
 						</div>
 						<button type="button" class="btn btn-secondary mb-1" (click)="addressFromPostCode()">Look-up</button>
+						<div *ngIf="addressNotFound" class="address-not-found">Address not found</div>
 
 						<div *ngIf="addresses" class="form-group">
 							<label for="addresses">Select address</label>
@@ -164,7 +165,8 @@
 	</div>
 	<div class="col-xs-12">
 		<button type="submit" class="btn btn-outline-success" [disabled]="!personForm.form.valid">Next</button>
-		<button type="button" class="btn btn-secondary" [routerLink]="['']">Cancel</button>
+		<button type="button" class="btn btn-secondary" (click)="backClicked()">Back</button>
+		<button type="button" class="btn btn-outline-danger" [routerLink]="['']">Cancel</button>
 	</div>
 	</form>
 </div>

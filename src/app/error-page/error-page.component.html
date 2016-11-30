@@ -1,12 +1,12 @@
 <div class="card">
 	<div class="card-block">
 		<h4 class="card-title">Error</h4>
-		<alert type="danger">
-			<p class="card-text">Whoops! Something has gone wrong. Please contact the administrator</p>
-			<p>Error: {{errorText}}</p>
+		<alert type="warning">
+			<p class="card-text">Whoops, something has gone wrong!</p>
+			<p><strong>Reason: {{errorText}}</strong></p>
 		</alert>
 	</div>
 	<div class="card-block">
-		<button class="btn btn-primary" [routerLink]="['']">Back</button>
+		<button class="btn btn-primary" (click)="backClicked()">Back</button>
 	</div>
 </div>

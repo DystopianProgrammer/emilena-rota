@@ -5,6 +5,7 @@ import {
   transition,
   animate
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PersonService } from '../person.service';
 import { Person, Client, Staff } from '../model';
@@ -49,6 +50,7 @@ export class PersonListComponent implements OnInit, OnDestroy {
   navigationState: boolean = true;
 
   constructor(private route: ActivatedRoute,
+    private location: Location,
     private errorService: ErrorService,
     private personService: PersonService) { }
 
@@ -89,6 +91,10 @@ export class PersonListComponent implements OnInit, OnDestroy {
 
   notified(event) {
     this.deleteError = event;
+  }
+
+  backClicked() {
+    this.location.back();
   }
 
   onChange(event): void {

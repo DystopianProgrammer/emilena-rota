@@ -51,9 +51,12 @@
 					<label for="organisation">Licensed To</label>
 					<input class="form-control" type="text" name="organisation" [disabled]="true" [value]="config.organisation">
 				</div>
-				<div class="form-group">
-					<button class="btn btn-primary" [routerLink]="['']">Home</button>
-				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<button class="btn btn-secondary" (click)="backClicked()">Back</button>
 			</div>
 		</div>
 	</div>
+</div>

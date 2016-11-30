@@ -5,6 +5,7 @@ import {
   transition,
   animate
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { InvoiceService, SortType } from '../invoice.service';
 import { ErrorService } from '../error.service';
 import { Invoice } from '../model';
@@ -42,10 +43,12 @@ export class InvoiceComponent implements OnInit {
   invoices: Invoice[] = [];
   isCurrent: boolean;
   isReadOnly: boolean;
-    // animating 
+  // animating 
   navigationState = true;
 
-  constructor(private invoiceService: InvoiceService, private errorService: ErrorService) { }
+  constructor(private invoiceService: InvoiceService,
+    private location: Location,
+    private errorService: ErrorService) { }
 
   ngOnInit() {
     this.currentDate = moment().format('D/MM/YYYY');
@@ -84,6 +87,10 @@ export class InvoiceComponent implements OnInit {
     this.invoiceService.update(invoice).subscribe(res => {
       this.invoices.splice(index, 1);
     }, err => this.errorService.handleError(err));
+  }
+
+  backClicked() {
+    this.location.back();
   }
 
   private sortByDate(input) {

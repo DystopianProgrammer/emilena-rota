@@ -23,9 +23,10 @@ export class RotaService {
   }
 
   delete(rota: Rota): Observable<Response> {
-    return this.http.post('/emilena-api/rota/delete', 
+    return this.http.post('/emilena-api/rota/delete',
       JSON.stringify(rota), this.authService.requestOptionsWithJsonHeader())
-      .catch(err => Observable.throw('Could not delete rota. Invoices have already been issued for it for this week.'));
+      .catch(err => Observable.throw('Could not delete rota. Invoices have already been' +
+      ' issued for this rota. Please consider modifying the rota if changes are necessary.'));
   }
 
   fetchAll(): Observable<Rota[]> {

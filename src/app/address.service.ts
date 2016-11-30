@@ -10,8 +10,13 @@ export class AddressService {
   address(postCode: string): Observable<any> {
     let trimmed = postCode.replace(/ /g, '')
     return this.http.get(`/emilena-api/external/address/${trimmed}`)
-      .map(res => res.json())
-      .catch(err => Observable.throw('Failed to fetch addresses'));
+      .map(res => {
+        if(res.status === 404) {
+          throw new Error(res.status.toString());
+        }
+        res.json();
+      })
+      .catch(err => Observable.throw(err));
   }
 
 }

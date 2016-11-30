@@ -5,6 +5,7 @@ import {
   animate,
   trigger
 } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-help',
@@ -33,9 +34,13 @@ import {
 })
 export class HelpComponent implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit() {
+  }
+
+  backClicked() {
+    this.location.back();
   }
 
 }

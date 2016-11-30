@@ -10,7 +10,7 @@ import {
   transition,
   animate
 } from '@angular/core';
-
+import { Location as aLocation } from '@angular/common';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { validate, ValidationError } from 'class-validator';
@@ -80,12 +80,15 @@ export class PersonComponent implements OnInit, OnDestroy {
   // our person subscriber
   private person$: Subscription;
 
+  addressNotFound: boolean = false;
+
   constructor(
     private router: Router,
     private viewContainerRef: ViewContainerRef,
     private route: ActivatedRoute,
     private errorService: ErrorService,
     private addressService: AddressService,
+    private _location: aLocation,
     private personService: PersonService) { }
 
   ngOnInit() {
@@ -133,6 +136,10 @@ export class PersonComponent implements OnInit, OnDestroy {
     }
   }
 
+  backClicked() {
+    this._location.back();
+  }
+
   /**
    * Removes an assignment of staff to client
    */
@@ -163,7 +170,14 @@ export class PersonComponent implements OnInit, OnDestroy {
         this.selectedLocation.longitude = res.Longitude;
         this.selectedLocation.latitude = res.Latitude;
         this.addresses = res.Addresses;
-      }, err => this.errorService.handleError(err));
+        this.addressNotFound = false;
+      }, err => {
+        if (err.status === 404) {
+          this.addressNotFound = true;
+        } else {
+          this.errorService.handleError(err);
+        }
+      });
     }
   }
 

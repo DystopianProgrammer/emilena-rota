@@ -5,6 +5,7 @@ import {
   animate,
   trigger
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { ConfigurationService } from '../configuration.service';
 import { ErrorService } from '../error.service';
 
@@ -39,7 +40,9 @@ export class ConfigurationComponent implements OnInit {
   config: any;
   loading: boolean = true;
 
-  constructor(private configurationService: ConfigurationService, private errorService: ErrorService) { }
+  constructor(private configurationService: ConfigurationService,
+    private location: Location,
+    private errorService: ErrorService) { }
 
   ngOnInit() {
     this.configurationService.getConfiguration()
@@ -47,6 +50,10 @@ export class ConfigurationComponent implements OnInit {
         this.config = res;
         this.loading = false;
       }, err => this.errorService.handleError(err));
+  }
+
+  backClicked() {
+    this.location.back();
   }
 
 }
