@@ -16,8 +16,7 @@ export class AllocationModalComponent implements OnInit {
 
   constructor(private rotaService: RotaService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public showChildModal(): void {
     this.childModal.show();

@@ -9,9 +9,11 @@
 				<h4 class="modal-title">Allocation Status</h4>
 			</div>
 			<div class="modal-body">
-				<p *ngIf="unallocated && unallocated.length === 0">All clients and staff have been allocated</p>
+				<p><em>All names listed are of people (staff and clients) who have availability preferences, but have not been allocated a spot
+					during the rota generation.</em></p>
+				<p *ngIf="unallocated && unallocated.length === 0"><strong>All clients and staff have been allocated</strong></p>
 				<ul *ngIf="unallocated" class="list-group">
-					<li *ngFor="let u of unallocated" class="list-group-item">{{ u.day | capitalizeFirst }}, {{ u.person.forename }} {{ u.person.surname }} - {{ u.person.personType | capitalizeFirst}}</li>
+					<li *ngFor="let u of unallocated" class="list-group-item"><strong>{{ u.personType | capitalizeFirst}}</strong> - {{ u.forename }} {{ u.surname }}</li>
 				</ul>
 			</div>
 		</div>

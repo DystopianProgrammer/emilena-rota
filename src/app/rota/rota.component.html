@@ -18,7 +18,7 @@
 			</div>
 			<button (click)="create()" class="btn btn-outline-danger float-xs-right"><i class="fa fa-calendar-o" aria-hidden="true"></i> New</button>
 			<button (click)="save()" class="btn btn-success">Save</button>
-			<app-allocation-modal *ngIf="rota" [rotaId]="rota.id"></app-allocation-modal>
+			<app-allocation-modal *ngIf="rota && rota.id" [rotaId]="rota.id"></app-allocation-modal>
 		</div>
 	</div>
 	<div class="col-xs-12">

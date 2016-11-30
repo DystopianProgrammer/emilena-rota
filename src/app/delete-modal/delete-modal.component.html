@@ -9,12 +9,12 @@
 			</div>
 			<div class="modal-body">
 				<p>
-					Unable to delete person. This is because they have a linked association to an existing rota. Would you like to disable
+					Unable to delete person. This is because they either have a linked association to an existing rota or an issued invoice. Would you like to disable
 					<strong>{{person.forename}} {{person.surname}}</strong>? Disabling the person will prevent them from being picked up
 					in any future rota generations until they have been re-enabled.
 				</p>
 				<button type="button" class="btn btn-outline-danger" (click)="deactivate()">Disable</button>
-				<button type="button" class="btn btn-outline-secondary" (click)="cancel()">Disable</button>
+				<button type="button" class="btn btn-outline-secondary" (click)="cancel()">Cancel</button>
 			</div>
 		</div>
 	</div>

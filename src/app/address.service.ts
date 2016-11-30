@@ -14,7 +14,7 @@ export class AddressService {
         if(res.status === 404) {
           throw new Error(res.status.toString());
         }
-        res.json();
+        return res.json();
       })
       .catch(err => Observable.throw(err));
   }

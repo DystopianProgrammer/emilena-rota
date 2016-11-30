@@ -166,11 +166,15 @@ export class PersonComponent implements OnInit, OnDestroy {
   addressFromPostCode() {
     if (this.person.address.postCode) {
       this.addressService.address(this.person.address.postCode).subscribe(res => {
-        this.selectedLocation = new Location();
-        this.selectedLocation.longitude = res.Longitude;
-        this.selectedLocation.latitude = res.Latitude;
-        this.addresses = res.Addresses;
-        this.addressNotFound = false;
+        if (res === undefined) {
+          this.addressNotFound = true;
+        } else {
+          this.selectedLocation = new Location();
+          this.selectedLocation.longitude = res.Longitude;
+          this.selectedLocation.latitude = res.Latitude;
+          this.addresses = res.Addresses;
+          this.addressNotFound = false;
+        }
       }, err => {
         if (err.status === 404) {
           this.addressNotFound = true;

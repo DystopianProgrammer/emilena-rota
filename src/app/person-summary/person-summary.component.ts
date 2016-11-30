@@ -50,6 +50,9 @@ export class PersonSummaryComponent implements OnInit {
 
   ngOnInit() {
     this.person = this.personService.person;
+    if (this.person.active === undefined) {
+      this.person.active = true;
+    }
   }
 
   submit() {
