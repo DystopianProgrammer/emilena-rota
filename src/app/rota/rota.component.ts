@@ -123,8 +123,7 @@ export class RotaComponent implements OnInit {
 
     this.rotaService.create(this.forDate).subscribe(res => {
       this.rota = res;
-      this.rota.rotaItems.forEach(item => {
-      })
+      this.rota.rotaItems.forEach(item => this.add(item));
       this.loading = false;
     }, err => {
       this.loading = false;
