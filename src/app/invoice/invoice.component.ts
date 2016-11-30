@@ -52,6 +52,7 @@ export class InvoiceComponent implements OnInit {
 
   ngOnInit() {
     this.currentDate = moment().format('D/MM/YYYY');
+    this.issued();
   }
 
   produce() {

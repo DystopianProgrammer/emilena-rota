@@ -41,12 +41,11 @@
 					</li>
 					<li class="list-group-item list-truncate"><strong>Prefs:</strong> {{ p.preferences | unspecified }}</li>
 				</ul>
-				<app-delete-modal *ngIf="deleteError" (closedNotification)="notified($event)" [person]="p"></app-delete-modal>
 				<div class="card-block">
 					<!-- TODO put this logic in the component -->
 					<button *ngIf="isClient" class="btn btn-secondary btn-block" [routerLink]="['/person-edit', { type: 'client', id: p.id }]">Edit</button>
 					<button *ngIf="!isClient" class="btn btn-secondary btn-block" [routerLink]="['/person-edit', { type: 'staff', id: p.id }]">Edit</button>
-					<button (click)="remove(i)" class="btn btn-outline-danger btn-block"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+					<app-delete-modal (closedNotification)="notified($event)" [person]="p"></app-delete-modal>
 				</div>
 			</div>
 		</div>

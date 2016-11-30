@@ -11,42 +11,34 @@ import { Client, Staff } from '../model';
 })
 export class DeleteModalComponent implements OnInit {
 
-  @ViewChild('lgModal') public childModal: ModalDirective;
+  deletable: any;
 
-  @Input() person;
+  @ViewChild('lgModal') public childModal:ModalDirective;
+
+  @Input() set person(person: any) {
+    this.deletable = person;
+  }
+
   @Output() closedNotification: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private personService: PersonService, private errorService: ErrorService) { }
 
-  ngOnInit() {
-    if (this.person) {
-      setTimeout(() => this.childModal.show(), 100);
-    }
-  }
+  ngOnInit() {}
 
   deactivate(): void {
-    this.person.active = false;
-    if (this.person.personType === 'CLIENT') {
-      this.personService.updateClient(this.person).subscribe(res => {
+    this.deletable.active = false;
+    if (this.deletable.personType === 'CLIENT') {
+      this.personService.updateClient(this.deletable).subscribe(res => {
         this.hideChildModal();
       }, err => this.errorService.handleError(err));
-    } else if (this.person.personType === 'STAFF') {
-      this.personService.updateStaff(this.person).subscribe(res => {
+    } else if (this.deletable.personType === 'STAFF') {
+      this.personService.updateStaff(this.deletable).subscribe(res => {
         this.hideChildModal();
       }, err => this.errorService.handleError(err));
     }
-  }
-
-  cancel(): void {
-    this.hideChildModal();
-  }
-
-  showChildModal(): void {
-    this.childModal.show();
   }
 
   hideChildModal(): void {
-    this.person = undefined;
     this.childModal.hide();
     this.closedNotification.emit(false);
   }
