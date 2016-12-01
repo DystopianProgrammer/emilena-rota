@@ -109,10 +109,12 @@ export class RotaComponent implements OnInit {
   }
 
   delete(rota: Rota) {
+    let start = rota.weekStarting;
     this.rotaService.delete(rota).subscribe(res => {
       this.alreadyExists = false;
       let index = this.rotas.findIndex(r => r.id === rota.id);
       this.rotas.splice(index, 1);
+      this.selectDate(start);
     }, err => {
       this.errorService.handleError(err);
     });
@@ -195,10 +197,10 @@ export class RotaComponent implements OnInit {
 
   selectDate(event) {
     this.loading = true
-    this.updated = moment().format('HH:mm:ss');
-    this.forDate = event;
-    this.reset();
     this.rotaService.create(event).subscribe(res => {
+      this.updated = moment().format('HH:mm:ss');
+      this.forDate = event;
+      this.reset();
       this.rota = res;
       this.rota.rotaItems.forEach(item => this.add(item));
       this.loading = false;

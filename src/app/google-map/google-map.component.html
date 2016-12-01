@@ -10,6 +10,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
 				<h4 class="modal-title">Location <small class="text-muted">{{ person.surname }}, {{ person.forename }}</small></h4>
+				<p>{{ person | address }}</p>
 			</div>
 			<div class="modal-body">
 				<div class="sebm-google-map-container">
