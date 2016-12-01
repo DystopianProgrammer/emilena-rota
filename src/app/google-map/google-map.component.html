@@ -1,10 +1,23 @@
 <div class="item-line-truncate">
-	<strong>Client:&nbsp;</strong><a href="javascript:void(0)" (click)="toggle()">{{ person.surname }}, {{ person.forename }}</a>
+	<strong>Client:&nbsp;</strong><a href="javascript:void(0)" (click)="showChildModal()">{{ person.surname }}, {{ person.forename }}</a>
 </div>
 
-<div *ngIf="isToggled" class="map-backdrop" (click)="toggle()"></div>
-<div class="sebm-google-map-container">
-	<sebm-google-map [latitude]="lat" [longitude]="lng" [zoomControl]="true" [zoom]="15">
-		<sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
-	</sebm-google-map>
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" aria-label="Close" (click)="hideChildModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+				<h4 class="modal-title">Location <small class="text-muted">{{ person.surname }}, {{ person.forename }}</small></h4>
+			</div>
+			<div class="modal-body">
+				<div class="sebm-google-map-container">
+					<sebm-google-map #googleMap [latitude]="lat" [longitude]="lng" [zoom]="11" [usePanning]="true">
+						<sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+					</sebm-google-map>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

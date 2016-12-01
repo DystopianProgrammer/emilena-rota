@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ng2-bootstrap';
+import { SebmGoogleMap, LatLngLiteral, LatLng } from 'angular2-google-maps/core';
 
 @Component({
   selector: 'app-google-map',
@@ -7,22 +9,33 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 })
 export class GoogleMapComponent implements OnInit {
 
+  @ViewChild('childModal') public childModal: ModalDirective;
+  @ViewChild('googleMap') public googleMap: SebmGoogleMap;
+
   lat: number;
   lng: number;
-
-  isToggled: boolean = false;
 
   @Input() person;
 
   constructor() { }
 
   ngOnInit() {
-    let location = this.person.address.location;
-    this.lat = location.latitude;
-    this.lng = location.longitude;
   }
 
-  toggle() {
-    this.isToggled = !this.isToggled;
+  public showChildModal(): void {
+
+    setTimeout(() => {
+      this.googleMap.triggerResize().then(() => {
+        let location = this.person.address.location;
+        this.lat = location.latitude;
+        this.lng = location.longitude;
+      });
+    }, 200);
+    this.childModal.show();
   }
+
+  public hideChildModal(): void {
+    this.childModal.hide();
+  }
+
 }
