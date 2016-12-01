@@ -28,10 +28,10 @@ export class TimeComponent implements OnInit {
 
   ngOnInit() { 
     if(this.inputStart && this.inputEnd) {
-      this.fromHours = this.format(this.inputStart, 0);
-      this.fromMinutes = this.format(this.inputStart, 1);
-      this.untilHours = this.format(this.inputEnd, 0);
-      this.untilMinutes = this.format(this.inputEnd, 1);
+      this.fromHours = this.inputStart.split(':')[0];
+      this.fromMinutes = this.inputStart.split(':')[1];
+      this.untilHours = this.inputEnd.split(':')[0];
+      this.untilMinutes = this.inputEnd.split(':')[1];
     }
   }
 
@@ -72,12 +72,5 @@ export class TimeComponent implements OnInit {
       }
     }
     return output;
-  }
-
-  /**
-   * utility for formatting a string of 00:00 into its parts for usage in this class
-   */
-  private format(input: string, position: number): string {
-    return input.split(':')[position];
   }
 }

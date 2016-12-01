@@ -21,8 +21,8 @@
 						</thead>
 						<tr *ngFor="let a of person.availabilities">
 							<td>{{ a.dayOfWeek | capitalizeFirst }}</td>
-							<td>{{ a.fromTime | time }}</td>
-							<td>{{ a.toTime | time }}</td>
+							<td>{{ a.fromTime }}</td>
+							<td>{{ a.toTime }}</td>
 						</tr>
 					</table>
 				</div>

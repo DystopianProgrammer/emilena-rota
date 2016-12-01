@@ -42,9 +42,8 @@
 					<li class="list-group-item list-truncate"><strong>Prefs:</strong> {{ p.preferences | unspecified }}</li>
 				</ul>
 				<div class="card-block">
-					<!-- TODO put this logic in the component -->
-					<button *ngIf="isClient" class="btn btn-secondary btn-block" [routerLink]="['/person-edit', { type: 'client', id: p.id }]">Edit</button>
-					<button *ngIf="!isClient" class="btn btn-secondary btn-block" [routerLink]="['/person-edit', { type: 'staff', id: p.id }]">Edit</button>
+					<button *ngIf="isClient" class="btn btn-outline-secondary btn-block" [routerLink]="['/person-edit', { type: 'client', id: p.id }]">Edit</button>
+					<button *ngIf="!isClient" class="btn btn-outline-secondary btn-block" [routerLink]="['/person-edit', { type: 'staff', id: p.id }]">Edit</button>
 					<app-delete-modal (closedNotification)="notified($event)" [person]="p"></app-delete-modal>
 				</div>
 			</div>

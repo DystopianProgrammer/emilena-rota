@@ -1,9 +1,9 @@
 <div><button (click)="callToDelete()" class="btn btn-outline-secondary btn-sm float-xs-right"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
 <app-rota-item-write [day]="item.dayOfWeek" [clients]="clients" [staff]="staff" [item]="item" (addRotaItem)="editRotaItem($event)"></app-rota-item-write>
 <div class="item-line-truncate"><strong>Staff:</strong> {{ item.staff.surname }}, {{item.staff.forename}}</div>
-<div class="item-line-truncate"><strong>Client:</strong> {{ item.client.surname }}, {{ item.client.forename }}</div>
+<app-google-map [person]="item.client"></app-google-map>
 <div class="item-line-truncate"><strong>Date:</strong> {{ item.supportDate }}</div>
-<div class="item-line-truncate"><strong>From:</strong> {{ item.start | time }}</div>
-<div class="item-line-truncate"><strong>To:</strong> {{ item.finish | time }}</div>
+<div class="item-line-truncate"><strong>From:</strong> {{ item.start }}</div>
+<div class="item-line-truncate"><strong>To:</strong> {{ item.finish }}</div>
 <div class="item-line-truncate"><strong>Address:</strong> {{ item.client | address }}</div>
 <div class="item-line-truncate"><strong>Telephone:</strong> {{ item.client.telephoneNumber }}</div>

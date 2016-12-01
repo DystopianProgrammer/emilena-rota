@@ -13,12 +13,19 @@
 			<div class="form-group">
 				<label for="rotas">Saved Rotas</label>
 				<select class="form-control" name="rotas" [(ngModel)]="rotaId" (ngModelChange)="onChange($event)">
-				<option *ngFor="let r of rotas" [value]="r.id">{{ r.weekStarting }}, Revision: {{ r.id }}</option>
-			</select>
+					<option *ngFor="let r of rotas" [value]="r.id">{{ r.weekStarting }}, Revision: {{ r.id }}</option>
+				</select>
 			</div>
-			<button (click)="create()" class="btn btn-outline-danger float-xs-right"><i class="fa fa-calendar-o" aria-hidden="true"></i> New</button>
-			<button (click)="save()" class="btn btn-success">Save</button>
-			<app-allocation-modal *ngIf="rota && rota.id" [rotaId]="rota.id"></app-allocation-modal>
+			<div class="form-group">
+				<label for="rotas">Create New Rota</label>
+				<select class="form-control" name="rotas" [(ngModel)]="selectedDate" (ngModelChange)="selectDate($event)">
+					<option *ngFor="let week of weeks" [value]="week">{{ week }}</option>
+				</select>
+			</div>
+			<div class="button-bar">
+				<button (click)="save()" class="btn btn-outline-success">Save</button>
+				<app-allocation-modal *ngIf="rota && rota.id" [rotaId]="rota.id"></app-allocation-modal>
+			</div>
 		</div>
 	</div>
 	<div class="col-xs-12">

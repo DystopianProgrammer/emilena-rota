@@ -1,14 +1,14 @@
-import { 
-        IsNotEmpty, 
-        IsDefined, 
-        IsMilitaryTime, 
-        IsEmail, 
-        IsMobilePhone, 
-        IsNumber
-    } from 'class-validator';
+import {
+    IsNotEmpty,
+    IsDefined,
+    IsMilitaryTime,
+    IsEmail,
+    IsMobilePhone,
+    IsNumber
+} from 'class-validator';
 
 export class Days {
-    private static  _MONDAY: string = 'MONDAY';
+    private static _MONDAY: string = 'MONDAY';
     private static _TUESDAY: string = 'TUESDAY';
     private static _WEDNESDAY: string = 'WEDNESDAY';
     private static _THURSDAY: string = 'THURSDAY';
@@ -42,6 +42,24 @@ export class Days {
 
     static get sunday() {
         return this._SUNDAY;
+    }
+
+    static numericValue(day: String): number {
+        if (day === this._MONDAY) {
+            return 0;
+        } else if (day === this._TUESDAY) {
+            return 1;
+        } else if (day === this._WEDNESDAY) {
+            return 2;
+        } else if (day === this._THURSDAY) {
+            return 3;
+        } else if (day === this._FRIDAY) {
+            return 4;
+        } else if (day === this._SATURDAY) {
+            return 5;
+        } else {
+            return 6;
+        }
     }
 }
 
@@ -91,16 +109,16 @@ export class Location {
 export class Availability {
 
     id: number;
-    
+
     @IsMilitaryTime()
     fromTime: string;
-    
+
     @IsMilitaryTime()
     toTime: string;
-    
+
     @IsDefined()
     dayOfWeek: string;
-    
+
     numberOfHours: number;
 }
 

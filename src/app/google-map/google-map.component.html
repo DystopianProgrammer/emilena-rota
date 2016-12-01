@@ -1,0 +1,10 @@
+<div class="item-line-truncate">
+	<strong>Client:&nbsp;</strong><a href="javascript:void(0)" (click)="toggle()">{{ person.surname }}, {{ person.forename }}</a>
+</div>
+
+<div *ngIf="isToggled" class="map-backdrop" (click)="toggle()"></div>
+<div class="sebm-google-map-container">
+	<sebm-google-map [latitude]="lat" [longitude]="lng" [zoomControl]="true" [zoom]="15">
+		<sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+	</sebm-google-map>
+</div>

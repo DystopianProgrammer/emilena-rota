@@ -42,7 +42,9 @@ import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
 import { FooterComponent } from './footer/footer.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { UnspecifiedPipe } from './unspecified.pipe';
-import { TimePipe } from './time.pipe';
+
+import { AgmCoreModule } from 'angular2-google-maps/core';
+import { GoogleMapComponent } from './google-map/google-map.component';
 
 @NgModule({
   imports: [
@@ -55,7 +57,10 @@ import { TimePipe } from './time.pipe';
     CollapseModule,
     ModalModule,
     TooltipModule,
-    MoneyMaskModule
+    MoneyMaskModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDSobc6EEP3CgSkk3e7rfrM3Bq0Cc37GwY'
+    })
   ],
   declarations: [
     AppComponent,
@@ -85,7 +90,7 @@ import { TimePipe } from './time.pipe';
     FooterComponent,
     ConfigurationComponent,
     UnspecifiedPipe,
-    TimePipe
+    GoogleMapComponent
   ],
   providers: [
     AuthService,

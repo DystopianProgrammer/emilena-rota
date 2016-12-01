@@ -57,7 +57,7 @@ export class RotaItemWriteComponent implements OnInit {
       if (this.fromTime && this.toTime && this.selectedClient && this.selectedStaff) {
         let clientId = +this.selectedClient;
         let staffId = +this.selectedStaff;
-        
+
         let entry = new RotaItem();
         entry.start = this.fromTime;
         entry.finish = this.toTime;
@@ -76,7 +76,7 @@ export class RotaItemWriteComponent implements OnInit {
 
         this.addRotaItem.emit(entry);
         this.hideChildModal();
-      } 
+      }
     } else {
       this.item.start = this.fromTime;
       this.item.finish = this.toTime;
@@ -93,7 +93,8 @@ export class RotaItemWriteComponent implements OnInit {
   }
 
   private determineDate(): string {
-    let pattern = 'YYYY-MM-DD';
-    return moment(this.weekStarting, pattern).add(this.day, 'd').format(pattern);
+    let pattern = 'DD-MM-YYYY';
+    return moment(this.weekStarting, pattern).add(Days.numericValue(this.day), 'd')
+      .format(pattern);
   }
 }

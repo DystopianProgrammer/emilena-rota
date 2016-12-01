@@ -26,7 +26,7 @@ export class RotaService {
     return this.http.post('/emilena-api/rota/delete',
       JSON.stringify(rota), this.authService.requestOptionsWithJsonHeader())
       .catch(err => Observable.throw('Could not delete rota. Invoices have already been' +
-      ' issued for this rota. Please consider modifying the rota if changes are necessary.'));
+        ' issued for this rota. Please consider modifying the rota if changes are necessary.'));
   }
 
   fetchAll(): Observable<Rota[]> {
@@ -42,5 +42,10 @@ export class RotaService {
   findUnallocated(id: number): Observable<any> {
     return this.http.get(`/emilena-api/rota/unallocated/${id}`, this.authService.requestOptionsWithJsonHeader())
       .map((r: Response) => r.json()).catch(error => Observable.throw('No unallocations'));
+  }
+
+  weeks(): Observable<any> {
+    return this.http.get('/emilena-api/rota/weeks', this.authService.requestOptionsWithJsonHeader())
+      .map((r: Response) => r.json()).catch(error => Observable.throw('Could not resolve dates for Rota Generation'));
   }
 }

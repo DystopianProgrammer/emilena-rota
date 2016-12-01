@@ -51,6 +51,8 @@ export class RotaComponent implements OnInit {
   forDate: string;
   version: number;
   updated: string;
+  selectedDate: string;
+  weeks: any[];
 
   monday: RotaItem[] = [];
   tuesday: RotaItem[] = [];
@@ -77,8 +79,14 @@ export class RotaComponent implements OnInit {
   ngOnInit() {
     this.loading = true;
     this.updated = moment().format('HH:mm:ss');
+
     this.personService.staff().subscribe(res => this.staff = res);
     this.personService.clients().subscribe(res => this.clients = res);
+
+    this.rotaService.weeks().subscribe(weeks => {
+      this.weeks = weeks;
+    }, error => this.errorService.handleError(error));
+
     this.rotaService.fetchAll().subscribe(res => {
       this.loading = false;
       this.rotas = res;
@@ -112,28 +120,6 @@ export class RotaComponent implements OnInit {
 
   noDelete(rota: Rota) {
     this.alreadyExists = false;
-  }
-
-  create(): void {
-    this.loading = true
-    this.updated = moment().format('HH:mm:ss');
-    this.forDate = moment().format('D-M-YYYY');
-    this.monday = [];
-    this.tuesday = [];
-    this.wednesday = [];
-    this.thursday = [];
-    this.friday = [];
-    this.saturday = [];
-    this.sunday = [];
-
-    this.rotaService.create(this.forDate).subscribe(res => {
-      this.rota = res;
-      this.rota.rotaItems.forEach(item => this.add(item));
-      this.loading = false;
-    }, err => {
-      this.loading = false;
-      this.alreadyExists = true;
-    });
   }
 
   deleteRotaItem(item: any): void {
@@ -180,7 +166,6 @@ export class RotaComponent implements OnInit {
     }
   }
 
-
   save(): void {
     let items = this.monday.concat(this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday);
     this.rota.rotaItems = items;
@@ -191,7 +176,7 @@ export class RotaComponent implements OnInit {
       if (item.length === 0) {
         this.rotas.push(this.rota);
       }
-    });
+    }, err => this.errorService.handleError(err));
   }
 
   alertDismissed(): void {
@@ -205,6 +190,21 @@ export class RotaComponent implements OnInit {
       this.rota.rotaItems.forEach(item => {
         this.add(item);
       });
+    }, err => this.errorService.handleError(err));
+  }
+
+  selectDate(event) {
+    this.loading = true
+    this.updated = moment().format('HH:mm:ss');
+    this.forDate = event;
+    this.reset();
+    this.rotaService.create(event).subscribe(res => {
+      this.rota = res;
+      this.rota.rotaItems.forEach(item => this.add(item));
+      this.loading = false;
+    }, err => {
+      this.loading = false;
+      this.alreadyExists = true;
     });
   }
 

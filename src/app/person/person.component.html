@@ -1,172 +1,134 @@
 <div class="row" *ngIf="person" [@navigationState]="navigationState">
 	<form (ngSubmit)="onSubmit()" #personForm="ngForm">
-	<div class="col-xs-12">
-		<div class="page-header">
-			<h4>{{title}}</h4>
-			<p>Add/Edit personal details such as preferences and contact information. Please specify the person's availability for automated scheduling.</p>
+		<div class="col-xs-12">
+			<div class="page-header">
+				<h4>{{title}}</h4>
+				<p>Add/Edit personal details such as preferences and contact information. Please specify the person's availability for automated
+					scheduling.</p>
+			</div>
 		</div>
-	</div>
-	<div class="col-xs-12">
-		<div class="card-deck-wrapper">
-			<div class="card-deck">
-				<div class="card">
-					<div class="card-header">
-						Details
-					</div>
-					<div class="card-block">
-						<div class="form-group">
-							<label for="forename">Forename</label>
-							<input class="form-control" 
-								type="text" 
-								name="forename" 
-								placeholder="Jane" 
-								required 
-								[(ngModel)]="person.forename"
-								#forename="ngModel">
-							<div [hidden]="forename.valid || forename.pristine" class="alert alert-danger">
-          						Forename is required
-        					</div>
+		<div class="col-xs-12">
+			<div class="card-deck-wrapper">
+				<div class="card-deck">
+					<div class="card">
+						<div class="card-header">
+							Details
 						</div>
-						<div class="form-group">
-							<label for="surname">Surname</label>
-							<input class="form-control" 
-								type="text" 
-								name="surname" 
-								required
-								placeholder="Smith" 
-								[(ngModel)]="person.surname"
-								#surname="ngModel">
-							<div [hidden]="surname.valid || surname.pristine" class="alert alert-danger">
-          						Surname is required
-        					</div>
-						</div>
-						<div class="form-group">
-							<label for="email">Email</label>
-							<input class="form-control" 
-								type="email" 
-								name="email" 
-								placeholder="someone@domain.com" 
-								[(ngModel)]="person.email">
-						</div>
-						<div class="form-group">
-							<label for="phone">Phone</label>
-							<input class="form-control" 
-								type="text" 
-								name="phone" 
-								pattern="^[0-9]*$"
-								[(ngModel)]="person.telephoneNumber"
-								#tel="ngModel">
-							<div [hidden]="tel.valid || tel.pristine" class="alert alert-danger">
-          						A telephone number is required
-        					</div>
-						</div>
-						<div class="form-group">
-							<label for="preferences">Preferences</label>
-							<textarea class="form-control" name="preferences" [(ngModel)]="person.preferences"></textarea>
+						<div class="card-block">
+							<div class="form-group">
+								<label for="forename">Forename</label>
+								<input class="form-control" type="text" name="forename" placeholder="Jane" required [(ngModel)]="person.forename" #forename="ngModel">
+								<div [hidden]="forename.valid || forename.pristine" class="alert alert-danger">
+									Forename is required
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="surname">Surname</label>
+								<input class="form-control" type="text" name="surname" required placeholder="Smith" [(ngModel)]="person.surname" #surname="ngModel">
+								<div [hidden]="surname.valid || surname.pristine" class="alert alert-danger">
+									Surname is required
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input class="form-control" type="email" name="email" placeholder="someone@domain.com" [(ngModel)]="person.email">
+							</div>
+							<div class="form-group">
+								<label for="phone">Phone</label>
+								<input class="form-control" type="text" name="phone" pattern="^[0-9]*$" [(ngModel)]="person.telephoneNumber" #tel="ngModel">
+								<div [hidden]="tel.valid || tel.pristine" class="alert alert-danger">
+									A telephone number is required
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="preferences">Preferences</label>
+								<textarea class="form-control" name="preferences" [(ngModel)]="person.preferences"></textarea>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="card">
-					<div class="card-header">
-						Address
-					</div>
-					<div class="card-block">
-						<div class="form-group">
-							<label for="line1">Line 1</label>
-							<input class="form-control" 
-								type="text" 
-								name="line1" 
-								placeholder="Address line 1" 
-								required
-								[(ngModel)]="person.address.firstLine"
-								#firstLine="ngModel">
-							<div [hidden]="firstLine.valid || firstLine.pristine" class="alert alert-danger">
-          						House number or name is required
-        					</div>
+					<div class="card">
+						<div class="card-header">
+							Address
 						</div>
-						<div class="form-group">
-							<label for="line2">Line 2</label>
-							<input class="form-control" 
-								type="text" 
-								name="line2" 
-								required
-								placeholder="Address line 2" 
-								[(ngModel)]="person.address.secondLine"
-								#secondLine="ngModel">
-							<div [hidden]="secondLine.valid || secondLine.pristine" class="alert alert-danger">
-          						Street is required
-        					</div>
-						</div>
-						<div class="form-group">
-							<label for="city">Line 3</label>
-							<input class="form-control" 
-								type="text" 
-								name="city" 
-								required
-								placeholder="Address line 3" 
-								[(ngModel)]="person.address.town"
-								#town="ngModel">
-							<div [hidden]="town.valid || town.pristine" class="alert alert-danger">
-          						Town or city is required
-        					</div>
-						</div>
-						<div class="form-group">
-							<label for="postcode">Postcode</label>
-							<input class="form-control" 
-								type="text" 
-								name="postcode" 
-								required
-								placeholder="E.g. AA11 1AA" 
-								[(ngModel)]="person.address.postCode"
-								#postCode="ngModel">
-							<div [hidden]="postCode.valid || postCode.pristine" class="alert alert-danger">
-          						Postcode is required
-        					</div>
-						</div>
-						<button type="button" class="btn btn-secondary mb-1" (click)="addressFromPostCode()">Look-up</button>
-						<div *ngIf="addressNotFound" class="address-not-found">Address not found</div>
+						<div class="card-block">
+							<div class="form-group">
+								<label for="line1">Line 1</label>
+								<input class="form-control" type="text" name="line1" placeholder="Address line 1" required [(ngModel)]="person.address.firstLine"
+									#firstLine="ngModel">
+								<div [hidden]="firstLine.valid || firstLine.pristine" class="alert alert-danger">
+									House number or name is required
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="line2">Line 2</label>
+								<input class="form-control" type="text" name="line2" required placeholder="Address line 2" [(ngModel)]="person.address.secondLine"
+									#secondLine="ngModel">
+								<div [hidden]="secondLine.valid || secondLine.pristine" class="alert alert-danger">
+									Street is required
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="city">Line 3</label>
+								<input class="form-control" type="text" name="city" required placeholder="Address line 3" [(ngModel)]="person.address.town"
+									#town="ngModel">
+								<div [hidden]="town.valid || town.pristine" class="alert alert-danger">
+									Town or city is required
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="postcode">Postcode</label>
+								<input class="form-control" type="text" name="postcode" required placeholder="E.g. AA11 1AA" [(ngModel)]="person.address.postCode"
+									#postCode="ngModel">
+								<div [hidden]="postCode.valid || postCode.pristine" class="alert alert-danger">
+									Postcode is required
+								</div>
+							</div>
+							<button type="button" class="btn btn-outline-secondary mb-1" (click)="addressFromPostCode()">Look-up</button>
+							<div *ngIf="addressNotFound" class="address-not-found">Address not found</div>
 
-						<div *ngIf="addresses" class="form-group">
-							<label for="addresses">Select address</label>
-							<select class="form-control" name="addresses" [ngModel]="selectedAddress" (ngModelChange)="selectAddress($event)">
+							<div *ngIf="addresses" class="form-group">
+								<label for="addresses">Select address</label>
+								<select class="form-control" name="addresses" [ngModel]="selectedAddress" (ngModelChange)="selectAddress($event)">
 								<option *ngFor="let a of addresses" [value]="a">{{ a }}</option>
 							</select>
-						</div>
+							</div>
 
+						</div>
 					</div>
-				</div>
-				<div class="card">
-					<div class="card-header">
-						Availability
-					</div>
-					<div class="card-block">
-						<availability (availabilityOutput)="updateAvailabilities($event)"></availability>
-						<p *ngIf="person.availabilities.length < 1">
-							<em>None to display</em>
-						</p>
-						<alert *ngFor="let a of person.availabilities; let i = index" [type]="'success'" (close)="removeAvailability(i)" dismissible="true">
-							<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
-							<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
-						</alert>
+					<div class="card">
+						<div class="card-header">
+							Availability
+						</div>
+						<div class="card-block">
+							<availability (availabilityOutput)="updateAvailabilities($event)"></availability>
+							<p *ngIf="person.availabilities.length < 1">
+								<em>None to display</em>
+							</p>
+							<alert *ngFor="let a of person.availabilities; let i = index" [type]="'success'" (close)="removeAvailability(i)" dismissible="true">
+								<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
+								<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
+							</alert>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-xs-12">
-		<alert *ngIf="missingFields" type="danger" (close)="alertDismissed()" dismissOnTimeout="6000">
-			{{validationPrompts}}
-		</alert>
-	</div>
-	<div class="col-xs-12">
-		<alert *ngIf="availabilityMsg" type="danger" (close)="alertDismissed()" dismissOnTimeout="6000">
-			You must provide at least one availability. This can be modified at a later time.
-		</alert>
-	</div>
-	<div class="col-xs-12">
-		<button type="submit" class="btn btn-outline-success" [disabled]="!personForm.form.valid">Next</button>
-		<button type="button" class="btn btn-secondary" (click)="backClicked()">Back</button>
-		<button type="button" class="btn btn-outline-danger" [routerLink]="['']">Cancel</button>
-	</div>
+		<div class="col-xs-12">
+			<alert *ngIf="missingFields" type="danger" (close)="alertDismissed()" dismissOnTimeout="6000">
+				{{validationPrompts}}
+			</alert>
+		</div>
+		<div class="col-xs-12">
+			<alert *ngIf="availabilityMsg" type="danger" (close)="alertDismissed()" dismissOnTimeout="6000">
+				You must provide at least one availability. This can be modified at a later time.
+			</alert>
+		</div>
+		<div class="col-xs-12">
+			<div class="button-bar">
+				<button type="submit" class="btn btn-outline-success" [disabled]="!personForm.form.valid">Next</button>
+				<button type="button" class="btn btn-outline-danger" [routerLink]="['']">Cancel</button>
+				<button type="button" class="btn btn-outline-secondary" (click)="backClicked()">Back</button>
+			</div>
+		</div>
 	</form>
 </div>
