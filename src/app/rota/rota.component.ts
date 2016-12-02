@@ -119,6 +119,7 @@ export class RotaComponent implements OnInit {
     }, err => {
       this.errorService.handleError(err);
     });
+    this.isCollapsed = false;
   }
 
   noDelete(rota: Rota) {
@@ -143,6 +144,7 @@ export class RotaComponent implements OnInit {
     } else {
       console.warn('I dunno Emily...');
     }
+    this.isCollapsed = false;
   }
 
   remove(index: number, rotaItem: RotaItem[]) {
@@ -167,12 +169,14 @@ export class RotaComponent implements OnInit {
     } else {
       console.warn('I dunno Emily...');
     }
+    this.isCollapsed = false;
   }
 
   save(): void {
     let items = this.monday.concat(this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday);
     this.rota.rotaItems = items;
     this.rotaService.update(this.rota).subscribe(res => {
+      this.isCollapsed = true;
       this.saved = true;
       this.rota = res;
       let item = this.rotas.filter(r => r.id === this.rota.id);

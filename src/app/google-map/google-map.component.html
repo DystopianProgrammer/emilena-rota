@@ -2,7 +2,7 @@
 	<strong>Client:&nbsp;</strong><a href="javascript:void(0)" (click)="showChildModal()">{{ person.surname }}, {{ person.forename }}</a>
 </div>
 
-<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="locationLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -12,7 +12,32 @@
 				<h4 class="modal-title">Location <small class="text-muted">{{ person.surname }}, {{ person.forename }}</small></h4>
 				<p>{{ person | address }}</p>
 			</div>
-			<div class="modal-body">
+			<div *ngIf="invalidCoords" class="modal-body">
+				<p>Map could not be generated for address with post code <strong>{{ person.address.postCode }}</strong>.</p>
+				<p>If this post code is valid, please use the post code look-up feature in order to assign the geographical coordinates.</p>
+				<p>If no results for this post code can be obtained, please ensure the validity of this post code as it is unlikely to exist
+					on the national database.</p>
+
+				<div class="form-group">
+					<label for="postcode">Postcode</label>
+					<input class="form-control" 
+							type="text" 
+							name="postcode" 
+							placeholder="E.g. AA11 1AA" 
+							[(ngModel)]="person.address.postCode">
+				</div>
+				<button type="button" class="btn btn-outline-secondary mb-1" (click)="addressFromPostCode()">Look-up</button>
+				<button *ngIf="addressUpdated" type="button" class="btn btn-outline-success mb-1" (click)="save()">Save</button>
+				<div *ngIf="addressNotFound" class="address-not-found">Address not found</div>
+
+				<div *ngIf="addresses" class="form-group">
+					<label for="addresses">Select address</label>
+					<select class="form-control" name="addresses" [ngModel]="selectedAddress" (ngModelChange)="selectAddress($event)">
+						<option *ngFor="let a of addresses" [value]="a">{{ a }}</option>
+					</select>
+				</div>
+			</div>
+			<div *ngIf="!invalidCoords" class="modal-body">
 				<div class="sebm-google-map-container">
 					<sebm-google-map #googleMap [latitude]="lat" [longitude]="lng" [zoom]="11" [usePanning]="true">
 						<sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>

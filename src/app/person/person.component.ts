@@ -169,9 +169,7 @@ export class PersonComponent implements OnInit, OnDestroy {
         if (res === undefined) {
           this.addressNotFound = true;
         } else {
-          this.selectedLocation = new Location();
-          this.selectedLocation.longitude = res.Longitude;
-          this.selectedLocation.latitude = res.Latitude;
+          this.selectedLocation = this.addressService.transformToLocation(res);
           this.addresses = res.Addresses;
           this.addressNotFound = false;
         }
@@ -186,15 +184,7 @@ export class PersonComponent implements OnInit, OnDestroy {
   }
 
   selectAddress(event) {
-    let parts: string =
-      event.split(',')
-        .filter(p => p !== null)
-        .filter(p => p !== undefined)
-        .filter(p => p.trim() !== '');
-
-    this.person.address.firstLine = parts[0];
-    this.person.address.secondLine = parts[1];
-    this.person.address.town = parts[2];
+    this.person.address = this.addressService.transformToAddress(event, this.person.address.postCode);
     this.person.address.location = this.selectedLocation;
   }
 
