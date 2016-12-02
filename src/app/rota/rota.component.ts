@@ -1,5 +1,8 @@
 import {
-  Component, OnInit, ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
   state,
   style,
   transition,
@@ -11,6 +14,7 @@ import * as moment from 'moment';
 import { Rota, RotaItem, Staff, Client, Days } from '../model';
 import { PersonService } from '../person.service';
 import { ErrorService } from '../error.service';
+import { Subscription } from 'rxjs/Subscription';
 
 export class ItemToRemove {
   day: string;
@@ -42,7 +46,7 @@ export class ItemToRemove {
     ])
   ]
 })
-export class RotaComponent implements OnInit {
+export class RotaComponent implements OnInit, OnDestroy {
 
   rota: Rota;
   rotas: Rota[];
@@ -73,6 +77,16 @@ export class RotaComponent implements OnInit {
 
   navigationState = true;
 
+  private _staffSubscription: Subscription;
+  private _clientSubscription: Subscription;
+  private _rotaWeeksSubscription: Subscription;
+  private _rotaFetchAllSubscription: Subscription;
+  private _rotaCreateSubscription: Subscription;
+  private _rotaUpdateSubscription: Subscription;
+  private _rotaDeleteSubscription: Subscription;
+  private _errorSubscription: Subscription;
+
+
   constructor(private rotaService: RotaService,
     private errorService: ErrorService,
     private personService: PersonService) { }
@@ -81,14 +95,14 @@ export class RotaComponent implements OnInit {
     this.loading = true;
     this.updated = moment().format('HH:mm:ss');
 
-    this.personService.staff().subscribe(res => this.staff = res);
-    this.personService.clients().subscribe(res => this.clients = res);
+    this._staffSubscription = this.personService.staff().subscribe(res => this.staff = res);
+    this._clientSubscription = this.personService.clients().subscribe(res => this.clients = res);
 
-    this.rotaService.weeks().subscribe(weeks => {
+    this._rotaWeeksSubscription = this.rotaService.weeks().subscribe(weeks => {
       this.weeks = weeks;
     }, error => this.errorService.handleError(error));
 
-    this.rotaService.fetchAll().subscribe(res => {
+    this._rotaFetchAllSubscription = this.rotaService.fetchAll().subscribe(res => {
       this.loading = false;
       this.rotas = res;
 
@@ -109,9 +123,20 @@ export class RotaComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    if (this._staffSubscription) { this._staffSubscription.unsubscribe(); }
+    if (this._clientSubscription) { this._clientSubscription.unsubscribe(); }
+    if (this._rotaWeeksSubscription) { this._rotaWeeksSubscription.unsubscribe(); }
+    if (this._rotaFetchAllSubscription) { this._rotaFetchAllSubscription.unsubscribe(); }
+    if (this._rotaCreateSubscription) { this._rotaCreateSubscription.unsubscribe(); }
+    if (this._rotaUpdateSubscription) { this._rotaUpdateSubscription.unsubscribe(); }
+    if (this._rotaDeleteSubscription) { this._rotaDeleteSubscription.unsubscribe(); }
+    if (this._errorSubscription) { this._errorSubscription.unsubscribe(); }
+  }
+
   delete(rota: Rota) {
     let start = rota.weekStarting;
-    this.rotaService.delete(rota).subscribe(res => {
+    this._rotaDeleteSubscription = this.rotaService.delete(rota).subscribe(res => {
       this.alreadyExists = false;
       let index = this.rotas.findIndex(r => r.id === rota.id);
       this.rotas.splice(index, 1);
@@ -174,7 +199,7 @@ export class RotaComponent implements OnInit {
   save(): void {
     let items = this.monday.concat(this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday);
     this.rota.rotaItems = items;
-    this.rotaService.update(this.rota).subscribe(res => {
+    this._rotaUpdateSubscription = this.rotaService.update(this.rota).subscribe(res => {
       this.isCollapsed = true;
       this.saved = true;
       this.rota = res;
@@ -201,7 +226,7 @@ export class RotaComponent implements OnInit {
 
   selectDate(event) {
     this.loading = true
-    this.rotaService.create(event).subscribe(res => {
+    this._rotaCreateSubscription = this.rotaService.create(event).subscribe(res => {
       this.updated = moment().format('HH:mm:ss');
       this.forDate = event;
       this.reset();

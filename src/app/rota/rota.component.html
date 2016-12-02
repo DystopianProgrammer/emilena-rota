@@ -56,100 +56,112 @@
 </div>
 <div class="row mt-1" *ngIf="!loading && rota">
 	<div class="col-xs-12">
-		<div class="card-deck-wrapper">
-			<div class="card-deck">
-				<div class="card">
-					<div class="card-header mb-1">
-						<span class="card-title list-truncate"><strong>Monday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'MONDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
-					</div>
-					<div class="card-block">
-						<p class="card-text" *ngIf="monday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of monday; let i = index">
-							<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
-						</div>
-						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
-					</div>
+		<div class="card">
+			<div class="card-header mb-1">
+				<span class="card-title list-truncate"><strong class="day-title">Monday</strong></span>
+				<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'MONDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
+			</div>
+			<div class="card-block">
+				<p class="card-text" *ngIf="monday.length == 0">Unallocated</p>
+				<div *ngFor="let item of monday; let i = index">
+					<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
 				</div>
-				<div class="card">
-					<div class="card-header mb-1">
-						<span class="card-title list-truncate"><strong>Tuesday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'TUESDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
-					</div>
-					<div class="card-block">
-						<p class="card-text" *ngIf="tuesday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of tuesday; let i = index">
-							<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
-						</div>
-						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header mb-1">
-						<span class="card-title list-truncate"><strong>Wednesday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'WEDNESDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
-					</div>
-					<div class="card-block">
-						<p class="card-text" *ngIf="wednesday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of wednesday; let i = index">
-							<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
-						</div>
-						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
-					</div>
-				</div>
+			</div>
+			<div class="card-footer text-muted">
+				<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 			</div>
 		</div>
 	</div>
 	<div class="col-xs-12">
-		<div class="card-deck-wrapper">
-			<div class="card-deck">
-				<div class="card">
-					<div class="card-header mb-1">
-						<span class="card-title list-truncate"><strong>Thursday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'THURSDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
-					</div>
-					<div class="card-block">
-						<p class="card-text" *ngIf="thursday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of thursday; let i = index">
-							<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
-						</div>
-						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
-					</div>
+		<div class="card">
+			<div class="card-header mb-1">
+				<span class="card-title list-truncate"><strong class="day-title">Tuesday</strong></span>
+				<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'TUESDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
+			</div>
+			<div class="card-block">
+				<p class="card-text" *ngIf="tuesday.length == 0">Unallocated</p>
+				<div class="card-text rota-item-block" *ngFor="let item of tuesday; let i = index">
+					<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
 				</div>
-				<div class="card">
-					<div class="card-header mb-1">
-						<span class="card-title list-truncate"><strong>Friday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'FRIDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
-					</div>
-					<div class="card-block">
-						<p class="card-text" *ngIf="friday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of friday; let i = index">
-							<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
-						</div>
-						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header mb-1">
-						<span class="card-title list-truncate"><strong>Saturday</strong></span>
-						<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [clients]="clients" [staff]="staff"
-							[day]="'SATURDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
-					</div>
-					<div class="card-block">
-						<p class="card-text" *ngIf="saturday.length == 0">Unallocated</p>
-						<div class="card-text rota-item-block" *ngFor="let item of saturday; let i = index">
-							<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
-						</div>
-						<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
-					</div>
-				</div>
+			</div>
+			<div class="card-footer text-muted">
+				<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12 col-sm-4">
+	<div class="col-xs-12">
 		<div class="card">
 			<div class="card-header mb-1">
-				<span class="card-title list-truncate"><strong>Sunday</strong></span>
+				<span class="card-title list-truncate"><strong class="day-title">Wednesday</strong></span>
+				<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'WEDNESDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
+			</div>
+			<div class="card-block">
+				<p class="card-text" *ngIf="wednesday.length == 0">Unallocated</p>
+				<div class="card-text rota-item-block" *ngFor="let item of wednesday; let i = index">
+					<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
+				</div>
+			</div>
+			<div class="card-footer text-muted">
+				<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="card">
+			<div class="card-header mb-1">
+				<span class="card-title list-truncate"><strong class="day-title">Thursday</strong></span>
+				<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'THURSDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
+			</div>
+			<div class="card-block">
+				<p class="card-text" *ngIf="thursday.length == 0">Unallocated</p>
+				<div class="card-text rota-item-block" *ngFor="let item of thursday; let i = index">
+					<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
+				</div>
+			</div>
+			<div class="card-footer text-muted">
+				<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="card">
+			<div class="card-header mb-1">
+				<span class="card-title list-truncate"><strong class="day-title">Friday</strong></span>
+				<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'FRIDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
+			</div>
+			<div class="card-block">
+				<p class="card-text" *ngIf="friday.length == 0">Unallocated</p>
+				<div class="card-text rota-item-block" *ngFor="let item of friday; let i = index">
+					<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
+				</div>
+			</div>
+			<div class="card-footer text-muted">
+				<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="card">
+			<div class="card-header mb-1">
+				<span class="card-title list-truncate"><strong class="day-title">Saturday</strong></span>
+				<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [clients]="clients" [staff]="staff"
+					[day]="'SATURDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
+			</div>
+			<div class="card-block">
+				<p class="card-text" *ngIf="saturday.length == 0">Unallocated</p>
+				<div class="card-text rota-item-block" *ngFor="let item of saturday; let i = index">
+					<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
+				</div>
+			</div>
+			<div class="card-footer text-muted">
+				<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="card">
+			<div class="card-header mb-1">
+				<span class="card-title list-truncate"><strong class="day-title">Sunday</strong></span>
 				<app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="'SUNDAY'" (addRotaItem)="add($event)"></app-rota-item-write>
 			</div>
 			<div class="card-block">
@@ -157,6 +169,8 @@
 				<div class="card-text rota-item-block" *ngFor="let item of sunday; let i = index">
 					<app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
 				</div>
+			</div>
+			<div class="card-footer text-muted">
 				<p class="card-text"><small class="text-muted">Last updated {{updated}}</small></p>
 			</div>
 		</div>

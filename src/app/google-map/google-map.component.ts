@@ -1,17 +1,18 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ng2-bootstrap';
 import { SebmGoogleMap, LatLngLiteral, LatLng } from 'angular2-google-maps/core';
 import { PersonService } from '../person.service';
 import { AddressService } from '../address.service';
 import { ErrorService } from '../error.service';
 import { Person, Client, Address, PersonType, Location } from '../model';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
   styleUrls: ['./google-map.component.css']
 })
-export class GoogleMapComponent implements OnInit {
+export class GoogleMapComponent implements OnInit, OnDestroy {
 
   @ViewChild('childModal') public childModal: ModalDirective;
   @ViewChild('googleMap') public googleMap: SebmGoogleMap;
@@ -23,12 +24,18 @@ export class GoogleMapComponent implements OnInit {
    * For the purposes of correcting an invalid post code
    */
   addresses: string[];
-  invalidCoords: boolean;
+  /**
+   * Set this as the default to the maps aren't rendered behind the scenes clogging up the browser
+   */
+  invalidCoords: boolean = true;
   addressNotFound: boolean = false;
   selectedLocation: Location;
   addressUpdated: boolean = false;
 
   @Input() person;
+
+  private _personCreateSubscription: Subscription;
+  private _addressServiceSubscription: Subscription;
 
   constructor(private addressService: AddressService,
     private personService: PersonService,
@@ -36,9 +43,17 @@ export class GoogleMapComponent implements OnInit {
 
   ngOnInit() {
     this.invalidCoords = (this.person.address.location === null) ? true : false;
+    console.log(this.googleMap);
   }
 
-  public showChildModal(): void {
+  ngOnDestroy() {
+    this.unsubscribeAll();
+    this.googleMap = undefined;
+    this.childModal = undefined;
+    console.log(this.googleMap);
+  }
+
+  showChildModal(): void {
 
     setTimeout(() => {
       this.googleMap.triggerResize().then(() => {
@@ -46,6 +61,7 @@ export class GoogleMapComponent implements OnInit {
         if (location === null) {
           this.invalidCoords = true;
         } else {
+          this.invalidCoords = false;
           this.lat = location.latitude;
           this.lng = location.longitude;
         }
@@ -54,13 +70,14 @@ export class GoogleMapComponent implements OnInit {
     this.childModal.show();
   }
 
-  public hideChildModal(): void {
+  hideChildModal(): void {
+    this.invalidCoords = true;
     this.childModal.hide();
   }
 
   addressFromPostCode() {
     if (this.person.address.postCode) {
-      this.addressService.address(this.person.address.postCode).subscribe(res => {
+      this._addressServiceSubscription = this.addressService.address(this.person.address.postCode).subscribe(res => {
         if (res === undefined) {
           this.addressNotFound = true;
         } else {
@@ -79,7 +96,7 @@ export class GoogleMapComponent implements OnInit {
   }
 
   save() {
-    this.personService.updateClient(this.person).subscribe(res => {
+    this._personCreateSubscription = this.personService.updateClient(this.person).subscribe(res => {
     });
   }
 
@@ -87,6 +104,11 @@ export class GoogleMapComponent implements OnInit {
     this.person.address = this.addressService.transformToAddress(event, this.person.address.postCode);
     this.person.address.location = this.selectedLocation;
     this.addressUpdated = true;
+  }
+
+  private unsubscribeAll() {
+    if(this._addressServiceSubscription) { this._addressServiceSubscription.unsubscribe(); }
+    if(this._personCreateSubscription) { this._personCreateSubscription.unsubscribe(); }
   }
 
 }
