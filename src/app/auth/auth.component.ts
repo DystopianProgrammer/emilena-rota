@@ -19,6 +19,9 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     this.systemUser = new SystemUser();
+    //TODO remove this eventually. But for the purposes of trialling and demo'ing.
+    this.systemUser.userName = 'superuser';
+    this.systemUser.password = 'superuser';
     try {
       this.login();
     } catch (error) {
