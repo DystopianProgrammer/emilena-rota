@@ -1,0 +1,10 @@
+.open>.dropdown-menu {
+   background-color: #0275d8; 
+   border: none;
+}
+.dropdown-item {
+    color: rgba(255,255,255,.5);
+}
+.dropdown-item:hover {
+    background-color: rgba(0, 0, 0, .5);
+}

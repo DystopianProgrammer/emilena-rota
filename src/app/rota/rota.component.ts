@@ -53,6 +53,7 @@ export class RotaComponent implements OnInit {
   updated: string;
   selectedDate: string;
   weeks: any[];
+  isCollapsed: boolean = true;
 
   monday: RotaItem[] = [];
   tuesday: RotaItem[] = [];

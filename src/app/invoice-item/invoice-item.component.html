@@ -6,16 +6,18 @@
 				<button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-				<h4 class="modal-title">Invoice <small>Created {{invoice.created}}</small></h4>
+				<h4 class="modal-title">Invoice <small class="text-muted">Created {{invoice.created}}</small></h4>
 			</div>
 			<div class="modal-body">
-				<p><strong>Invoice ID:</strong> {{invoice.id}}</p>
-				<p><strong>Client:</strong> {{ invoice.rotaItem.client.forename }} {{ invoice.rotaItem.client.surname }}</p>
-				<p><strong>Address:</strong> {{ invoice.rotaItem.client | address }}</p>
-				<p><strong>Date of support:</strong> {{ invoice.rotaItem.supportDate }}</p>
-				<p><strong>Date of issue:</strong> {{ invoice.issued }}</p>
-				<p><strong>Total amount:</strong> {{ invoice.amount }}</p>
-				<p><strong>Total hours:</strong> {{ invoice.duration }}</p>
+				<div class="item-line-truncate">
+					<p><strong>Invoice ID:</strong> {{invoice.id}}</p>
+					<p><strong>Client:</strong> {{ invoice.rotaItem.client.forename }} {{ invoice.rotaItem.client.surname }}</p>
+					<p><strong>Address:</strong> {{ invoice.rotaItem.client | address }}</p>
+					<p><strong>Date of support:</strong> {{ invoice.rotaItem.supportDate }}</p>
+					<p><strong>Date of issue:</strong> {{ invoice.issued }}</p>
+					<p><strong>Total amount:</strong> {{ invoice.amount }}</p>
+					<p><strong>Total hours:</strong> {{ invoice.duration }}</p>
+				</div>
 			</div>
 		</div>
 	</div>

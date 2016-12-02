@@ -9,6 +9,9 @@
 		</div>
 	</div>
 	<div class="col-xs-12 mb-1">
+		<button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed">Control Panel</button>
+	</div>
+	<div class="col-xs-12 mb-1" [collapse]="isCollapsed">
 		<div class="ctrl-panel">
 			<div class="form-group">
 				<label for="rotas">Saved Rotas</label>
