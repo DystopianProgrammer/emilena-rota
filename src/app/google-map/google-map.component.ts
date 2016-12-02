@@ -43,31 +43,31 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.invalidCoords = (this.person.address.location === null) ? true : false;
-    console.log(this.googleMap);
   }
 
   ngOnDestroy() {
     this.unsubscribeAll();
     this.googleMap = undefined;
     this.childModal = undefined;
-    console.log(this.googleMap);
   }
 
   showChildModal(): void {
 
-    setTimeout(() => {
-      this.googleMap.triggerResize().then(() => {
-        let location = this.person.address.location;
-        if (location === null) {
-          this.invalidCoords = true;
-        } else {
-          this.invalidCoords = false;
-          this.lat = location.latitude;
-          this.lng = location.longitude;
-        }
-      });
-    }, 200);
-    this.childModal.show();
+    if (!this.invalidCoords) {
+      setTimeout(() => {
+        this.googleMap.triggerResize().then(() => {
+          let location = this.person.address.location;
+          if (location === null) {
+            this.invalidCoords = true;
+          } else {
+            this.invalidCoords = false;
+            this.lat = location.latitude;
+            this.lng = location.longitude;
+          }
+        });
+      }, 200);
+      this.childModal.show();
+    }
   }
 
   hideChildModal(): void {
@@ -107,8 +107,8 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
   }
 
   private unsubscribeAll() {
-    if(this._addressServiceSubscription) { this._addressServiceSubscription.unsubscribe(); }
-    if(this._personCreateSubscription) { this._personCreateSubscription.unsubscribe(); }
+    if (this._addressServiceSubscription) { this._addressServiceSubscription.unsubscribe(); }
+    if (this._personCreateSubscription) { this._personCreateSubscription.unsubscribe(); }
   }
 
 }

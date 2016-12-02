@@ -95,8 +95,6 @@ export class RotaItemWriteComponent implements OnInit {
     let a = moment(start, pattern);
     let b = moment(finish, pattern);
 
-    console.log(a);
-    console.log(b);
     if (a.isAfter(b)) {
       this.isValid = false;
     } else {
