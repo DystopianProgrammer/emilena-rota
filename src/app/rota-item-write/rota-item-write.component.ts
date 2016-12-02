@@ -39,7 +39,6 @@ export class RotaItemWriteComponent implements OnInit {
       this.selectedClient = this.item.client.id;
       this.selectedStaff = this.item.staff.id;
     } else {
-      // new mode
       this.title = this.day;
     }
   }
@@ -88,8 +87,23 @@ export class RotaItemWriteComponent implements OnInit {
   }
 
   updateTime(time: Time): void {
-    this.fromTime = time.start;
-    this.toTime = time.finish;
+    let pattern = 'ddd MMM DD YYYY THH:mm';
+    let date = new Date().toDateString();
+    let start = `${date} ${time.start}`;
+    let finish = `${date} ${time.finish}`;
+
+    let a = moment(start, pattern);
+    let b = moment(finish, pattern);
+
+    console.log(a);
+    console.log(b);
+    if (a.isAfter(b)) {
+      this.isValid = false;
+    } else {
+      this.isValid = true;
+      this.fromTime = time.start;
+      this.toTime = time.finish;
+    }
   }
 
   private determineDate(): string {

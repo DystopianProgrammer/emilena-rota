@@ -26,10 +26,10 @@
 					</select>
 				</div>
 
-				<alert *ngIf="!isValid" (close)="alertDismissed()" dismissOnTimeout="4000">
-					Please ensure all fields are selected
+				<alert *ngIf="!isValid" dismissOnTimeout="4000">
+					Please ensure all fields are selected, and that the start time is not after the finish time for the appointment.
 				</alert>
-				<button class="btn btn-outline-success" (click)="create()">Add</button>
+				<button class="btn btn-outline-success" [disabled]="!isValid" (click)="create()">Add</button>
 				<button class="btn btn-outline-secondary" (click)="lgModal.hide()">Cancel</button>
 			</div>
 		</div>
