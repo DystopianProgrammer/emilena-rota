@@ -9,11 +9,8 @@ import { Invoice } from '../model';
 })
 export class InvoiceItemComponent implements OnInit {
 
-  @Input() invoice: Invoice;
-  @Input() isReadOnly: boolean;
-
-  @ViewChild('childModal') public childModal: ModalDirective;
-
+  @Input() invoice;
+  
   constructor() { }
 
   ngOnInit() {

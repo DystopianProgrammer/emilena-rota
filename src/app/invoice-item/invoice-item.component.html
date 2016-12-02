@@ -1,24 +1,50 @@
-<button (click)="lgModal.show()" class="btn btn-sm btn-outline-secondary"><i class="fa fa-binoculars" aria-hidden="true"></i></button>
-<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-				<h4 class="modal-title">Invoice <small class="text-muted">Created {{invoice.created}}</small></h4>
-			</div>
-			<div class="modal-body">
-				<div class="item-line-truncate">
-					<p><strong>Invoice ID:</strong> {{invoice.id}}</p>
-					<p><strong>Client:</strong> {{ invoice.rotaItem.client.forename }} {{ invoice.rotaItem.client.surname }}</p>
-					<p><strong>Address:</strong> {{ invoice.rotaItem.client | address }}</p>
-					<p><strong>Date of support:</strong> {{ invoice.rotaItem.supportDate }}</p>
-					<p><strong>Date of issue:</strong> {{ invoice.issued }}</p>
-					<p><strong>Total amount:</strong> {{ invoice.amount }}</p>
-					<p><strong>Total hours:</strong> {{ invoice.duration }}</p>
-				</div>
-			</div>
+<div class="col-xs-12 col-md-6">
+	<div class="card">
+		<div class="card-header">
+			Issued {{ invoice.issued }}
+		</div>
+		<div class="card-block">
+			<h4 class="card-title">Invoice<small class="text-muted"> {{ invoice.rotaItem.client.forename }} {{ invoice.rotaItem.client.surname }}</small></h4>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>ID:</td>
+						<td>{{invoice.id}}</td>
+					</tr>
+					<tr>
+						<td>Client:</td>
+						<td>{{ invoice.rotaItem.client.forename }} {{ invoice.rotaItem.client.surname }}</td>
+					</tr>
+					<tr>
+						<td>Address:</td>
+						<td>{{ invoice.rotaItem.client.address.firstLine }}, {{ invoice.rotaItem.client.address.postCode }}</td>
+					</tr>
+					<tr>
+						<td>Support:</td>
+						<td>{{ invoice.rotaItem.supportDate }}</td>
+					</tr>
+					<tr>
+						<td>Issue:</td>
+						<td>{{ invoice.issued }}</td>
+					</tr>
+					<tr>
+						<td>Amount:</td>
+						<td>
+							<span class="input-group input-group-sm">
+		<input class="form-control" [money-mask-options]="{ prefix: '£ '}" [(ngModel)]="invoice.amount" mask-money />
+		</span>
+						</td>
+					</tr>
+					<tr>
+						<td>Hours:</td>
+						<td>{{ invoice.duration }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="card-footer text-muted">
+			2 days ago
 		</div>
 	</div>
 </div>
