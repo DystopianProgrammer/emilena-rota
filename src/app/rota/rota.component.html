@@ -8,10 +8,12 @@
 			</p>
 		</div>
 	</div>
-	<div class="col-xs-12 mb-1">
-		<button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed">Control Panel</button>
+	<div class="col-xs-12">
+		<div class="ctrl-panel-dropdown" (click)="isCollapsed = !isCollapsed">
+			<strong><i class="fa" [ngClass]="{'fa-chevron-down': isCollapsed, 'fa-chevron-up': !isCollapsed}" aria-hidden="true"></i> Control Panel</strong>
+		</div>
 	</div>
-	<div class="col-xs-12 mb-1" [collapse]="isCollapsed">
+	<div class="col-xs-12" [collapse]="isCollapsed">
 		<div class="ctrl-panel">
 			<div class="form-group">
 				<label for="rotas">Saved Rotas</label>
@@ -31,13 +33,13 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12">
-		<alert *ngIf="saved" (close)="alertDismissed()" type="success" dismissOnTimeout="3000">
+	<div *ngIf="saved" class="col-xs-12 mt-1">
+		<alert (close)="alertDismissed()" type="success" dismissOnTimeout="3000">
 			Successfully saved!
 		</alert>
 	</div>
-	<div class="col-xs-12">
-		<alert *ngIf="alreadyExists" (close)="alertDismissed()" dismissible="true" type="danger">
+	<div *ngIf="alreadyExists" class="col-xs-12 mt-1">
+		<alert (close)="alertDismissed()" dismissible="true" type="danger">
 			<p>
 				A rota for <strong>{{rota.weekStarting}} </strong> already exists. If you wish to recreate it, please delete it first.
 				Otherwise make manual amendments to the existing rota.
@@ -52,7 +54,7 @@
 		</alert>
 	</div>
 </div>
-<div class="row" *ngIf="!loading && rota">
+<div class="row mt-1" *ngIf="!loading && rota">
 	<div class="col-xs-12">
 		<div class="card-deck-wrapper">
 			<div class="card-deck">

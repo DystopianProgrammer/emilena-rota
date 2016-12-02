@@ -169,7 +169,6 @@ export class RotaComponent implements OnInit {
     } else {
       console.warn('I dunno Emily...');
     }
-    this.isCollapsed = false;
   }
 
   save(): void {
