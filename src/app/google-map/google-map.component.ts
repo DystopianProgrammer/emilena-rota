@@ -31,6 +31,7 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
   addressNotFound: boolean = false;
   selectedLocation: Location;
   addressUpdated: boolean = false;
+  initialised: boolean = false;
 
   @Input() person;
 
@@ -41,9 +42,7 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
     private personService: PersonService,
     private errorService: ErrorService) { }
 
-  ngOnInit() {
-    this.invalidCoords = (this.person.address.location === null) ? true : false;
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.unsubscribeAll();
@@ -52,8 +51,7 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
   }
 
   showChildModal(): void {
-
-    if (!this.invalidCoords) {
+      this.initialised = true;
       setTimeout(() => {
         this.googleMap.triggerResize().then(() => {
           let location = this.person.address.location;
@@ -67,10 +65,10 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
         });
       }, 200);
       this.childModal.show();
-    }
   }
 
   hideChildModal(): void {
+    this.initialised = false;
     this.invalidCoords = true;
     this.childModal.hide();
   }

@@ -37,7 +37,7 @@
 					</select>
 				</div>
 			</div>
-			<div *ngIf="!invalidCoords" class="modal-body">
+			<div *ngIf="initialised" class="modal-body">
 				<div class="sebm-google-map-container">
 					<sebm-google-map #googleMap [latitude]="lat" [longitude]="lng" [zoom]="11" [usePanning]="true">
 						<sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
