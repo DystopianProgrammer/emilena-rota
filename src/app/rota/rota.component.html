@@ -18,15 +18,15 @@
 	<div class="col-xs-12" [collapse]="isCollapsed">
 		<div class="ctrl-panel">
 			<div class="form-group">
-				<label for="rotas">Saved Rotas</label>
-				<select class="form-control" name="rotas" [(ngModel)]="rotaId" (ngModelChange)="onChange($event)">
+				<label for="saved">Saved Rotas</label>
+				<select class="form-control" name="saved" [(ngModel)]="rotaId" (ngModelChange)="onChange($event)">
 					<option disabled></option>
 					<option *ngFor="let r of rotas" [value]="r.id">{{ r.weekStarting }}, Revision: {{ r.id }}</option>
 				</select>
 			</div>
 			<div class="form-group">
-				<label for="rotas">Create New Rota</label>
-				<select class="form-control" name="rotas" [(ngModel)]="selectedDate" (ngModelChange)="selectDate($event)">
+				<label for="create">Create New Rota</label>
+				<select class="form-control" name="create" [(ngModel)]="selectedDate" (ngModelChange)="selectDate($event)">
 					<option disabled></option>
 					<option *ngFor="let week of weeks" [value]="week">{{ week }}</option>
 				</select>

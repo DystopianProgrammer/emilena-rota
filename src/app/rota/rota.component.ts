@@ -227,18 +227,24 @@ export class RotaComponent implements OnInit, OnDestroy {
   }
 
   selectDate(event) {
-    this.loading = true
-    this._rotaCreateSubscription = this.rotaService.create(event).subscribe(res => {
-      this.updated = moment().format('HH:mm:ss');
-      this.forDate = event;
-      this.reset();
-      this.rota = res;
-      this.rota.rotaItems.forEach(item => this.add(item));
-      this.loading = false;
-    }, err => {
-      this.loading = false;
-      this.alreadyExists = true;
-    });
+
+    setTimeout(() => operation(), 200);
+
+    let operation = () => {
+      this.loading = true
+      this._rotaCreateSubscription = this.rotaService.create(event).subscribe(res => {
+        this.updated = moment().format('HH:mm:ss');
+        this.forDate = event;
+        this.reset();
+        this.rota = res;
+        this.rota.rotaItems.forEach(item => this.add(item));
+        this.loading = false;
+      }, err => {
+        this.loading = false;
+        this.alreadyExists = true;
+      });
+    }
+
   }
 
   reset() {
