@@ -21,7 +21,6 @@ export class InvoiceService {
   }
 
   update(invoice: Invoice): Observable<Response> {
-    invoice.amount = invoice.amount.substr(1, invoice.amount.length).trim();;
     return this.http.post('/emilena-api/invoice/update',
       JSON.stringify(invoice), this.authService.requestOptionsWithJsonHeader())
       .catch(err => Observable.throw('Unable to create invoice associated to rota item: ' + invoice.rotaItem.id));

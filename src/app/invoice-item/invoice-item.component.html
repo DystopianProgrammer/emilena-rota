@@ -32,7 +32,7 @@
 							<span class="input-group input-group-sm">
 								<input class="form-control" 
 										[disabled]="invoice.id"
-										[money-mask-options]="{ prefix: '£ '}" 
+										[money-mask-options]="{ prefix: '', thousands: '' }" 
 										[(ngModel)]="invoice.amount" mask-money />
 							</span>
 						</td>
