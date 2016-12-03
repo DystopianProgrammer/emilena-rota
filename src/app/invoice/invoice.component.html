@@ -18,7 +18,7 @@
 			<app-invoice-item [invoice]="invoice" (updatedInvoice)="removeInvoice($event)"></app-invoice-item>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row" *ngIf="!loading">
 		<div class="col-xs-12">
 			<div class="button-bar">
 				<button class="btn btn-outline-secondary" (click)="backClicked()">Back</button>
