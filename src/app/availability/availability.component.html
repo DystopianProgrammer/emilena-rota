@@ -4,7 +4,8 @@
 <div class="form-group">
 	<label for="availability">Day</label>
 	<select class="form-control" name="availability" [(ngModel)]="availability.dayOfWeek">
-	<option *ngFor="let day of days" [value]="day">{{ day | capitalizeFirst }}</option>
+		<option disabled></option>
+		<option *ngFor="let day of days" [value]="day">{{ day | capitalizeFirst }}</option>
 </select>
 </div>
 <div class="form-group">

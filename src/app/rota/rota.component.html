@@ -20,12 +20,14 @@
 			<div class="form-group">
 				<label for="rotas">Saved Rotas</label>
 				<select class="form-control" name="rotas" [(ngModel)]="rotaId" (ngModelChange)="onChange($event)">
+					<option disabled></option>
 					<option *ngFor="let r of rotas" [value]="r.id">{{ r.weekStarting }}, Revision: {{ r.id }}</option>
 				</select>
 			</div>
 			<div class="form-group">
 				<label for="rotas">Create New Rota</label>
 				<select class="form-control" name="rotas" [(ngModel)]="selectedDate" (ngModelChange)="selectDate($event)">
+					<option disabled></option>
 					<option *ngFor="let week of weeks" [value]="week">{{ week }}</option>
 				</select>
 			</div>

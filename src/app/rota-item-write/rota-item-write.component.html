@@ -17,11 +17,13 @@
 				<div class="form-group">
 					<label for="clients">Client</label>
 					<select class="form-control" name="clients" [(ngModel)]="selectedClient">
+						<option disabled></option>
 						<option *ngFor="let c of clients" [value]="c.id">{{ c.surname }}, {{ c.forename }}</option>
 					</select>
 
 					<label for="staff">Staff</label>
 					<select class="form-control" name="staff" [(ngModel)]="selectedStaff">
+						<option disabled></option>
 						<option *ngFor="let s of staff" [value]="s.id">{{ s.surname }}, {{ s.forename }}</option>
 					</select>
 				</div>

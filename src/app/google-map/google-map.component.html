@@ -33,6 +33,7 @@
 				<div *ngIf="addresses" class="form-group">
 					<label for="addresses">Select address</label>
 					<select class="form-control" name="addresses" [ngModel]="selectedAddress" (ngModelChange)="selectAddress($event)">
+						<option disabled></option>
 						<option *ngFor="let a of addresses" [value]="a">{{ a }}</option>
 					</select>
 				</div>
