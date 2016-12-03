@@ -8,14 +8,14 @@
 			<div class="page-header">
 				<h4>Invoices</h4>
 				<p>The invoice control panel generates invoices prior to <strong>{{ currentDate }}</strong></p>
-				<button class="btn btn-sm btn-outline-primary" [disabled]="isCurrent" (click)="produce()">Generate Invoices</button>
+				<button class="btn btn-sm btn-outline-primary" [disabled]="isCurrent" (click)="produce()">Produce Invoices</button>
 				<button class="btn btn-sm btn-outline-primary" (click)="issued()">View issued</button>
 			</div>
 		</div>
 	</div>
 	<div class="row" *ngIf="invoices.length > 0">
 		<div *ngFor="let invoice of invoices; let i = index">
-			<app-invoice-item [invoice]="invoice"></app-invoice-item>
+			<app-invoice-item [invoice]="invoice" (updatedInvoice)="removeInvoice($event)"></app-invoice-item>
 		</div>
 	</div>
 	<div class="row">

@@ -9,6 +9,7 @@ import {
   animate,
   trigger
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { RotaService } from '../rota.service';
 import * as moment from 'moment';
 import { Rota, RotaItem, Staff, Client, Days } from '../model';
@@ -88,6 +89,7 @@ export class RotaComponent implements OnInit, OnDestroy {
 
 
   constructor(private rotaService: RotaService,
+    private location: Location,
     private errorService: ErrorService,
     private personService: PersonService) { }
 
@@ -248,5 +250,10 @@ export class RotaComponent implements OnInit, OnDestroy {
     this.saturday = [];
     this.sunday = [];
   }
+
+  backClicked() {
+    this.location.back();
+  }
+
 }
 

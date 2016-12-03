@@ -84,10 +84,9 @@ export class InvoiceComponent implements OnInit {
     });
   }
 
-  submit(invoice: Invoice, index: number) {
-    this.invoiceService.update(invoice).subscribe(res => {
-      this.invoices.splice(index, 1);
-    }, err => this.errorService.handleError(err));
+  removeInvoice(event: Invoice) {
+    let index = this.invoices.findIndex(invoice => invoice.rotaItem.id === event.rotaItem.id);
+    this.invoices.splice(index, 1);
   }
 
   backClicked() {
