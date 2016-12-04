@@ -60,31 +60,40 @@
 	<div class="col-xs-12">
 		<tabset>
 			<tab heading="Monday">
-				<app-rota-card [rota]="rota" [dayTitle]="Monday" [items]="monday" [clients]="clients" [staff]="staff" [dayOfWeek]="'MONDAY'"></app-rota-card>
+				<app-rota-card [rota]="rota" (requestDelete)="deleteRotaItem($event)" (requestSave)="save()" [dayTitle]="Monday" [items]="monday"
+					[clients]="clients" [staff]="staff" [dayOfWeek]="'MONDAY'">
+				</app-rota-card>
 			</tab>
 
 			<tab heading="Tuesday">
-				<app-rota-card [rota]="rota" [dayTitle]="Tuesday" [items]="tuesday" [clients]="clients" [staff]="staff" [dayOfWeek]="'TUESDAY'"></app-rota-card>
+				<app-rota-card [rota]="rota" (requestDelete)="deleteRotaItem($event)" (requestSave)="save()" [dayTitle]="Tuesday" [items]="tuesday"
+					[clients]="clients" [staff]="staff" [dayOfWeek]="'TUESDAY'">
+				</app-rota-card>
 			</tab>
 
 			<tab heading="Wednesday">
-				<app-rota-card [rota]="rota" [dayTitle]="Wednesday" [items]="wednesday" [clients]="clients" [staff]="staff" [dayOfWeek]="'WEDNESDAY'"></app-rota-card>
+				<app-rota-card [rota]="rota" (requestDelete)="deleteRotaItem($event)" (requestSave)="save()" [dayTitle]="Wednesday" [items]="wednesday"
+					[clients]="clients" [staff]="staff" [dayOfWeek]="'WEDNESDAY'"></app-rota-card>
 			</tab>
 
 			<tab heading="Thursday">
-				<app-rota-card [rota]="rota" [dayTitle]="Thursday" [items]="thursday" [clients]="clients" [staff]="staff" [dayOfWeek]="'THURSDAY'"></app-rota-card>
+				<app-rota-card [rota]="rota" (requestDelete)="deleteRotaItem($event)" (requestSave)="save()" [dayTitle]="Thursday" [items]="thursday"
+					[clients]="clients" [staff]="staff" [dayOfWeek]="'THURSDAY'"></app-rota-card>
 			</tab>
 
 			<tab heading="Friday">
-				<app-rota-card [rota]="rota" [dayTitle]="Friday" [items]="friday" [clients]="clients" [staff]="staff" [dayOfWeek]="'FRIDAY'"></app-rota-card>
+				<app-rota-card [rota]="rota" (requestDelete)="deleteRotaItem($event)" (requestSave)="save()" [dayTitle]="Friday" [items]="friday"
+					[clients]="clients" [staff]="staff" [dayOfWeek]="'FRIDAY'"></app-rota-card>
 			</tab>
 
 			<tab heading="Saturday">
-				<app-rota-card [rota]="rota" [dayTitle]="Saturday" [items]="saturday" [clients]="clients" [staff]="staff" [dayOfWeek]="'SATURDAY'"></app-rota-card>
+				<app-rota-card [rota]="rota" (requestDelete)="deleteRotaItem($event)" (requestSave)="save()" [dayTitle]="Saturday" [items]="saturday"
+					[clients]="clients" [staff]="staff" [dayOfWeek]="'SATURDAY'"></app-rota-card>
 			</tab>
 
 			<tab heading="Sunday">
-				<app-rota-card [rota]="rota" [dayTitle]="Sunday" [items]="sunday" [clients]="clients" [staff]="staff" [dayOfWeek]="'SUNDAY'"></app-rota-card>
+				<app-rota-card [rota]="rota" (requestDelete)="deleteRotaItem($event)" (requestSave)="save()" [dayTitle]="Sunday" [items]="sunday"
+					[clients]="clients" [staff]="staff" [dayOfWeek]="'SUNDAY'"></app-rota-card>
 			</tab>
 		</tabset>
 	</div>

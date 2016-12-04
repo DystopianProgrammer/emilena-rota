@@ -23,6 +23,7 @@ export class RotaItemReadComponent implements OnInit {
   }
 
   callToDelete(): void {
+    console.log('call to delete');
     let itemToRemove = new ItemToRemove();
     itemToRemove.index = this.index;
     itemToRemove.day = this.item.dayOfWeek;

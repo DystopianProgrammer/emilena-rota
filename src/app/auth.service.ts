@@ -23,8 +23,11 @@ import { SystemUser, Traffic } from './model';
  */
 @Injectable()
 export class AuthService {
-  _systemUser: SystemUser;
-  _systemUserSubject = new Subject<SystemUser>();
+
+  private _systemUser: SystemUser;
+  private _systemUserSubject = new Subject<SystemUser>();
+
+  systemUser$ = this._systemUserSubject.asObservable();
 
   constructor(private _http: Http, private router: Router, private jsonp: Jsonp) { }
 
@@ -35,24 +38,24 @@ export class AuthService {
    * @param systemUser? - optional parameter for supplying an object representing the user of the application
    * @return - returns an observable of SystemUser
    */
-  login(systemUser?: SystemUser): Observable<SystemUser> {
+  login(systemUser: SystemUser): Observable<SystemUser> {
     let headers = undefined;
     if (systemUser) {
       let user = systemUser.userName.trim();
       let password = systemUser.password.trim();
       headers = this.headers(user, password);
     } else {
-      this._systemUser = JSON.parse(window.sessionStorage.getItem('system_user'));
-      headers = this.headers(this._systemUser.userName, this._systemUser.password);
+      Observable.throw('Credentials must be supplied');
     }
 
     let options = new RequestOptions({ 'headers': headers });
 
     return this._http.get('/emilena-api/user/login', options)
       .map(res => {
-        window.sessionStorage.setItem('system_user', JSON.stringify(res.json()));
-        return this._systemUser = res.json();
-      });
+        let su = this._systemUser = res.json();
+        this._systemUserSubject.next(su)
+        return su;
+      }).catch(err => Observable.throw(err));
   }
 
   /**

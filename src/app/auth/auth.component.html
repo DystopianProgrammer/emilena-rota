@@ -1,31 +1,27 @@
-<div class="jumbotron">
-	<h1 class="display-3">Rota</h1>
-	<hr class="my-2">
-	<div class="container">
-		<form (ngSubmit)="login()">
-			<div class="row">
-				<div class="col-xs-12 col-md-6">
-					<alert *ngIf="attempts > 0" dismissOnTimeout="6000" type="danger">
-						Invalid credentials, please try again.
-					</alert>
-					<p><strong>Login</strong></p>
-					<div class="form-group">
-						<label for="user">Username</label>
-						<input class="form-control" name="user" type="text" placeholder="username" align="end" [(ngModel)]="systemUser.userName"
-							(ngModelChange)="onChangeUsername($event)">
-					</div>
+<app-spinner *ngIf="loading"></app-spinner>
+<div *ngIf="!loading" class="col-xs-12 col-md-6 offset-md-3" [@navigationState]="navigationState">
+	<div class="card card-inverse card-primary">
+		<div class="card-header">
+			<p>Care Scheduler - Login</p>
+			<p class="card-text"><em>For demo, please use the credentials for both username and password:</em> <strong>superuser</strong></p>
+		</div>
+		<div class="card-block">
+			<form (ngSubmit)="login()">
+				<alert *ngIf="attempts > 0" type="danger">
+					Invalid credentials, please try again.
+				</alert>
+				<div class="form-group">
+					<label for="user">Username</label>
+					<input class="form-control" name="user" type="text" placeholder="username" align="end" [(ngModel)]="systemUser.userName"
+						(ngModelChange)="onChangeUsername($event)">
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
-						<label for="password">Password</label>
-						<input class="form-control" name="password" type="password" placeholder="password" align="end" [(ngModel)]="systemUser.password"
-							(ngModelChange)="onChangePassword($event)">
-					</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input class="form-control" name="password" type="password" placeholder="password" align="end" [(ngModel)]="systemUser.password"
+						(ngModelChange)="onChangePassword($event)">
 				</div>
-			</div>
-			<input type="submit" class="btn btn-primary" value="Login">
-		</form>
+				<input type="submit" class="btn btn-outline-secondary" value="Login">
+			</form>
+		</div>
 	</div>
 </div>

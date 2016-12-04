@@ -1,8 +1,9 @@
 .spinner {
     position: absolute;
-    top: 40%;
-    left: 35%;
-    z-index: 1010;
+    top: 45%;
+    left: 45%;
+    z-index: 1040;
+    height: 3rem;
 }
 .spinner-bg {
     position: fixed;
@@ -12,12 +13,4 @@
     min-height: 100%;
     min-width: 100%;
     z-index: 1000;
-}
-
-@media (min-width: 600px) {
-    .spinner {
-        position: absolute;
-        top: 40%;
-        left: 45%;
-    }
 }

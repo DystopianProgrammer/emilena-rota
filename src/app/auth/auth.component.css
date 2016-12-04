@@ -1,0 +1,9 @@
+.card {
+    float: none;
+    margin: 0px auto;
+}
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+    color: rgba(255,255,255,.65);
+}

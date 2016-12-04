@@ -6,7 +6,7 @@
   <div class="card-block">
     <p class="card-text" *ngIf="!items || items.length == 0">Unallocated</p>
     <div *ngFor="let item of items; let i = index">
-      <app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
+      <app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="removeRotaItem($event)"></app-rota-item-read>
     </div>
   </div>
   <div class="card-footer text-muted">

@@ -8,8 +8,12 @@ import {
 import { Location } from '@angular/common';
 import { InvoiceService, SortType } from '../invoice.service';
 import { ErrorService } from '../error.service';
+import { PaginationService } from '../pagination.service';
 import { Invoice } from '../model';
 import * as moment from 'moment';
+
+const TITLE_NEW = 'New';
+const TITLE_ISSUED = 'Issued';
 
 @Component({
   selector: 'app-invoice',
@@ -43,24 +47,42 @@ export class InvoiceComponent implements OnInit {
   invoices: Invoice[] = [];
   isCurrent: boolean;
   isReadOnly: boolean;
+  isCollapsed: boolean = true;
+  title: string;
+
+  // pagination
+  currentPage: number = 1;
+  maxSize: number = 4;
+  numberItemPerPage: number = 4;
+  currentResults: Invoice[] = [];
+
   // animating 
   navigationState = true;
 
   constructor(private invoiceService: InvoiceService,
+    private paginationService: PaginationService,
     private location: Location,
     private errorService: ErrorService) { }
 
   ngOnInit() {
     this.currentDate = moment().format('D/MM/YYYY');
     this.issued();
+
+    if(this.isReadOnly) {
+      this.title = TITLE_ISSUED;
+    } else {
+      this.title = TITLE_NEW;
+    }
   }
 
   produce() {
-    this.invoices = [];
+    this.title = TITLE_NEW;
+    this.currentPage = 1;
     this.isReadOnly = false;
     this.loading = true;
     this.invoiceService.produce().subscribe(res => {
       this.invoices = this.sortByDate(res);
+      this.currentResults = this.paginationService.subList(this.invoices, this.currentPage, this.numberItemPerPage);
       this.loading = false;
     }, err => {
       this.isCurrent = true;
@@ -69,6 +91,8 @@ export class InvoiceComponent implements OnInit {
   }
 
   issued() {
+    this.title = TITLE_ISSUED;
+    this.currentPage = 1;
     this.isReadOnly = true;
     this.loading = true;
     this.invoiceService.fetch().subscribe(invoices => {
@@ -77,6 +101,7 @@ export class InvoiceComponent implements OnInit {
         invoice.amount = (i.amount.toString().includes('.')) ? `£${i.amount}` : `£${i.amount}.00`;
         return invoice;
       });
+      this.currentResults = this.paginationService.subList(this.invoices, this.currentPage, this.numberItemPerPage);
       this.loading = false;
     }, err => {
       this.loading = false;
@@ -91,6 +116,12 @@ export class InvoiceComponent implements OnInit {
 
   backClicked() {
     this.location.back();
+  }
+
+  // pagination
+  pageChanged(event: any): void {
+    this.currentResults = 
+      this.paginationService.subList(this.invoices, event.page, event.itemsPerPage);
   }
 
   private sortByDate(input) {

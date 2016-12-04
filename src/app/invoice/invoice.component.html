@@ -6,18 +6,53 @@
 		</div>
 		<div class="col-xs-12">
 			<div class="page-header">
-				<h4>Invoices</h4>
+				<h4>Invoices <small class="text-muted">{{ title }}</small></h4>
 				<p>The invoice control panel generates invoices prior to <strong>{{ currentDate }}</strong></p>
-				<button class="btn btn-sm btn-outline-primary" [disabled]="isCurrent" (click)="produce()">Produce Invoices</button>
-				<button class="btn btn-sm btn-outline-primary" (click)="issued()">View issued</button>
 			</div>
 		</div>
+
+
+		<!-- CONTROL PANEL -->
+		<div class="col-xs-12 mb-1">
+			<div class="ctrl-panel-dropdown" (click)="isCollapsed = !isCollapsed">
+				<strong><i class="fa" [ngClass]="{'fa-chevron-down': isCollapsed, 'fa-chevron-up': !isCollapsed}" aria-hidden="true"></i> Control Panel</strong>
+			</div>
+		</div>
+		<div class="col-xs-12" [collapse]="isCollapsed">
+			<div class="ctrl-panel">
+				<button class="btn btn-outline-primary" [disabled]="!isReadOnly" (click)="produce()">Produce Invoices</button>
+				<button class="btn btn-outline-success" [disabled]="isReadOnly" (click)="issueAll()">Issue All</button>
+				<button class="btn btn-outline-primary" [disabled]="isReadOnly" (click)="issued()">View issued</button>
+			</div>
+		</div>
+
 	</div>
+
+	<pagination *ngIf="invoices || invoices.length > 0" 
+		class="pagination-sm"
+		previousText="&lsaquo;" nextText="&rsaquo;"
+		[totalItems]="invoices.length" 
+		[itemsPerPage]="numberItemPerPage" 
+		[maxSize]="maxSize"
+		[rotate]="false"
+		[(ngModel)]="currentPage" 
+		(pageChanged)="pageChanged($event)">		
+	</pagination>
+
+	<div class="row" *ngIf="currentResults.length > 0">
+		<div *ngFor="let invoice of currentResults; let i = index">
+			<app-invoice-item [invoice]="invoice" (updatedInvoice)="removeInvoice($event)"></app-invoice-item>
+		</div>
+	</div>
+
+	<!--
 	<div class="row" *ngIf="invoices.length > 0">
 		<div *ngFor="let invoice of invoices; let i = index">
 			<app-invoice-item [invoice]="invoice" (updatedInvoice)="removeInvoice($event)"></app-invoice-item>
 		</div>
 	</div>
+	-->
+
 	<div class="row" *ngIf="!loading">
 		<div class="col-xs-12">
 			<div class="button-bar">
@@ -25,4 +60,5 @@
 			</div>
 		</div>
 	</div>
+	
 </div>

@@ -23,7 +23,7 @@ import { CapitalizeFirstPipe } from './capitalize-first.pipe';
 import { PersonComponent } from './person/person.component';
 import { PersonSummaryComponent } from './person-summary/person-summary.component';
 
-import { AlertModule, CollapseModule, ModalModule, TooltipModule, TabsModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { AlertModule, CollapseModule, ModalModule, TooltipModule, TabsModule, PaginationModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { PersonListComponent } from './person-list/person-list.component';
 import { NavComponent } from './nav/nav.component';
 import { AddressPipe } from './address.pipe';
@@ -43,6 +43,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { UnspecifiedPipe } from './unspecified.pipe';
 import { TimeService } from './time.service';
+import { PaginationService } from './pagination.service';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { GoogleMapComponent } from './google-map/google-map.component';
@@ -60,6 +61,7 @@ import { RotaCardComponent } from './rota-card/rota-card.component';
     ModalModule,
     TooltipModule,
     TabsModule,
+    PaginationModule,
     MoneyMaskModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDSobc6EEP3CgSkk3e7rfrM3Bq0Cc37GwY'
@@ -105,7 +107,8 @@ import { RotaCardComponent } from './rota-card/rota-card.component';
     InvoiceService,
     AddressService,
     ConfigurationService,
-    TimeService
+    TimeService,
+    PaginationService
   ],
   bootstrap: [
     AppComponent

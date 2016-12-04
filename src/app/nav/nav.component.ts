@@ -1,5 +1,8 @@
 import {
-  Component, OnInit, trigger,
+  Component, 
+  OnInit, 
+  OnDestroy,
+  trigger,
   state,
   style,
   transition,
@@ -7,6 +10,8 @@ import {
 } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { PersonService } from '../person.service';
+import { SystemUser } from '../model';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-nav',
@@ -20,18 +25,31 @@ import { PersonService } from '../person.service';
     ])
   ]
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
 
-  public isMenuCollapsed: boolean = true;
-  public isDropDown: boolean = false;
+  isMenuCollapsed: boolean = true;
+  isDropDown: boolean = false;
+  systemUser: SystemUser;
+
+  private systemUserSubject: Subscription;
 
   constructor(private authService: AuthService, private personService: PersonService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.systemUserSubject =
+      this.authService.systemUser$.subscribe(su => this.systemUser = su);
+  }
+
+  ngOnDestroy() {
+    if(this.systemUserSubject) {
+      this.systemUserSubject.unsubscribe();
+    }
+  }
 
   logOut(): void {
     this.isMenuCollapsed = true;
     this.personService.person = undefined;
+    this.systemUser = undefined;
     this.authService.logOut();
   }
 

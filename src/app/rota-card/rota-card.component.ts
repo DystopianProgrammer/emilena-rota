@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-rota-card',
@@ -13,6 +13,8 @@ export class RotaCardComponent implements OnInit {
   @Input() staff;
   @Input() rota;
   @Input() dayOfWeek;
+  @Output() requestSave: EventEmitter<any> = new EventEmitter;
+  @Output() requestDelete: EventEmitter<any> = new EventEmitter;
 
   constructor() { }
 
@@ -20,8 +22,12 @@ export class RotaCardComponent implements OnInit {
   }
 
   createNewRotaItem(item) {
-    console.log(item);
     this.items.push(item);
+    this.requestSave.emit(true);
+  }
+
+  removeRotaItem(item) {
+    this.requestDelete.emit(item);
   }
 
 }

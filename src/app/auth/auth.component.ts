@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component, OnInit, state,
+  style,
+  transition,
+  animate,
+  trigger
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { SystemUser } from '../model';
@@ -7,21 +13,44 @@ import { ErrorService } from '../../app/error.service';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['./auth.component.css'],
+  animations: [
+    trigger('navigationState', [
+      state('*',
+        style({
+          opacity: 1
+        })
+      ),
+      transition('void => *', [
+        style({
+          opacity: 0
+        }),
+        animate('0.3s ease-in')
+      ]),
+      transition('* => void', [
+        animate('0.5s ease-out', style({
+          opacity: 0
+        }))
+      ])
+    ])
+  ]
 })
 export class AuthComponent implements OnInit {
+
   systemUser: SystemUser;
   attempts: number = 0;
+  navigationState = true;
+  loading: boolean = false;
 
   constructor(private _authService: AuthService,
     private errorService: ErrorService,
     private router: Router) { }
 
   ngOnInit() {
+    let temp = "superuser";
     this.systemUser = new SystemUser();
-    //TODO remove this eventually. But for the purposes of trialling and demo'ing.
-    this.systemUser.userName = 'superuser';
-    this.systemUser.password = 'superuser';
+    this.systemUser.userName = temp;
+    this.systemUser.password = temp;
     try {
       this.login();
     } catch (error) {
@@ -59,11 +88,15 @@ export class AuthComponent implements OnInit {
       }
     };
 
-    if (this.systemUser.userName && this.systemUser.password) {
-      this.attempts = 0;
-      this._authService.login(this.systemUser).subscribe(loginAction, errorHandler);
-    } else {
-      this._authService.login().subscribe(loginAction);
-    }
+    setTimeout(() => {
+      if (this.systemUser.userName && this.systemUser.password) {
+        this.attempts = 0;
+        this._authService.login(this.systemUser).subscribe(loginAction, errorHandler);
+      } else {
+        this.attempts = this.attempts++;
+      }
+      this.loading = false;
+    }, 2000);
+    this.loading = true;
   }
 }
