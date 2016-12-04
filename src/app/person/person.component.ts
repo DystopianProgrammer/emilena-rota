@@ -62,6 +62,8 @@ export class PersonComponent implements OnInit, OnDestroy {
   // is client - for staff assignee
   isClient: boolean;
 
+  availabilityCollapse: boolean = true;
+
   // validation failures
   missingFields: boolean = false;
   validationPrompts: string;

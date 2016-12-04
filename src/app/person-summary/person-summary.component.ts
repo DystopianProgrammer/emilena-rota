@@ -42,6 +42,7 @@ export class PersonSummaryComponent implements OnInit {
   isCollapsed: boolean = true;
   disableBtn: boolean = false;
   notification: boolean = false;
+  navigationState: boolean = true;
 
   constructor(private personService: PersonService,
     private router: Router,

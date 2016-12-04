@@ -1,31 +1,47 @@
-<div class="card">
-	<div class="card-block">
-		<h4 class="card-title">{{person.surname}}, {{person.forename}}</h4>
-		<p class="card-text">{{ person | address }} </p>
-		<div class="form-check">
-			<label class="custom-control custom-radio">
-				<input id="radio1" name="radio" [(ngModel)]="person.active" [value]="true" type="radio" class="custom-control-input">
-				<span class="custom-control-indicator"></span>
-				<span class="custom-control-description">Enable person</span>
-			</label>
-			<label class="custom-control custom-radio">
-				<input id="radio2" name="radio" [(ngModel)]="person.active" [value]="false" type="radio" class="custom-control-input">
-				<span class="custom-control-indicator"></span>
-				<span class="custom-control-description">Disable person</span>
-			</label>
+<div class="row" [@navigationState]="navigationState">
+	<div class="col-xs-12">
+		<div class="page-header">
+			<h4>Summary</h4>
+			<p>Please ensure all information is correct before submitting the form. If you wish to edit the person's details at a later
+				stage, for example updating their contact information, availability or whether they are active or not, locate them from
+				the listings view and select the edit function.</p>
 		</div>
 	</div>
-	<ul class="list-group list-group-flush">
-		<li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{ person.telephoneNumber }}</li>
-		<li class="list-group-item"><i class="fa fa-envelope" aria-hidden="true"></i> {{ person.email | unspecified }}</li>
-		<li class="list-group-item">
-			<app-availability-modal [person]="person"></app-availability-modal>
-		</li>
-		<li class="list-group-item"><strong>Preferences:</strong> {{ person.preferences | unspecified }}</li>
-	</ul>
-	<div class="card-block">
-		<alert *ngIf="notification" type="success">Item successfully updated...</alert>
-		<button class="btn btn-outline-success" [disabled]="disableBtn" (click)="submit()">Submit</button>
-		<button class="btn btn-outline-warning" [disabled]="disableBtn" (click)="back()">Edit</button>
+	<div class="col-xs-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">{{person.surname}}, {{person.forename}} <small class="text-muted">({{ person.personType | capitalizeFirst }})</small></h4>
+				<p class="card-text">{{ person | address }} </p>
+			</div>
+			<div class="card-block">
+				<div class="form-check">
+					<label class="custom-control custom-radio">
+						<input id="radio1" name="radio" [(ngModel)]="person.active" [value]="true" type="radio" class="custom-control-input">
+						<span class="custom-control-indicator"></span>
+						<span class="custom-control-description">Enable</span>
+					</label>
+					<label class="custom-control custom-radio">
+						<input id="radio2" name="radio" [(ngModel)]="person.active" [value]="false" type="radio" class="custom-control-input">
+						<span class="custom-control-indicator"></span>
+						<span class="custom-control-description">Disable</span>
+					</label>
+				</div>
+			</div>
+			<ul class="list-group list-group-flush">
+				<li class="list-group-item"><i class="fa fa-phone" aria-hidden="true"></i> {{ person.telephoneNumber }}</li>
+				<li class="list-group-item"><i class="fa fa-envelope" aria-hidden="true"></i> {{ person.email | unspecified }}</li>
+				<li class="list-group-item">
+					<app-availability-modal [person]="person"></app-availability-modal>
+				</li>
+				<li class="list-group-item"><strong>Preferences:</strong> {{ person.preferences | unspecified }}</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="button-bar">
+			<alert *ngIf="notification" type="success">Item successfully updated...</alert>
+			<button class="btn btn-outline-success" [disabled]="disableBtn" (click)="submit()">Submit</button>
+			<button class="btn btn-outline-warning" [disabled]="disableBtn" (click)="back()">Edit</button>
+		</div>
 	</div>
 </div>

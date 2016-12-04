@@ -42,6 +42,7 @@ export class AvailabilityComponent implements OnInit {
         if (!finish.isBefore(start)) {
           this.availabilityOutput.emit(this.availability);
           this.availability = new Availability();
+          this.alertDismissed();
         } else {
           this.incorrectTimes = true;
         }

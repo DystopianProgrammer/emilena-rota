@@ -1,5 +1,5 @@
-<alert *ngIf="incorrectTimes || incorrectFormat" (close)="alertDismissed()" dismissOnTimeout="4000">
-	Please check the format of the time, and that the start time isn't after the finish time.
+<alert *ngIf="incorrectTimes || incorrectFormat" type="danger" (close)="alertDismissed()" dismissible="true">
+	Time format is incorrect.
 </alert>
 <div class="form-group">
 	<label for="availability">Day</label>
@@ -12,5 +12,8 @@
 	<app-time (outputTime)="updateTime($event)"></app-time>
 </div>
 <div class="mb-1">
-	<button type="button" class="btn btn-outline-secondary" (click)="add()">ADD</button>
+	<button type="button" 
+			class="btn btn-outline-primary" 
+			[disabled]="!availability.dayOfWeek"
+			(click)="add()">Add Availability</button>
 </div>

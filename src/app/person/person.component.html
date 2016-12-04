@@ -83,7 +83,7 @@
 									Postcode is required
 								</div>
 							</div>
-							<button type="button" class="btn btn-outline-secondary mb-1" (click)="addressFromPostCode()">Look-up</button>
+							<button type="button" class="btn btn-outline-primary mb-1" (click)="addressFromPostCode()">Look-up</button>
 							<div *ngIf="addressNotFound" class="address-not-found">Address not found</div>
 
 							<div *ngIf="addresses" class="form-group">
@@ -104,10 +104,16 @@
 							<div *ngIf="duplicateAvailabilityMsg" class="mb-1 availability-conflict">
 								This availability you have selected conflicts with an existing availability.
 							</div>
-							<alert *ngFor="let a of person.availabilities; let i = index" [type]="'success'" (close)="removeAvailability(i)" dismissible="true">
-								<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
-								<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
-							</alert>
+							<button type="button" class="btn btn-secondary btn-block mb-1"
+								(click)="availabilityCollapse = !availabilityCollapse">
+								<i class="fa" [ngClass]="{'fa-chevron-down': availabilityCollapse, 'fa-chevron-up': !availabilityCollapse}" aria-hidden="true"></i> Availabilities: {{ person.availabilities.length }}
+							</button>
+							<div [collapse]="availabilityCollapse">
+								<alert *ngFor="let a of person.availabilities; let i = index" [type]="'success'" (close)="removeAvailability(i)" dismissible="true">
+									<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
+									<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
+								</alert>
+							</div>
 						</div>
 					</div>
 				</div>
