@@ -81,10 +81,12 @@ export class InvoiceComponent implements OnInit {
     this.isReadOnly = false;
     this.loading = true;
     this.invoiceService.produce().subscribe(res => {
+      console.log(res);
       this.invoices = this.sortByDate(res);
       this.currentResults = this.paginationService.subList(this.invoices, this.currentPage, this.numberItemPerPage);
       this.loading = false;
     }, err => {
+      this.currentResults = [];
       this.isCurrent = true;
       this.loading = false;
     });
@@ -104,14 +106,14 @@ export class InvoiceComponent implements OnInit {
       this.currentResults = this.paginationService.subList(this.invoices, this.currentPage, this.numberItemPerPage);
       this.loading = false;
     }, err => {
+      this.currentResults = this.paginationService.subList(this.invoices, this.currentPage, this.numberItemPerPage);
       this.loading = false;
       this.errorService.handleError(err);
     });
   }
 
-  removeInvoice(event: Invoice) {
-    let index = this.invoices.findIndex(invoice => invoice.rotaItem.id === event.rotaItem.id);
-    this.invoices.splice(index, 1);
+  markAsIssued(event: Invoice) {
+    this.produce();
   }
 
   backClicked() {
