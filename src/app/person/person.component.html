@@ -101,9 +101,9 @@
 						</div>
 						<div class="card-block">
 							<availability (availabilityOutput)="updateAvailabilities($event)"></availability>
-							<p *ngIf="person.availabilities.length < 1">
-								<em>None to display</em>
-							</p>
+							<div *ngIf="duplicateAvailabilityMsg" class="mb-1 availability-conflict">
+								This availability you have selected conflicts with an existing availability.
+							</div>
 							<alert *ngFor="let a of person.availabilities; let i = index" [type]="'success'" (close)="removeAvailability(i)" dismissible="true">
 								<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
 								<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>

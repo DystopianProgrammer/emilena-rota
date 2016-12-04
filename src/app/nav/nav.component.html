@@ -12,9 +12,9 @@
 			<li class="nav-item dropdown" [ngClass]="{'open': isDropDown}" (click)="toggleDropDown()">
 				<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-o" aria-hidden="true"></i> People Management</a>
 				<div class="dropdown-menu" aria-labelledby="responsiveNavbarDropdown" (click)="isMenuCollapsed = !isMenuCollapsed">
-					<a class="dropdown-item" [routerLink]="['client']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Client Add/Edit</a>
+					<a class="dropdown-item" [routerLink]="['client']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Client - New</a>
 					<a class="dropdown-item" [routerLink]="['client-list', { type: 'clients' }]"><i class="fa fa-address-card-o" aria-hidden="true"></i> Client Directory</a>
-					<a class="dropdown-item" [routerLink]="['staff']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Staff Add/Edit</a>
+					<a class="dropdown-item" [routerLink]="['staff']"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Staff - New</a>
 					<a class="dropdown-item" [routerLink]="['staff-list', { type: 'staff' }]"><i class="fa fa-address-card-o" aria-hidden="true"></i> Staff Directory</a>
 				</div>
 			</li>

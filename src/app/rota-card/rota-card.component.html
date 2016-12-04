@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-header mb-1">
+    <span class="card-title list-truncate"><strong class="day-title">{{ dayTitle }}</strong></span>
+    <app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="dayOfWeek" (addRotaItem)="createNewRotaItem($event)"></app-rota-item-write>
+  </div>
+  <div class="card-block">
+    <p class="card-text" *ngIf="!items || items.length == 0">Unallocated</p>
+    <div *ngFor="let item of items; let i = index">
+      <app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="deleteRotaItem($event)"></app-rota-item-read>
+    </div>
+  </div>
+  <div class="card-footer text-muted">
+    <p class="card-text"><small class="text-muted">Last updated 2 days ago</small></p>
+  </div>
+</div>

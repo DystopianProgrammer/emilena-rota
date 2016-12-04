@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import * as moment from 'moment';
-
 export class Time {
   start: string;
   finish: string;

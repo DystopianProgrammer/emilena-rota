@@ -42,9 +42,11 @@ import { InvoiceItemComponent } from './invoice-item/invoice-item.component';
 import { FooterComponent } from './footer/footer.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { UnspecifiedPipe } from './unspecified.pipe';
+import { TimeService } from './time.service';
 
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { GoogleMapComponent } from './google-map/google-map.component';
+import { RotaCardComponent } from './rota-card/rota-card.component';
 
 @NgModule({
   imports: [
@@ -91,7 +93,8 @@ import { GoogleMapComponent } from './google-map/google-map.component';
     FooterComponent,
     ConfigurationComponent,
     UnspecifiedPipe,
-    GoogleMapComponent
+    GoogleMapComponent,
+    RotaCardComponent
   ],
   providers: [
     AuthService,
@@ -101,7 +104,8 @@ import { GoogleMapComponent } from './google-map/google-map.component';
     RotaService,
     InvoiceService,
     AddressService,
-    ConfigurationService
+    ConfigurationService,
+    TimeService
   ],
   bootstrap: [
     AppComponent

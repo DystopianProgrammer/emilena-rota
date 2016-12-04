@@ -18,6 +18,7 @@ import { Person, Client, Staff, Address, Availability, PersonType, Location } fr
 import { PersonService } from '../person.service';
 import { ErrorService } from '../error.service';
 import { AddressService } from '../address.service';
+import { TimeService } from '../time.service';
 
 @Component({
   selector: 'app-person',
@@ -65,6 +66,7 @@ export class PersonComponent implements OnInit, OnDestroy {
   missingFields: boolean = false;
   validationPrompts: string;
   availabilityMsg: boolean = false;
+  duplicateAvailabilityMsg: boolean = false;
 
   // animating 
   navigationState = true;
@@ -88,6 +90,7 @@ export class PersonComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private errorService: ErrorService,
     private addressService: AddressService,
+    private timeService: TimeService,
     private _location: aLocation,
     private personService: PersonService) { }
 
@@ -152,7 +155,16 @@ export class PersonComponent implements OnInit, OnDestroy {
    */
   updateAvailabilities(event: any) {
     if (event instanceof Availability) {
-      this.person.availabilities.push(event);
+      // create a temporary copy
+      let validationContainer = this.person.availabilities.slice(0);
+      validationContainer.push(event);
+      let isValid = this.timeService.isValid(validationContainer);
+      if (isValid) {
+        this.duplicateAvailabilityMsg = false;
+        this.person.availabilities.push(event);
+      } else {
+        this.duplicateAvailabilityMsg = true;
+      }
     }
   }
 
