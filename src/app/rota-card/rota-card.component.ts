@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import * as moment from 'moment';
+import { Days } from '../model';
 
 @Component({
   selector: 'app-rota-card',
@@ -16,9 +18,16 @@ export class RotaCardComponent implements OnInit {
   @Output() requestSave: EventEmitter<any> = new EventEmitter;
   @Output() requestDelete: EventEmitter<any> = new EventEmitter;
 
+  date: string;
+
   constructor() { }
 
   ngOnInit() {
+    if (this.rota && this.dayOfWeek) {
+      let pattern = 'DD-MM-YYYY';
+      this.date = moment(this.rota.weekStarting, pattern).add(Days.numericValue(this.dayOfWeek), 'd')
+        .format(pattern);
+    }
   }
 
   createNewRotaItem(item) {

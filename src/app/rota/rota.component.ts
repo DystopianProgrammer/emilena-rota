@@ -117,6 +117,7 @@ export class RotaComponent implements OnInit, OnDestroy {
         });
       }
       if (this.rotas.length > 0) {
+        // FIXME - GET FOR THE CURRENT WEEK!
         initialise(this.rotas.length - 1)
       }
     }, err => {
@@ -227,7 +228,7 @@ export class RotaComponent implements OnInit, OnDestroy {
   }
 
   selectDate(event) {
-
+    this.isCollapsed = true; 
     setTimeout(() => operation(), 200);
 
     let operation = () => {

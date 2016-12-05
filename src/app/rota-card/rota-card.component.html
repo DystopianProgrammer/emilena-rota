@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header mb-1">
-    <span class="card-title list-truncate"><strong class="day-title">{{ dayTitle }}</strong></span>
+    <span class="card-title list-truncate">{{date}}</span>
     <app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="dayOfWeek" (addRotaItem)="createNewRotaItem($event)"></app-rota-item-write>
   </div>
   <div class="card-block">
