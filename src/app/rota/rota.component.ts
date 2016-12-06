@@ -94,6 +94,7 @@ export class RotaComponent implements OnInit, OnDestroy {
     private personService: PersonService) { }
 
   ngOnInit() {
+
     this.loading = true;
     this.updated = moment().format('HH:mm:ss');
 
@@ -117,8 +118,8 @@ export class RotaComponent implements OnInit, OnDestroy {
         });
       }
       if (this.rotas.length > 0) {
-        // FIXME - GET FOR THE CURRENT WEEK!
-        initialise(this.rotas.length - 1)
+        // find the index for this week's rota
+        initialise(0);
       }
     }, err => {
       this.loading = false;

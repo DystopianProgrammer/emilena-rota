@@ -65,7 +65,7 @@ export class InvoiceComponent implements OnInit {
     private errorService: ErrorService) { }
 
   ngOnInit() {
-    this.currentDate = moment().format('D/MM/YYYY');
+    this.currentDate = moment().format('DD-MM-YYYY');
     this.issued();
 
     if(this.isReadOnly) {
