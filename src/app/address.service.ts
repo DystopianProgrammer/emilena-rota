@@ -38,7 +38,7 @@ export class AddressService {
     address.firstLine = parts[0];
     address.secondLine = parts[1];
     address.town = parts[2];
-    address.postCode = postCode;
+    address.postCode = postCode.toUpperCase();
 
     return address;
   }

@@ -24,15 +24,9 @@
 					<option *ngFor="let r of rotas" [value]="r.id">{{ r.weekStarting }}, Revision: {{ r.id }}</option>
 				</select>
 			</div>
-			<div class="form-group">
-				<label for="create">Create New Rota</label>
-				<select class="form-control" name="create" [(ngModel)]="selectedDate" (ngModelChange)="selectDate($event)">
-					<option disabled></option>
-					<option *ngFor="let week of weeks" [value]="week">{{ week }}</option>
-				</select>
-			</div>
 			<div class="button-bar">
-				<button (click)="save()" class="btn btn-outline-success">Save</button>
+				<button (click)="new()" class="btn btn-success">New</button>
+				<button (click)="save()" class="btn btn-secondary">Save</button>
 				<app-allocation-modal *ngIf="rota && rota.id" [rotaId]="rota.id"></app-allocation-modal>
 			</div>
 		</div>
@@ -101,7 +95,7 @@
 <div class="row" *ngIf="!loading">
 	<div class="col-xs-12">
 		<div class="button-bar">
-			<button class="btn btn-outline-secondary" (click)="backClicked()">Back</button>
+			<button class="btn btn-secondary" (click)="backClicked()">Back</button>
 		</div>
 	</div>
 </div>

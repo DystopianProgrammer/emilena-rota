@@ -13,7 +13,7 @@ export class DeleteModalComponent implements OnInit {
 
   deletable: any;
 
-  @ViewChild('lgModal') public childModal:ModalDirective;
+  @ViewChild('lgModal') public childModal: ModalDirective;
 
   @Input() set person(person: any) {
     this.deletable = person;
@@ -23,10 +23,23 @@ export class DeleteModalComponent implements OnInit {
 
   constructor(private personService: PersonService, private errorService: ErrorService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  activate(): void {
+    this.updateStatus(true);
+  }
 
   deactivate(): void {
-    this.deletable.active = false;
+    this.updateStatus(false);
+  }
+
+  hideChildModal(): void {
+    this.childModal.hide();
+    this.closedNotification.emit(false);
+  }
+
+  private updateStatus(status: boolean) {
+    this.deletable.active = status;
     if (this.deletable.personType === 'CLIENT') {
       this.personService.updateClient(this.deletable).subscribe(res => {
         this.hideChildModal();
@@ -36,10 +49,5 @@ export class DeleteModalComponent implements OnInit {
         this.hideChildModal();
       }, err => this.errorService.handleError(err));
     }
-  }
-
-  hideChildModal(): void {
-    this.childModal.hide();
-    this.closedNotification.emit(false);
   }
 }

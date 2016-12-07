@@ -61,12 +61,8 @@ export class PersonSummaryComponent implements OnInit {
     let notificationCb = (personType: PersonType) => {
       setTimeout(() => {
         this.notification = false;
-        if (personType === PersonType.staff) {
-          this.router.navigate(['staff-list', { type: 'staff' }]);
-        } else {
-          this.router.navigate(['client-list', { type: 'client' }]);
-        }
-      }, 3000);
+        this.router.navigate(['home']);
+      }, 2000);
       this.notification = true;
       this.disableBtn = true;
     }
@@ -85,6 +81,11 @@ export class PersonSummaryComponent implements OnInit {
 
   back(): void {
     this.location.back();
+  }
+
+  public cancel() {
+    this.personService.person = undefined;
+    this.router.navigate(['home']);
   }
 }
 

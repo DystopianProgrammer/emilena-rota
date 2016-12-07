@@ -1,0 +1,14 @@
+<div [@navigationState]="navigationState">
+	<div class="page-header">
+		<h4>{{title}}</h4>
+		<p>Add the staff member's personal information including any preferences.</p>
+	</div>
+	<form novalidate [formGroup]="personDetailsForm" (ngSubmit)="next(personDetailsForm)" autocomplete="off">
+		<app-personal-information [group]="personDetailsForm"></app-personal-information>
+
+		<div class="button-bar">
+			<button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+			<button type="submit" class="btn btn-primary" [disabled]="!personDetailsForm.valid">Next</button>
+		</div>
+	</form>
+</div>

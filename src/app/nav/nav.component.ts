@@ -1,6 +1,6 @@
 import {
-  Component, 
-  OnInit, 
+  Component,
+  OnInit,
   OnDestroy,
   trigger,
   state,
@@ -41,19 +41,23 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.systemUserSubject) {
+    if (this.systemUserSubject) {
       this.systemUserSubject.unsubscribe();
     }
   }
 
-  logOut(): void {
+  public logOut(): void {
     this.isMenuCollapsed = true;
     this.personService.person = undefined;
     this.systemUser = undefined;
     this.authService.logOut();
   }
 
-  toggleDropDown() {
+  public toggleDropDown() {
     this.isDropDown = !this.isDropDown;
+  }
+
+  public reset() {
+    this.personService.person = undefined;
   }
 }

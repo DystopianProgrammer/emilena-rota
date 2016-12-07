@@ -1,4 +1,4 @@
-<button class="btn btn-outline-danger btn-block mt-1" (click)="lgModal.show()"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+<button class="btn btn-outline-danger btn-block mt-1" (click)="lgModal.show()">Modify status</button>
 <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -10,13 +10,11 @@
       </div>
 			<div class="modal-body">
 				<p>
-					Unable to delete person. This is because they either have a linked association to an existing rota or an issued invoice.
-					Would you like to disable
-					<strong>{{deletable.forename}} {{deletable.surname}}</strong>? Disabling the person will prevent them from being picked
-					up in any future rota generations until they have been re-enabled.
+          Deactivating {{deletable.forename}} {{deletable.surname}} will prevent them from being picked up in any future rota generations until they have been re-enabled.
 				</p>
-				<button type="button" class="btn btn-outline-danger" (click)="deactivate()">Disable</button>
-				<button type="button" class="btn btn-outline-secondary" (click)="lgModal.hide()">Cancel</button>
+				<button type="button" class="btn btn-danger" (click)="deactivate()">Deactivate</button>
+        <button type="button" class="btn btn-secondary" (click)="activate()">Activate</button>
+				<button type="button" class="btn btn-secondary" (click)="lgModal.hide()">Cancel</button>
 			</div>
     </div>
   </div>

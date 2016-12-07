@@ -6,7 +6,7 @@ import {
   animate
 } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PersonService } from '../person.service';
 import { Person, Client, Staff } from '../model';
 import { ErrorService } from '../error.service';
@@ -41,37 +41,38 @@ export class PersonListComponent implements OnInit, OnDestroy {
   people: Person[] = [];
   type: string;
   isClient: boolean;
-  title: string;
+  title: string = "Directory";
   isCollapsed: boolean = true;
-  filterText: string;
-  filterContainer: Person[] = [];
   deleteError: boolean = false;
   loading: boolean = false;
   navigationState: boolean = true;
 
+  // filters
+  filterText: string;
+  filterContainer: Person[] = [];
+  staffCount: number;
+  clientCount: number;
+  activeCount: number;
+  inactiveCount: number;
+
+  isStaffChecked: boolean = false;
+  isClientChecked: boolean = false;
+  isActiveChecked: boolean = false;
+  isInactiveChecked: boolean = false;
+
+  filterStaff: Person[] = [];
+  filterClients: Person[] = [];
+  filterActive: Person[] = [];
+  filterInactive: Person[] = [];
+
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private location: Location,
     private errorService: ErrorService,
     private personService: PersonService) { }
 
   ngOnInit() {
-    this.loading = true;
-    this.route.params.forEach((params: Params) => {
-      this.type = params['type'];
-      this.isClient = (this.type == 'staff') ? false : true;
-      if (this.type.includes('client')) {
-        this.title = 'Client Listing';
-      } else {
-        this.title = 'Staff Listing';
-      }
-      this.personService.listForPersonType(params['type']).subscribe(results => {
-        this.loading = false;
-        this.people = results;
-      }, err => {
-        this.loading = false;
-        this.errorService.handleError(err);
-      });
-    });
+    this.initialiseDirectoryResults();
   }
 
   ngOnDestroy() {
@@ -79,7 +80,7 @@ export class PersonListComponent implements OnInit, OnDestroy {
     this.navigationState = false;
   }
 
-  remove(index: number) {
+  public remove(index: number) {
     if (this.isClient) {
       this.personService.removeClient(<Client>this.people[index])
         .subscribe(res => this.people.splice(index, 1), err => this.deleteError = true);
@@ -89,28 +90,103 @@ export class PersonListComponent implements OnInit, OnDestroy {
     }
   }
 
-  notified(event) {
+  public notified(event) {
     this.deleteError = event;
   }
 
-  backClicked() {
+  public back(): void {
     this.location.back();
   }
 
-  onChange(event): void {
+  public onChange(event): void {
 
-    if (this.filterContainer.length < 1) {
-      this.filterContainer = this.people.slice();
+    if (this.filterText.length === 0) {
+      this.people = this.filterContainer.slice();
     }
-    if (this.filterText.length > 2) {
-      this.people = this.people.filter(p => {
-        let forename = p.forename.toLowerCase();
-        let surname = p.surname.toLowerCase();
-        let filter = this.filterText.toLowerCase();
-        return forename.includes(filter) || surname.includes(filter)
-      });
+
+    this.people = this.people.filter(p => {
+      let forename = p.forename.toLowerCase();
+      let surname = p.surname.toLowerCase();
+      let filter = this.filterText.toLowerCase();
+      return forename.includes(filter) || surname.includes(filter)
+    });
+  }
+
+  public filterStaffCheck(event) {
+    this.isStaffChecked = event;
+    if (event) {
+      this.people = this.filterStaff.slice();
     } else {
       this.people = this.filterContainer.slice();
     }
+  }
+
+  public filterClientCheck(event) {
+    this.isClientChecked = event;
+    if (event) {
+      this.people = this.filterClients.slice();
+    } else {
+      this.people = this.filterContainer.slice();
+    }
+  }
+
+  public filterActiveCheck(event) {
+    this.isActiveChecked = event;
+  }
+
+  public filterInactiveCheck(event) {
+    this.isInactiveChecked = event;
+  }
+
+  private filter() {
+
+  }
+
+  public edit(person: Person) {
+    this.personService.person = person;
+    if (person.personType === 'STAFF') {
+      this.router.navigate(['person-staff']);
+    } else {
+      this.router.navigate(['person-client']);
+    }
+  }
+
+  private initialiseDirectoryResults() {
+    this.loading = true;
+    this.personService.clients().subscribe(clients => {
+      this.loading = false;
+      this.people = this.people.concat(clients);
+      this.initialiseFilters(this.people);
+      this.filterContainer = this.filterContainer.concat(clients);
+      console.log(this.filterContainer);
+    }, error => {
+      this.loading = false;
+      this.errorService.handleError(error);
+    });
+
+    this.personService.staff().subscribe(staff => {
+      this.loading = false;
+      this.people = this.people.concat(staff);
+      this.initialiseFilters(this.people);
+      this.filterContainer = this.filterContainer.concat(staff);
+      console.log(this.filterContainer);
+    }, error => {
+      this.loading = false;
+      this.errorService.handleError(error);
+    });
+  }
+
+  private initialiseFilters(people: Person[]) {
+    this.filterStaff = people.filter(p => p.personType === 'STAFF');
+    this.staffCount = this.filterStaff.length ? this.filterStaff.length : 0;
+
+    this.filterClients = people.filter(p => p.personType === 'CLIENT');
+    this.clientCount = this.filterClients.length ? this.filterClients.length : 0;
+
+    this.filterActive = people.filter(p => p.active);
+    this.activeCount = this.filterActive.length ? this.filterActive.length : 0;
+
+    this.filterInactive = people.filter(p => !p.active);
+    this.inactiveCount = this.filterInactive.length ? this.filterInactive.length : 0;
   }
 }

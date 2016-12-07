@@ -26,7 +26,7 @@
 							placeholder="E.g. AA11 1AA" 
 							[(ngModel)]="person.address.postCode">
 				</div>
-				<button type="button" class="btn btn-outline-secondary mb-1" (click)="addressFromPostCode()">Look-up</button>
+				<button type="button" class="btn btn-secondary mb-1" (click)="addressFromPostCode()">Look-up</button>
 				<button *ngIf="addressUpdated" type="button" class="btn btn-outline-success mb-1" (click)="save()">Save</button>
 				<div *ngIf="addressNotFound" class="address-not-found">Address not found</div>
 

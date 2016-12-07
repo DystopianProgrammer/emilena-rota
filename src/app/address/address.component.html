@@ -1,0 +1,59 @@
+<div [@navigationState]="navigationState">
+	<div class="page-header">
+		<h4>{{title}}</h4>
+		<p>Add the person's address. Use the post code look up function in order to retrieve the geographical coordinates.</p>
+	</div>
+	<form novalidate [formGroup]="addressForm" (ngSubmit)="next(addressForm)" autocomplete="off">
+		<div class="card">
+			<div class="card-header">
+				Address
+			</div>
+			<div class="card-block">
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label for="line1">Line 1</label>
+						<input class="form-control" type="text" name="line1" placeholder="122 Stapley Road" formControlName="firstLine">
+						<small [hidden]="addressForm.controls.firstLine.valid" class="text-danger">Street or building is required</small>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label for="line2">Line 2</label>
+						<input class="form-control" type="text" name="line2" placeholder="Hove" formControlName="secondLine">
+						<small [hidden]="addressForm.controls.secondLine.valid" class="text-danger">Town or city is required</small>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label for="city">Line 3</label>
+						<input class="form-control" type="text" name="city" placeholder="East Sussex" formControlName="town">
+						<small [hidden]="addressForm.controls.town.valid" class="text-danger">County required</small>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div class="form-group">
+						<label for="postcode">Postcode</label>
+						<input class="form-control" type="text" name="postcode" placeholder="AA11 1AA" formControlName="postCode">
+						<small [hidden]="addressForm.controls.postCode.valid" class="text-danger">Postcode is required</small>
+					</div>
+
+					<! -- address lookup -->
+					<div *ngIf="addressNotFound" class="address-not-found">Address not found</div>
+					<div *ngIf="addresses" class="form-group">
+						<label for="addresses">Select address</label>
+						<select class="form-control" name="addresses" (ngModelChange)="selectAddress($event)" formControlName="selectedAddress">
+							<option disabled></option>
+							<option *ngFor="let a of addresses" [value]="a">{{ a }}</option>
+						</select>
+					</div>
+					<button type="button" class="btn btn-secondary btn-sm" (click)="addressFromPostCode(addressForm)">Look-up</button>
+				</div>
+			</div>
+		</div>
+		<div class="button-bar">
+			<button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+			<button type="button" class="btn btn-secondary" (click)="backClicked()">Back</button>
+			<button type="submit" class="btn btn-primary" [disabled]="!addressForm.valid">Next</button>
+		</div>
+	</form>
+</div>

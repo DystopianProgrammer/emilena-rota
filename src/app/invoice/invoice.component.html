@@ -4,7 +4,7 @@
 		<div class="col-xs-12">
 			<div class="page-header">
 				<h4>Invoices <small class="text-muted">{{ title }}</small></h4>
-				<p>The invoice control panel produces invoices for pending and completed appointments. Note that invoices are first produced. Once they have been issued, deletion and regeneration of a rota is not possible. Only manual modifications can be made to the linked rota containing appointments limited to adding additional appointments.</p>
+				<p>The invoice control panel produces invoices for completed appointments. Once an invoice has been issued, deletion and regeneration of a rota is not possible. Only manual modifications can be made to the linked rota containing appointments limited to adding additional appointments.</p>
 			</div>
 		</div>
 		<!-- CONTROL PANEL -->
@@ -43,7 +43,7 @@
 	<div class="row" *ngIf="!loading">
 		<div class="col-xs-12">
 			<div class="button-bar">
-				<button class="btn btn-outline-secondary" (click)="backClicked()">Back</button>
+				<button class="btn btn-secondary" (click)="backClicked()">Back</button>
 			</div>
 		</div>
 	</div>

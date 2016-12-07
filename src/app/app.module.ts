@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MoneyMaskModule } from 'ng2-money-mask';
 
@@ -48,6 +48,11 @@ import { PaginationService } from './pagination.service';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { RotaCardComponent } from './rota-card/rota-card.component';
+import { PersonStaffComponent } from './person-staff/person-staff.component';
+import { PersonClientComponent } from './person-client/person-client.component';
+import { PersonalInformationComponent } from './personal-information/personal-information.component';
+import { AddressComponent } from './address/address.component';
+import { PersonAvailabilityComponent } from './person-availability/person-availability.component';
 
 @NgModule({
   imports: [
@@ -55,6 +60,7 @@ import { RotaCardComponent } from './rota-card/rota-card.component';
     HttpModule,
     JsonpModule,
     FormsModule,
+    ReactiveFormsModule,
     appRouting,
     AlertModule,
     CollapseModule,
@@ -96,7 +102,12 @@ import { RotaCardComponent } from './rota-card/rota-card.component';
     ConfigurationComponent,
     UnspecifiedPipe,
     GoogleMapComponent,
-    RotaCardComponent
+    RotaCardComponent,
+    PersonStaffComponent,
+    PersonClientComponent,
+    PersonalInformationComponent,
+    AddressComponent,
+    PersonAvailabilityComponent
   ],
   providers: [
     AuthService,

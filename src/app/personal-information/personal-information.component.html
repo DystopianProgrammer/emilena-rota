@@ -1,0 +1,41 @@
+<div class="card">
+	<div class="card-header">
+		Personal
+	</div>
+	<div class="card-block" [formGroup]="personDetailsForm">
+		<div class="col-xs-12 col-sm-6">
+			<div class="form-group">
+				<label for="forename">Forename</label>
+				<input class="form-control" type="text" name="forename" placeholder="Jane" formControlName="forename">
+				<small [hidden]="personDetailsForm.controls.forename.valid" class="text-danger">Forename is required</small>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="form-group">
+				<label for="surname">Surname</label>
+				<input class="form-control" type="text" name="surname" placeholder="Smith" formControlName="surname">
+				<small [hidden]="personDetailsForm.controls.surname.valid" class="text-danger">Surname is required</small>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input class="form-control" type="email" name="email" placeholder="someone@domain.com" formControlName="email">
+				<small [hidden]="personDetailsForm.controls.email.valid" class="text-danger">Email is required</small>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="form-group">
+				<label for="phone">Phone</label>
+				<input class="form-control" type="text" name="phone" placeholder="Telephone" formControlName="phone">
+				<small [hidden]="personDetailsForm.controls.phone.valid" class="text-danger">A telephone number is required</small>
+			</div>
+		</div>
+		<div class="col-xs-12">
+			<div class="form-group">
+				<label for="preferences">Preferences</label>
+				<textarea class="form-control" name="preferences" formControlName="preferences"></textarea>
+			</div>
+		</div>
+	</div>
+</div>

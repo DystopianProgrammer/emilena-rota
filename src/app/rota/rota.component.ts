@@ -58,7 +58,7 @@ export class RotaComponent implements OnInit, OnDestroy {
   updated: string;
   selectedDate: string;
   weeks: any[];
-  isCollapsed: boolean = true;
+  isCollapsed: boolean = false;
 
   monday: RotaItem[] = [];
   tuesday: RotaItem[] = [];
@@ -144,7 +144,6 @@ export class RotaComponent implements OnInit, OnDestroy {
       this.alreadyExists = false;
       let index = this.rotas.findIndex(r => r.id === rota.id);
       this.rotas.splice(index, 1);
-      this.selectDate(start);
     }, err => {
       this.errorService.handleError(err);
     });
@@ -228,25 +227,19 @@ export class RotaComponent implements OnInit, OnDestroy {
     }, err => this.errorService.handleError(err));
   }
 
-  selectDate(event) {
-    this.isCollapsed = true; 
-    setTimeout(() => operation(), 200);
-
-    let operation = () => {
-      this.loading = true
-      this._rotaCreateSubscription = this.rotaService.create(event).subscribe(res => {
-        this.updated = moment().format('HH:mm:ss');
-        this.forDate = event;
-        this.reset();
-        this.rota = res;
-        this.rota.rotaItems.forEach(item => this.add(item));
-        this.loading = false;
-      }, err => {
-        this.loading = false;
-        this.alreadyExists = true;
-      });
-    }
-
+  new() {
+    this.loading = true
+    this._rotaCreateSubscription = this.rotaService.create(this.weeks[0]).subscribe(res => {
+      this.updated = moment().format('HH:mm:ss');
+      this.forDate = this.weeks[0];
+      this.reset();
+      this.rota = res;
+      this.rota.rotaItems.forEach(item => this.add(item));
+      this.loading = false;
+    }, err => {
+      this.loading = false;
+      this.alreadyExists = true;
+    });
   }
 
   reset() {
