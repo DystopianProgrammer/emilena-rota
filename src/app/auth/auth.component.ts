@@ -47,10 +47,9 @@ export class AuthComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    let temp = "superuser";
     this.systemUser = new SystemUser();
-    this.systemUser.userName = temp;
-    this.systemUser.password = temp;
+    this.systemUser.userName;
+    this.systemUser.password;
     try {
       this.login();
     } catch (error) {
