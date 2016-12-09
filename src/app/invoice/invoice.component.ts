@@ -47,7 +47,7 @@ export class InvoiceComponent implements OnInit {
   invoices: Invoice[] = [];
   isCurrent: boolean;
   isReadOnly: boolean;
-  isCollapsed: boolean = true;
+  isCollapsed: boolean = false;
   title: string;
 
   // pagination
@@ -66,7 +66,7 @@ export class InvoiceComponent implements OnInit {
 
   ngOnInit() {
     this.currentDate = moment().format('DD-MM-YYYY');
-    this.issued();
+    this.produce();
 
     if(this.isReadOnly) {
       this.title = TITLE_ISSUED;
