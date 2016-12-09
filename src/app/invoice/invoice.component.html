@@ -29,7 +29,7 @@
 		</div>
 	</div>
 
-	<pagination *ngIf="invoices" 
+	<pagination *ngIf="invoices && invoices.length > 0" 
 		class="pagination-sm"
 		previousText="&lsaquo;" nextText="&rsaquo;"
 		[totalItems]="invoices.length" 

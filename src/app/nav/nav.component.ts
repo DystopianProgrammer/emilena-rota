@@ -56,8 +56,4 @@ export class NavComponent implements OnInit, OnDestroy {
   public toggleDropDown() {
     this.isDropDown = !this.isDropDown;
   }
-
-  public reset() {
-    this.personService.person = undefined;
-  }
 }

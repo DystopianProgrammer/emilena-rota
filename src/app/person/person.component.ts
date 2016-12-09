@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { Location as aLocation } from '@angular/common';
 import { Router, Params, ActivatedRoute } from '@angular/router';
+import { PersonService } from '../person.service';
 
 @Component({
   selector: 'app-person',
@@ -45,9 +46,17 @@ export class PersonComponent implements OnInit {
   title: string = 'Add New Entry';
   selection: boolean;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private personService: PersonService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.personService.person) {
+      if (this.personService.person.personType === 'STAFF') {
+        this.router.navigate(['person-staff']);
+      } else {
+        this.router.navigate(['person-client']);
+      }
+    }
+  }
 
   public selectAction(): void {
     if (this.selection) {

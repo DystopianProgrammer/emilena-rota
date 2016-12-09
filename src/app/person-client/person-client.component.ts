@@ -92,7 +92,7 @@ export class PersonClientComponent implements OnInit {
 
   public cancel() {
     this.personService.person = undefined;
-    this.router.navigate(['home']);
+    this.router.navigate(['person']);
   }
 
   private buildForm(): void {

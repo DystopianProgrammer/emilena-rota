@@ -85,7 +85,7 @@ export class PersonSummaryComponent implements OnInit {
 
   public cancel() {
     this.personService.person = undefined;
-    this.router.navigate(['home']);
+    this.router.navigate(['person']);
   }
 }
 
