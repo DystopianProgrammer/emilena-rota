@@ -2,25 +2,29 @@
 	<div class="page-header">
 		<h4>{{title}}</h4>
 		<p>Add the person's availability. This is required for scheduling appointments in the rota. If the availability is unknown,
-			select the person from the directory and edit their availabilities at a later time.</p>
+			select the person from the directory and edit their availabilities at a later time. Multple availabilities can be added
+			for a single day allowing for lunch breaks, and multiple appointments in the case of clients. <em>For example two entries
+			1) Monday 09:00 - 12:00; 2) Monday 13:00 - 17:00</em></p>
 	</div>
 	<div class="card">
 		<div class="card-header">
 			Availability
 		</div>
 		<div class="card-block">
-			<availability (availabilityOutput)="updateAvailabilities($event)"></availability>
-			<div *ngIf="duplicateAvailabilityMsg" class="mb-1 availability-conflict">
-				This availability you have selected conflicts with an existing availability.
-			</div>
-			<button type="button" class="btn btn-secondary btn-block mb-1" (click)="availabilityCollapse = !availabilityCollapse">
-								<i class="fa" [ngClass]="{'fa-chevron-down': availabilityCollapse, 'fa-chevron-up': !availabilityCollapse}" aria-hidden="true"></i> Availabilities: {{ person.availabilities.length }}
-							</button>
-			<div [collapse]="availabilityCollapse">
-				<alert *ngFor="let a of person.availabilities; let i = index" [type]="'success'" (close)="removeAvailability(i)" dismissible="true">
-					<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
-					<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
-				</alert>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<availability (availabilityOutput)="updateAvailabilities($event)"></availability>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div *ngIf="duplicateAvailabilityMsg" class="mb-1 availability-conflict">
+						This availability you have selected conflicts with an existing availability.
+					</div>
+					<alert *ngFor="let a of person.availabilities; let i = index" [type]="'success'" (close)="removeAvailability(i)" dismissible="true">
+						<div><strong>{{ a.dayOfWeek | capitalizeFirst }}</strong></div>
+						<div>From: {{ a.fromTime }}, Till: {{ a.toTime }}</div>
+					</alert>
+				</div>
 			</div>
 		</div>
 	</div>
