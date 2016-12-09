@@ -126,6 +126,10 @@ export class PersonListComponent implements OnInit, OnDestroy {
   }
 
   private filter() {
+    this.filterByType();
+  }
+
+  private filterByType(active?) {
     if (this.isClientChecked && this.isStaffChecked) {
       this.filterContainer = this.people.slice();
     } else if (this.isClientChecked && !this.isStaffChecked) {
