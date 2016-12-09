@@ -38,7 +38,7 @@ import { ErrorService } from '../error.service';
 })
 export class PersonListComponent implements OnInit, OnDestroy {
 
-  people: Person[] = [];
+  people: Person[] = []; // holds the original response
   type: string;
   isClient: boolean;
   title: string = "Directory";
@@ -59,11 +59,6 @@ export class PersonListComponent implements OnInit, OnDestroy {
   isClientChecked: boolean = false;
   isActiveChecked: boolean = false;
   isInactiveChecked: boolean = false;
-
-  filterStaff: Person[] = [];
-  filterClients: Person[] = [];
-  filterActive: Person[] = [];
-  filterInactive: Person[] = [];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -98,13 +93,13 @@ export class PersonListComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  public onChange(event): void {
+  public onChange(event?): void {
 
     if (this.filterText.length === 0) {
-      this.people = this.filterContainer.slice();
+      this.filterContainer = this.people.slice();
     }
 
-    this.people = this.people.filter(p => {
+    this.filterContainer = this.filterContainer.filter(p => {
       let forename = p.forename.toLowerCase();
       let surname = p.surname.toLowerCase();
       let filter = this.filterText.toLowerCase();
@@ -114,20 +109,12 @@ export class PersonListComponent implements OnInit, OnDestroy {
 
   public filterStaffCheck(event) {
     this.isStaffChecked = event;
-    if (event) {
-      this.people = this.filterStaff.slice();
-    } else {
-      this.people = this.filterContainer.slice();
-    }
+    this.filter();
   }
 
   public filterClientCheck(event) {
     this.isClientChecked = event;
-    if (event) {
-      this.people = this.filterClients.slice();
-    } else {
-      this.people = this.filterContainer.slice();
-    }
+    this.filter();
   }
 
   public filterActiveCheck(event) {
@@ -139,7 +126,15 @@ export class PersonListComponent implements OnInit, OnDestroy {
   }
 
   private filter() {
-
+    if (this.isClientChecked && this.isStaffChecked) {
+      this.filterContainer = this.people.slice();
+    } else if (this.isClientChecked && !this.isStaffChecked) {
+      this.filterContainer = this.people.filter(p => p.personType === 'CLIENT').slice();
+    } else if (!this.isClientChecked && this.isStaffChecked) {
+      this.filterContainer = this.people.filter(p => p.personType === 'STAFF').slice();
+    } else {
+      this.filterContainer = this.people.slice();
+    }
   }
 
   public edit(person: Person) {
@@ -156,9 +151,8 @@ export class PersonListComponent implements OnInit, OnDestroy {
     this.personService.clients().subscribe(clients => {
       this.loading = false;
       this.people = this.people.concat(clients);
-      this.initialiseFilters(this.people);
       this.filterContainer = this.filterContainer.concat(clients);
-      console.log(this.filterContainer);
+      this.clientCount = clients.length;
     }, error => {
       this.loading = false;
       this.errorService.handleError(error);
@@ -167,26 +161,11 @@ export class PersonListComponent implements OnInit, OnDestroy {
     this.personService.staff().subscribe(staff => {
       this.loading = false;
       this.people = this.people.concat(staff);
-      this.initialiseFilters(this.people);
       this.filterContainer = this.filterContainer.concat(staff);
-      console.log(this.filterContainer);
+      this.staffCount = staff.length;
     }, error => {
       this.loading = false;
       this.errorService.handleError(error);
     });
-  }
-
-  private initialiseFilters(people: Person[]) {
-    this.filterStaff = people.filter(p => p.personType === 'STAFF');
-    this.staffCount = this.filterStaff.length ? this.filterStaff.length : 0;
-
-    this.filterClients = people.filter(p => p.personType === 'CLIENT');
-    this.clientCount = this.filterClients.length ? this.filterClients.length : 0;
-
-    this.filterActive = people.filter(p => p.active);
-    this.activeCount = this.filterActive.length ? this.filterActive.length : 0;
-
-    this.filterInactive = people.filter(p => !p.active);
-    this.inactiveCount = this.filterInactive.length ? this.filterInactive.length : 0;
   }
 }

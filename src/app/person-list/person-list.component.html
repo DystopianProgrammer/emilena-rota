@@ -18,12 +18,12 @@
 					(ngModelChange)="onChange($event)">
 			</div>
 			<label class="custom-control custom-checkbox">
-				<input type="checkbox" class="custom-control-input" [disabled]="isClientChecked" [ngModel]="isStaffChecked" (ngModelChange)="filterStaffCheck($event)">
+				<input type="checkbox" class="custom-control-input" [ngModel]="isStaffChecked" (ngModelChange)="filterStaffCheck($event)">
 				<span class="custom-control-indicator"></span>
 				<span class="custom-control-description">Staff <small>({{staffCount}})</small></span>
 			</label>
 			<label class="custom-control custom-checkbox">
-				<input type="checkbox" class="custom-control-input" [disabled]="isStaffChecked" [ngModel]="isClientChecked" (ngModelChange)="filterClientCheck($event)">
+				<input type="checkbox" class="custom-control-input" [ngModel]="isClientChecked" (ngModelChange)="filterClientCheck($event)">
 				<span class="custom-control-indicator"></span>
 				<span class="custom-control-description">Clients <small>({{clientCount}})</small></span>
 			</label>
@@ -37,7 +37,7 @@
 </div>
 
 <div class="row">
-	<div *ngFor="let p of people, let i = index">
+	<div *ngFor="let p of filterContainer, let i = index">
 		<div class="col-xs-12 col-md-6 col-lg-4">
 			<div class="card">
 				<div class="card-header mb-1">
