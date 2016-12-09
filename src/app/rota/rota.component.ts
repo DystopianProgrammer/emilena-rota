@@ -144,6 +144,7 @@ export class RotaComponent implements OnInit, OnDestroy {
       this.alreadyExists = false;
       let index = this.rotas.findIndex(r => r.id === rota.id);
       this.rotas.splice(index, 1);
+      this.reset();
     }, err => {
       this.errorService.handleError(err);
     });
