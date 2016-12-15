@@ -78,6 +78,7 @@ export class PersonAvailabilityComponent implements OnInit {
       if (isValid) {
         this.duplicateAvailabilityMsg = false;
         this.person.availabilities.push(event);
+        this.person.availabilities.sort(this.personService.sortAvailabilities);
       } else {
         this.duplicateAvailabilityMsg = true;
       }

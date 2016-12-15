@@ -58,7 +58,7 @@ export class RotaComponent implements OnInit, OnDestroy {
   updated: string;
   selectedDate: string;
   weeks: any[];
-  isCollapsed: boolean = true;
+  isCollapsed: boolean = false;
 
   monday: RotaItem[] = [];
   tuesday: RotaItem[] = [];
@@ -145,6 +145,7 @@ export class RotaComponent implements OnInit, OnDestroy {
       let index = this.rotas.findIndex(r => r.id === rota.id);
       this.rotas.splice(index, 1);
       this.reset();
+      this.automate();
     }, err => {
       this.errorService.handleError(err);
     });
@@ -204,7 +205,7 @@ export class RotaComponent implements OnInit, OnDestroy {
     let items = this.monday.concat(this.tuesday, this.wednesday, this.thursday, this.friday, this.saturday, this.sunday);
     this.rota.rotaItems = items;
     this._rotaUpdateSubscription = this.rotaService.update(this.rota).subscribe(res => {
-      this.isCollapsed = true;
+      this.isCollapsed = false;
       this.saved = true;
       this.rota = res;
       let item = this.rotas.filter(r => r.id === this.rota.id);
@@ -228,7 +229,7 @@ export class RotaComponent implements OnInit, OnDestroy {
     }, err => this.errorService.handleError(err));
   }
 
-  new() {
+  automate() {
     this.loading = true
     this._rotaCreateSubscription = this.rotaService.create(this.weeks[0]).subscribe(res => {
       this.updated = moment().format('HH:mm:ss');

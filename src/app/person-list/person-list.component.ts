@@ -52,13 +52,13 @@ export class PersonListComponent implements OnInit, OnDestroy {
   filterContainer: Person[] = [];
   staffCount: number;
   clientCount: number;
-  activeCount: number;
-  inactiveCount: number;
+  activeCount: number = 0;
+  inActiveCount: number = 0;
 
   isStaffChecked: boolean = false;
   isClientChecked: boolean = false;
   isActiveChecked: boolean = false;
-  isInactiveChecked: boolean = false;
+  isInActiveChecked: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -119,25 +119,49 @@ export class PersonListComponent implements OnInit, OnDestroy {
 
   public filterActiveCheck(event) {
     this.isActiveChecked = event;
+    this.filter();
   }
 
-  public filterInactiveCheck(event) {
-    this.isInactiveChecked = event;
+  public filterInActiveCheck(event) {
+    this.isInActiveChecked = event;
+    this.filter();
   }
 
   private filter() {
-    this.filterByType();
+    this.filterByType(this.isActiveChecked);
   }
 
   private filterByType(active?) {
-    if (this.isClientChecked && this.isStaffChecked) {
-      this.filterContainer = this.people.slice();
-    } else if (this.isClientChecked && !this.isStaffChecked) {
-      this.filterContainer = this.people.filter(p => p.personType === 'CLIENT').slice();
-    } else if (!this.isClientChecked && this.isStaffChecked) {
-      this.filterContainer = this.people.filter(p => p.personType === 'STAFF').slice();
+    if (this.isActiveChecked && !this.isInActiveChecked) {
+      if (this.isClientChecked && this.isStaffChecked) {
+        this.filterContainer = this.people.filter(p => p.active).slice();
+      } else if (this.isClientChecked && !this.isStaffChecked) {
+        this.filterContainer = this.people.filter(p => p.personType === 'CLIENT' && p.active).slice();
+      } else if (!this.isClientChecked && this.isStaffChecked) {
+        this.filterContainer = this.people.filter(p => p.personType === 'STAFF' && p.active).slice();
+      } else {
+        this.filterContainer = this.people.filter(p => p.active).slice();
+      }
+    } else if (!this.isActiveChecked && this.isInActiveChecked) {
+      if (this.isClientChecked && this.isStaffChecked) {
+        this.filterContainer = this.people.filter(p => !p.active).slice();
+      } else if (this.isClientChecked && !this.isStaffChecked) {
+        this.filterContainer = this.people.filter(p => p.personType === 'CLIENT' && !p.active).slice();
+      } else if (!this.isClientChecked && this.isStaffChecked) {
+        this.filterContainer = this.people.filter(p => p.personType === 'STAFF' && !p.active).slice();
+      } else {
+        this.filterContainer = this.people.filter(p => !p.active).slice();
+      }
     } else {
-      this.filterContainer = this.people.slice();
+      if (this.isClientChecked && this.isStaffChecked) {
+        this.filterContainer = this.people.slice();
+      } else if (this.isClientChecked && !this.isStaffChecked) {
+        this.filterContainer = this.people.filter(p => p.personType === 'CLIENT').slice();
+      } else if (!this.isClientChecked && this.isStaffChecked) {
+        this.filterContainer = this.people.filter(p => p.personType === 'STAFF').slice();
+      } else {
+        this.filterContainer = this.people.slice();
+      }
     }
   }
 
@@ -150,13 +174,24 @@ export class PersonListComponent implements OnInit, OnDestroy {
     }
   }
 
+  public reset() {
+    this.isStaffChecked = false;
+    this.isClientChecked = false;
+    this.isActiveChecked = false;
+    this.isInActiveChecked = false;
+    this.filterText = '';
+    this.filterContainer = this.people.slice();
+  }
+
   private initialiseDirectoryResults() {
     this.loading = true;
     this.personService.clients().subscribe(clients => {
       this.loading = false;
-      this.people = this.people.concat(clients);
-      this.filterContainer = this.filterContainer.concat(clients);
+      this.people = this.people.concat(clients).sort((a, b) => a.surname.localeCompare(b.surname));
+      this.filterContainer = this.filterContainer.concat(clients).sort((a, b) => a.surname.localeCompare(b.surname));
       this.clientCount = clients.length;
+      this.activeCount = clients.filter(c => c.active).length + this.activeCount;
+      this.inActiveCount = clients.filter(c => !c.active).length + this.inActiveCount;
     }, error => {
       this.loading = false;
       this.errorService.handleError(error);
@@ -164,9 +199,11 @@ export class PersonListComponent implements OnInit, OnDestroy {
 
     this.personService.staff().subscribe(staff => {
       this.loading = false;
-      this.people = this.people.concat(staff);
-      this.filterContainer = this.filterContainer.concat(staff);
+      this.people = this.people.concat(staff).sort((a, b) => a.surname.localeCompare(b.surname));
+      this.filterContainer = this.filterContainer.concat(staff).sort((a, b) => a.surname.localeCompare(b.surname));
       this.staffCount = staff.length;
+      this.activeCount = staff.filter(s => s.active).length + this.activeCount;
+      this.inActiveCount = staff.filter(s => !s.active).length + this.inActiveCount;
     }, error => {
       this.loading = false;
       this.errorService.handleError(error);

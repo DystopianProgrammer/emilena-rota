@@ -3,7 +3,7 @@ import { Http, Response, ResponseOptions } from '@angular/http';
 
 import { Observable } from 'rxjs';
 
-import { Person, Staff, Client, PersonType } from './model';
+import { Person, Staff, Client, PersonType, Availability } from './model';
 import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
 
@@ -63,6 +63,22 @@ export class PersonService {
     return this.http.post('/emilena-api/client/update',
       JSON.stringify(client),
       this.authService.requestOptionsWithJsonHeader()).catch(this.handleError);
+  }
+
+  public sortAvailabilities = (a, b) => {
+    let sorter = {
+      'MONDAY': 0,
+      'TUESDAY': 1,
+      'WEDNESDAY': 2,
+      'THURSDAY': 3,
+      'FRIDAY': 4,
+      'SATURDAY': 5,
+      'SUNDAY': 6
+    }
+
+    let aDay = a.dayOfWeek;
+    let bDay = b.dayOfWeek;
+    return sorter[aDay] - sorter[bDay];
   }
 
   private handleError(error: Response | any) {

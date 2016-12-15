@@ -1,6 +1,10 @@
 .card {
     float: none;
     margin: 0px auto;
+    background-color: #0080ab;
+}
+.card-header {
+    background-color: #0080ab;
 }
 label {
     display: inline-block;
