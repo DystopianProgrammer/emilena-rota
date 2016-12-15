@@ -39,8 +39,7 @@ export class HelpComponent implements OnInit {
   ngOnInit() {
   }
 
-  backClicked() {
+  public backClicked() {
     this.location.back();
   }
-
 }

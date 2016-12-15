@@ -1,0 +1,78 @@
+<div class="card">
+	<div class="card-header"><strong>Technical</strong></div>
+	<div class="card-block">
+		<p class="card-text">
+			The project is open source and free to use. It uses the Google Maps API - Distance Radius Matrix for determing distances
+			between appointments and map generation. This is currently capped to the free version for non-commercial use. It also
+			uses getaddress.io for address look-ups using a postcode. Again this is limited to the free version. Both have daily quotas.
+			If this is insufficient for your purposes, then consider upgrading each package; neither of which are expensive. All the
+			source code is available on GitHub at <a href="https://github.com/DystopianProgrammer">https://github.com/DystopianProgrammer</a>
+		</p>
+		<p class="card-text">The demo version of this application is currently deployed on DigitalOcean within two docker containers. The project is
+			provided with docker files for ease of use and easy deployment. With docker, you can have the application up and running
+			within your own environment in a matter of minutes. If you require assistance with this, please contact me for additional
+			support, though reasonable fees will apply.</p>
+	</div>
+	<div class="card-block">
+		<p class="card-text"><strong>Configuration</strong></p>
+		<p class="card-text">The configuration is done through a yaml file which is located in the emilena-docker repository: <a href="https://github.com/DystopianProgrammer/emilena-docker">https://github.com/DystopianProgrammer/emilena-docker</a></p>
+		<p>Within this project there are 3x directories.</p>
+		<ul class="card-text">
+			<li>api</li>
+			<li>db</li>
+			<li>web</li>
+		</ul>
+		<p class="card-text">The api directory contains a shell script which takes a single parameter which points to the dropwizard project. It then
+			downloads and installs any dependencies and then starts up a docker container. <strong>emilena.yaml</strong> provides
+			all the necessary configuration for the application. For example the SQL Dialect, and all application settings under 'applicationConfiguration'</p>
+		<p class="card-text">The db directory just provides a DDL for the database. This is generated from a PostgreSQL export.</p>
+		<p class="card-text">The web directory, similar to the api directory, also provides a shell script which takes a single parameter pointing to
+			the front end web project.</p>
+		<p class="card-text">To run each script, simply type ./run.sh /location/to/deployable/project</p>
+		<p class="card-text">To build each deployable, from the emilena-api project, ensure you have Apache Maven installed, and run <strong>mvn clean package</strong>.
+			To build the emilena-rota front-end, ensure you have ng cli installed using npm. First install all dependencies by typing
+			<strong>npm install</strong>. Once that is done, then from the same project, type <strong>ng build --prod</strong></p>
+		<p class="card-text">The front-end is deployed in an Nginx HTTP server, and the configuration file for this is located in the same docker directory.
+			However the application could be deployed with any HTTP server including over HTTPS. Proxying is required to prevent CORS.</p>
+	</div>
+	<div class="card-block">
+		<p class="card-text"><strong>Support</strong></p>
+		<p class="card-text">For any support, training, or assistance in deploying the application, please contact me at <a href="mailto:geoff.perks@me.com">geoff.perks@me.com</a>
+	</div>
+	<div class="card-block">
+		<p class="card-text"><strong>GitHub repositories</strong></p>
+		<ul class="card-text">
+			<li>emilena-api;</li>
+			<li>emilena-rota;</li>
+			<li>emilena-docker;</li>
+		</ul>
+	</div>
+	<div class="card-block">
+		<p class="card-text"><strong>Back-end technology</strong></p>
+		<ul class="card-text">
+			<li>Java 8;</li>
+			<li>Hibernate</li>
+			<li>Maven 3+;</li>
+			<li>Dropwizard;</li>
+		</ul>
+	</div>
+	<div class="card-block">
+		<p class="card-text"><strong>Front-end technology</strong></p>
+		<ul class="card-text">
+			<li>HTML5, CSS3, Javascript;</li>
+			<li>TypeScript 2;</li>
+			<li>Angular 2</li>
+			<li>Bootstrap 4</li>
+			<li>Webpack</li>
+			<li>npm</li>
+			<li>ng cli</li>
+		</ul>
+	</div>
+	<div class="card-block">
+		<p class="card-text"><strong>Data store</strong></p>
+		<ul class="card-text">
+			<li>The project uses a relational database for persistence;</li>
+			<li>The demo uses PostgreSQL, however most databases are supported by simply modifying the SQL dialect in the configuration file.</li>
+		</ul>
+	</div>
+</div>

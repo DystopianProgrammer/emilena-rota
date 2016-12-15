@@ -14,6 +14,11 @@ import { PersonSummaryComponent } from './person-summary/person-summary.componen
 import { PersonListComponent } from './person-list/person-list.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HelpComponent } from './help/help.component';
+import { HelpPeopleManagementComponent } from './help-people-management/help-people-management.component';
+import { HelpRotaComponent } from './help-rota/help-rota.component';
+import { HelpInvoicingComponent } from './help-invoicing/help-invoicing.component';
+import { HelpTechnicalComponent } from './help-technical/help-technical.component';
+import { HelpFaqComponent } from './help-faq/help-faq.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 
@@ -30,7 +35,17 @@ const appRoutes: Routes = [
     { path: 'person-availability', component: PersonAvailabilityComponent, canActivate: [AuthGuard] },
     { path: 'person-list', component: PersonListComponent, canActivate: [AuthGuard] },
     { path: 'summary', component: PersonSummaryComponent, canActivate: [AuthGuard] },
-    { path: 'info', component: HelpComponent, canActivate: [AuthGuard] },
+    {
+        path: 'info', component: HelpComponent, canActivate: [AuthGuard],
+        children: [
+            { path: '', component: HelpPeopleManagementComponent },
+            { path: 'help-people-management', component: HelpPeopleManagementComponent, canActivate: [AuthGuard] },
+            { path: 'help-rota', component: HelpRotaComponent, canActivate: [AuthGuard] },
+            { path: 'help-invoicing', component: HelpInvoicingComponent, canActivate: [AuthGuard] },
+            { path: 'help-technical', component: HelpTechnicalComponent, canActivate: [AuthGuard] },
+            { path: 'help-faq', component: HelpFaqComponent, canActivate: [AuthGuard] }
+        ]
+    },
     { path: 'invoicing', component: InvoiceComponent, canActivate: [AuthGuard] },
     { path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuard] },
     { path: 'error:text', component: ErrorPageComponent },

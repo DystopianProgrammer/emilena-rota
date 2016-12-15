@@ -48,8 +48,8 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     this.systemUser = new SystemUser();
-    this.systemUser.userName;
-    this.systemUser.password;
+    this.systemUser.userName = 'superuser';
+    this.systemUser.password = 'superuser';
     try {
       this.login();
     } catch (error) {

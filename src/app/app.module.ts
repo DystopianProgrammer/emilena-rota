@@ -53,6 +53,11 @@ import { PersonClientComponent } from './person-client/person-client.component';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { AddressComponent } from './address/address.component';
 import { PersonAvailabilityComponent } from './person-availability/person-availability.component';
+import { HelpPeopleManagementComponent } from './help-people-management/help-people-management.component';
+import { HelpRotaComponent } from './help-rota/help-rota.component';
+import { HelpInvoicingComponent } from './help-invoicing/help-invoicing.component';
+import { HelpFaqComponent } from './help-faq/help-faq.component';
+import { HelpTechnicalComponent } from './help-technical/help-technical.component';
 
 @NgModule({
   imports: [
@@ -107,7 +112,12 @@ import { PersonAvailabilityComponent } from './person-availability/person-availa
     PersonClientComponent,
     PersonalInformationComponent,
     AddressComponent,
-    PersonAvailabilityComponent
+    PersonAvailabilityComponent,
+    HelpPeopleManagementComponent,
+    HelpRotaComponent,
+    HelpInvoicingComponent,
+    HelpFaqComponent,
+    HelpTechnicalComponent
   ],
   providers: [
     AuthService,
