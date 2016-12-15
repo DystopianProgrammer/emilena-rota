@@ -30,12 +30,12 @@
 			<label class="custom-control custom-checkbox">
 				<input type="checkbox" class="custom-control-input" [ngModel]="isActiveChecked" (ngModelChange)="filterActiveCheck($event)">
 				<span class="custom-control-indicator"></span>
-				<span class="custom-control-description">Active <small>{{activeCount}}</small></span>
+				<span class="custom-control-description">Active <small>({{activeCount}})</small></span>
 			</label>
 			<label class="custom-control custom-checkbox">
 				<input type="checkbox" class="custom-control-input" [ngModel]="isInActiveChecked" (ngModelChange)="filterInActiveCheck($event)">
 				<span class="custom-control-indicator"></span>
-				<span class="custom-control-description">Inactive <small>{{inActiveCount}}</small></span>
+				<span class="custom-control-description">Inactive <small>({{inActiveCount}})</small></span>
 			</label>
 		</div>
 	</div>
