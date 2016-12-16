@@ -61,8 +61,8 @@ export class PersonSummaryComponent implements OnInit {
     let notificationCb = (personType: PersonType) => {
       setTimeout(() => {
         this.notification = false;
-        this.router.navigate(['home']);
-      }, 2000);
+        this.router.navigate(['person-list']);
+      }, 1000);
       this.notification = true;
       this.disableBtn = true;
     }
