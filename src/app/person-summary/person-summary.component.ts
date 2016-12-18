@@ -14,7 +14,7 @@ import { ErrorService } from '../error.service';
 @Component({
   selector: 'app-person-summary',
   templateUrl: './person-summary.component.html',
-  styleUrls: ['./person-summary.component.css'],
+  styleUrls: ['./person-summary.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',

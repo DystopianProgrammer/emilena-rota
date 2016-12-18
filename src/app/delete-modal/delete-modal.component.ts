@@ -7,7 +7,7 @@ import { Client, Staff } from '../model';
 @Component({
   selector: 'app-delete-modal',
   templateUrl: './delete-modal.component.html',
-  styleUrls: ['./delete-modal.component.css']
+  styleUrls: ['./delete-modal.component.scss']
 })
 export class DeleteModalComponent implements OnInit {
 

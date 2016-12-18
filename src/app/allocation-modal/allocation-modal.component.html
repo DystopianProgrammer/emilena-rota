@@ -1,4 +1,4 @@
-<button class="btn btn-outline-warning" (click)="showChildModal()">Unallocated</button>
+<button class="btn btn-sm btn-secondary" (click)="showChildModal()">Status</button>
 <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -11,9 +11,11 @@
 			<div class="modal-body">
 				<p><em>All names listed are of people (staff and clients) who have availability preferences, but have not been allocated a spot
 					during the rota generation.</em></p>
-				<p *ngIf="unallocated && unallocated.length === 0"><strong>All clients and staff have been allocated</strong></p>
+				<p *ngIf="unallocated && unallocated.length === 0"><strong>All clients and staff have been allocated!</strong></p>
 				<ul *ngIf="unallocated" class="list-group">
-					<li *ngFor="let u of unallocated" class="list-group-item"><strong>{{ u.personType | capitalizeFirst}}</strong> - {{ u.forename }} {{ u.surname }}</li>
+					<li *ngFor="let u of unallocated" class="list-group-item">
+						<strong>{{ u.personType | capitalizeFirst}}</strong> - {{ u.forename }} {{ u.surname }} ({{ u.days }})
+					</li>
 				</ul>
 			</div>
 		</div>

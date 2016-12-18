@@ -1,0 +1,28 @@
+@import '../../variables';
+
+.list-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.filter-list {
+  background-color: $gray-dark;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid $gray-light;
+  margin-bottom: 1rem;
+}
+
+.active-state {
+  color: $brand-success;
+}
+
+.inactive-state {
+  color: $brand-danger;
+}
+
+.item-label {
+  display: inline-block;
+  min-width: 5rem;
+}

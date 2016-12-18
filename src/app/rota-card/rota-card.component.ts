@@ -5,7 +5,7 @@ import { Days } from '../model';
 @Component({
   selector: 'app-rota-card',
   templateUrl: './rota-card.component.html',
-  styleUrls: ['./rota-card.component.css']
+  styleUrls: ['./rota-card.component.scss']
 })
 export class RotaCardComponent implements OnInit {
 

@@ -1,19 +1,18 @@
-<alert *ngIf="incorrectTimes || incorrectFormat" type="danger" (close)="alertDismissed()" dismissible="true">
-	Time format is incorrect.
-</alert>
-<div class="form-group">
-	<label for="availability">Day</label>
-	<select class="form-control" name="availability" [(ngModel)]="availability.dayOfWeek">
-		<option disabled></option>
-		<option *ngFor="let day of days" [value]="day">{{ day | capitalizeFirst }}</option>
-</select>
-</div>
-<div class="form-group">
-	<app-time (outputTime)="updateTime($event)"></app-time>
-</div>
-<div class="mb-1">
-	<button type="button" 
-			class="btn btn-outline-primary" 
-			[disabled]="!availability.dayOfWeek"
-			(click)="add()">Add Availability</button>
+<div class="avail-outline mb-1">
+	<alert *ngIf="incorrectTimes || incorrectFormat" type="danger" (close)="alertDismissed()" dismissible="true">
+		Time format is incorrect.
+	</alert>
+	<div class="form-group">
+		<label for="availability">Day</label>
+		<select class="form-control" name="availability" [(ngModel)]="availability.dayOfWeek">
+			<option disabled></option>
+			<option *ngFor="let day of days" [value]="day">{{ day | capitalizeFirst }}</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<app-time (outputTime)="updateTime($event)"></app-time>
+	</div>
+	<div>
+		<button type="button" class="btn btn-secondary" [disabled]="!availability.dayOfWeek" (click)="add()">Add Availability</button>
+	</div>
 </div>

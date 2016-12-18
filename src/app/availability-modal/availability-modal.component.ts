@@ -6,7 +6,7 @@ import { PersonService } from '../person.service';
 @Component({
   selector: 'app-availability-modal',
   templateUrl: './availability-modal.component.html',
-  styleUrls: ['./availability-modal.component.css']
+  styleUrls: ['./availability-modal.component.scss']
 })
 export class AvailabilityModalComponent implements OnInit {
 

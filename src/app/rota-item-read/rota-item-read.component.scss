@@ -1,0 +1,18 @@
+@import '../../emilena';
+
+.rota-item-block {
+    background-color: $gray;
+    padding: 0.5rem;
+    border-bottom: 1px solid $gray-dark;
+    border-right: 1px solid $gray-dark;
+    border-left: 1px solid $gray-dark;
+    margin-bottom: 1rem;
+}
+
+.ctrl-panel-item {
+    background-color: $gray-light;
+    padding: 0.5rem;
+    border-bottom: 0.5px solid $gray-dark;
+    border-right: 1px solid $gray-dark;
+    border-left: 1px solid $gray-dark;
+}

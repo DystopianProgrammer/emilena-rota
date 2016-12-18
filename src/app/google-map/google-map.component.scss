@@ -1,0 +1,13 @@
+@import '../../variables';
+
+.sebm-google-map-container {
+    height: 300px !important;
+}
+
+a {
+    border-bottom: 1px dotted $gray-dark;
+}
+a:hover {
+    text-decoration: none;
+}
+

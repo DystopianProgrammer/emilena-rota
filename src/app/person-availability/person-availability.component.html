@@ -1,10 +1,9 @@
 <div [@navigationState]="navigationState">
 	<div class="page-header">
 		<h4>{{title}}</h4>
-		<p>Add the person's availability. This is required for scheduling appointments in the rota. If the availability is unknown,
-			select the person from the directory and edit their availabilities at a later time. Multple availabilities can be added
-			for a single day allowing for lunch breaks, and multiple appointments in the case of clients. <em>For example two entries
-			1) Monday 09:00 - 12:00; 2) Monday 13:00 - 17:00</em></p>
+		<p>Availability is required for scheduling appointments in the rota. If the availability is unknown, select the person from
+			the directory and edit their availabilities at a later time. Multple availabilities can be added for a single day for
+			both clients and staff.</p>
 	</div>
 	<div class="card">
 		<div class="card-header">
@@ -31,6 +30,6 @@
 	<div class="button-bar">
 		<button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
 		<button type="button" class="btn btn-secondary" (click)="backClicked()">Back</button>
-		<button type="button" class="btn btn-primary" (click)="next()">Next</button>
+		<button type="button" class="btn btn-secondary" (click)="next()">Next</button>
 	</div>
 </div>

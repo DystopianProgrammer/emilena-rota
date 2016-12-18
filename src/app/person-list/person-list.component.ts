@@ -14,7 +14,7 @@ import { ErrorService } from '../error.service';
 @Component({
   selector: 'app-person-list',
   templateUrl: './person-list.component.html',
-  styleUrls: ['./person-list.component.css'],
+  styleUrls: ['./person-list.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',
@@ -93,16 +93,21 @@ export class PersonListComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
+  // track the state of the filter text
+  private indexOf: number = 0
+
   public onChange(event?): void {
 
-    if (this.filterText.length === 0) {
+    if(this.indexOf < event.length) {
+      this.indexOf = event.length;
+    } else {
       this.filterContainer = this.people.slice();
     }
 
     this.filterContainer = this.filterContainer.filter(p => {
       let forename = p.forename.toLowerCase();
       let surname = p.surname.toLowerCase();
-      let filter = this.filterText.toLowerCase();
+      let filter = event.toLowerCase();
       return forename.includes(filter) || surname.includes(filter)
     });
   }

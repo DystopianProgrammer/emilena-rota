@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css'],
+  styleUrls: ['./nav.component.scss'],
   animations: [
     trigger('collapseChanged', [
       state('true', style({ height: '0px', border: 0 })),

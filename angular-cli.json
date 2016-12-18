@@ -7,7 +7,9 @@
     {
       "root": "src",
       "outDir": "dist",
-      "assets": "assets",
+      "assets": [
+        "assets"
+      ],
       "index": "index.html",
       "main": "main.ts",
       "test": "test.ts",
@@ -15,11 +17,12 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "styles.scss",
+        "../bootstrap-4.0.0-alpha.5/scss/bootstrap.scss",
         "./assets/css/glyphicons.css"
       ],
-      "scripts": [],
+      "scripts": [
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
@@ -28,9 +31,27 @@
     }
   ],
   "addons": [
-    "./assets/fonts/*"
+    {
+      "0": ".",
+      "1": "/",
+      "2": "a",
+      "3": "s",
+      "4": "s",
+      "5": "e",
+      "6": "t",
+      "7": "s",
+      "8": "/",
+      "9": "f",
+      "10": "o",
+      "11": "n",
+      "12": "t",
+      "13": "s",
+      "14": "/",
+      "15": "*"
+    }
   ],
-  "packages": [],
+  "packages": [
+  ],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"
@@ -42,7 +63,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "prefixInterfaces": false
   }
 }

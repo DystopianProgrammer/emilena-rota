@@ -1,7 +1,7 @@
-<div class="card">
+<div class="card custom-card">
   <div class="card-header mb-1">
     <span class="card-title list-truncate">{{date}}</span>
-    <app-rota-item-write [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="dayOfWeek" (addRotaItem)="createNewRotaItem($event)"></app-rota-item-write>
+    <app-rota-item-write class="float-xs-right" [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="dayOfWeek" (addRotaItem)="createNewRotaItem($event)"></app-rota-item-write>
   </div>
   <div class="card-block">
     <p class="card-text" *ngIf="!items || items.length == 0">Unallocated</p>

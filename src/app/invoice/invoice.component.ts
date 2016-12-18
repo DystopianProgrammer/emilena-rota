@@ -18,7 +18,7 @@ const TITLE_ISSUED = 'Issued';
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
-  styleUrls: ['./invoice.component.css'],
+  styleUrls: ['./invoice.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',
@@ -50,11 +50,11 @@ export class InvoiceComponent implements OnInit {
   isCollapsed: boolean = false;
   title: string;
 
-  // pagination
-  currentPage: number = 1;
-  maxSize: number = 4;
-  numberItemPerPage: number = 4;
   currentResults: Invoice[] = [];
+
+  // filter
+  filterText: string;
+  originalResults: Invoice[] = [];
 
   // animating 
   navigationState = true;
@@ -68,7 +68,7 @@ export class InvoiceComponent implements OnInit {
     this.currentDate = moment().format('DD-MM-YYYY');
     this.produce();
 
-    if(this.isReadOnly) {
+    if (this.isReadOnly) {
       this.title = TITLE_ISSUED;
     } else {
       this.title = TITLE_NEW;
@@ -77,39 +77,46 @@ export class InvoiceComponent implements OnInit {
 
   produce() {
     this.title = TITLE_NEW;
-    this.currentPage = 1;
     this.isReadOnly = false;
     this.loading = true;
-    this.invoiceService.produce().subscribe(res => {
-      console.log(res);
-      this.invoices = this.sortByDate(res);
-      this.currentResults = this.paginationService.subList(this.invoices, this.currentPage, this.numberItemPerPage);
-      this.loading = false;
-    }, err => {
-      this.currentResults = [];
-      this.isCurrent = true;
-      this.loading = false;
-    });
+
+    let produceCB = () => {
+      this.invoiceService.produce().subscribe(res => {
+        this.invoices = this.sortByDate(res);
+        this.currentResults = res;
+        this.originalResults = this.currentResults.slice();
+        this.loading = false;
+      }, err => {
+        this.currentResults = [];
+        this.isCurrent = true;
+        this.loading = false;
+      });
+    }
+
+    setTimeout(produceCB, 1000);
   }
 
   issued() {
     this.title = TITLE_ISSUED;
-    this.currentPage = 1;
     this.isReadOnly = true;
     this.loading = true;
-    this.invoiceService.fetch().subscribe(invoices => {
-      this.invoices = invoices.map(i => {
-        let invoice = i;
-        invoice.amount = (i.amount.toString().includes('.')) ? `£${i.amount}` : `£${i.amount}.00`;
-        return invoice;
+
+    let fetchCB = () => {
+      this.invoiceService.fetch().subscribe(invoices => {
+        this.invoices = invoices.map(i => {
+          let invoice = i;
+          invoice.amount = (i.amount.toString().includes('.')) ? `£${i.amount}` : `£${i.amount}.00`;
+          return invoice;
+        });
+        this.currentResults = invoices;
+        this.loading = false;
+      }, err => {
+        this.loading = false;
+        this.errorService.handleError(err);
       });
-      this.currentResults = this.paginationService.subList(this.invoices, this.currentPage, this.numberItemPerPage);
-      this.loading = false;
-    }, err => {
-      this.currentResults = this.paginationService.subList(this.invoices, this.currentPage, this.numberItemPerPage);
-      this.loading = false;
-      this.errorService.handleError(err);
-    });
+    }
+
+    setTimeout(fetchCB, 1000);
   }
 
   markAsIssued(event: Invoice) {
@@ -122,8 +129,27 @@ export class InvoiceComponent implements OnInit {
 
   // pagination
   pageChanged(event: any): void {
-    this.currentResults = 
+    this.currentResults =
       this.paginationService.subList(this.invoices, event.page, event.itemsPerPage);
+  }
+
+  // track the state of the filter text
+  private indexOf: number = 0
+
+  onChange(event) {
+    if (this.indexOf < event.length) {
+      this.indexOf = event.length;
+    } else {
+      this.currentResults = this.originalResults.slice();
+    }
+
+    this.currentResults = this.currentResults.filter(i => {
+      let forename = i.rotaItem.client.forename.toLowerCase();
+      let surname = i.rotaItem.client.surname.toLowerCase();
+      let searchText = event.toLowerCase();
+
+      return forename.includes(event) || surname.includes(event);
+    });
   }
 
   private sortByDate(input) {

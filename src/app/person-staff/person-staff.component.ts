@@ -25,7 +25,7 @@ import { ErrorService } from '../error.service';
 @Component({
   selector: 'app-person-staff',
   templateUrl: './person-staff.component.html',
-  styleUrls: ['./person-staff.component.css'],
+  styleUrls: ['./person-staff.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',
@@ -98,8 +98,15 @@ export class PersonStaffComponent implements OnInit {
     this.personDetailsForm = this.formBuilder.group({
       forename: [this.person.forename, [Validators.required, Validators.minLength(2)]],
       surname: [this.person.surname, [Validators.required, Validators.minLength(2)]],
-      email: [this.person.email, [Validators.required, Validators.minLength(2)]],
-      phone: [this.person.telephoneNumber, [Validators.required, Validators.minLength(2)]],
+      email: [this.person.email, [Validators.required]],
+      phone: [this.person.telephoneNumber, 
+        [
+          Validators.required, 
+          Validators.minLength(10), 
+          Validators.maxLength(11), 
+          Validators.pattern('^[0-9]*$')
+        ]
+      ],
       preferences: [this.person.preferences, []]
     });
   }

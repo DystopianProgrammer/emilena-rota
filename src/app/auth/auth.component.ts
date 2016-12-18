@@ -13,7 +13,7 @@ import { ErrorService } from '../../app/error.service';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css'],
+  styleUrls: ['./auth.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',
@@ -95,7 +95,7 @@ export class AuthComponent implements OnInit {
         this.attempts = this.attempts++;
       }
       this.loading = false;
-    }, 2000);
+    }, 1000);
     this.loading = true;
   }
 }

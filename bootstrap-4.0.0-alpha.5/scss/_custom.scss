@@ -1,0 +1,68 @@
+// Bootstrap overrides
+//
+// Copy variables from `_variables.scss` to this file to override default values
+// without modifying source files.
+$gray-dark:                 #373a3c;
+$gray:                      #55595c;
+$gray-light:                #818a91;
+$gray-lighter:              #eceeef;
+$gray-lightest:             #f7f7f9;
+
+$brand-primary:             #333;
+$brand-success:             #5cb85c;
+$brand-info:                #5bc0de;
+$brand-warning:             #f0ad4e;
+$brand-danger:              #d9534f;
+
+
+// body
+
+$body-bg:    $gray;
+$body-color: $gray-lighter;
+
+// cards
+
+$card-border-color:        rgba(0,0,0,.125);
+$card-cap-bg:              $gray;
+$card-bg:                  $gray-dark;
+$card-link-hover-color:    #fff;
+
+
+// lists
+
+$list-group-bg:                 $gray-dark;
+$list-group-border-color:       $gray-dark;
+
+// jumbo
+
+$jumbotron-bg:                   $gray-dark;
+
+// forms
+
+$input-bg:                       $gray;
+$input-bg-disabled:              $gray;
+$input-color:                    $gray-lighter;
+$input-bg-focus:                 $input-bg !default;
+$input-color-focus:              $input-color !default;
+
+// buttons
+
+$btn-primary-color:              #fff;
+$btn-primary-bg:                 $brand-primary;
+$btn-primary-border:             $btn-primary-bg;
+
+$btn-secondary-color:            $gray-lighter;
+$btn-secondary-bg:               $gray-dark;
+$btn-secondary-border:           $gray;
+
+$btn-info-color:                 #fff;
+$btn-info-bg:                    $brand-info;
+$btn-info-border:                $btn-info-bg;
+
+$btn-success-color:              #fff;
+$btn-success-bg:                 $brand-success;
+$btn-success-border:             $btn-success-bg;
+
+$btn-warning-color:              #fff;
+$btn-warning-bg:                 $brand-warning;
+$btn-warning-border:             $btn-warning-bg;

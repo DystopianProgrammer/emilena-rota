@@ -1,0 +1,9 @@
+@import '../bootstrap-4.0.0-alpha.5/scss/custom';
+@import 'mixins';
+
+
+$body-bg-color: $gray-lightest;
+$secondary-font-color: $gray-lighter;
+$validation-success-color: $brand-success;
+$validation-fail-color: $brand-danger;
+$footer-bg-color: $gray-dark;

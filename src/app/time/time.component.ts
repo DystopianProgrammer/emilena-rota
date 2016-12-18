@@ -8,7 +8,7 @@ export class Time {
 @Component({
   selector: 'app-time',
   templateUrl: './time.component.html',
-  styleUrls: ['./time.component.css']
+  styleUrls: ['./time.component.scss']
 })
 export class TimeComponent implements OnInit {
 

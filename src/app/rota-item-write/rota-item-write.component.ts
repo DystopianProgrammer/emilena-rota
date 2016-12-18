@@ -8,7 +8,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-rota-item-write',
   templateUrl: './rota-item-write.component.html',
-  styleUrls: ['./rota-item-write.component.css']
+  styleUrls: ['./rota-item-write.component.scss']
 })
 export class RotaItemWriteComponent implements OnInit {
 

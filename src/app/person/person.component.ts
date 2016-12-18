@@ -17,7 +17,7 @@ import { PersonService } from '../person.service';
 @Component({
   selector: 'app-person',
   templateUrl: './person.component.html',
-  styleUrls: ['./person.component.css'],
+  styleUrls: ['./person.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',
@@ -41,10 +41,7 @@ import { PersonService } from '../person.service';
 })
 export class PersonComponent implements OnInit {
 
-  staff: string = 'Staff';
-  client: string = 'Client';
   title: string = 'Add New Entry';
-  selection: boolean;
 
   constructor(private router: Router, private personService: PersonService) { }
 
@@ -58,11 +55,12 @@ export class PersonComponent implements OnInit {
     }
   }
 
-  public selectAction(): void {
-    if (this.selection) {
-      this.router.navigate(['person-staff']);
-    } else {
-      this.router.navigate(['person-client']);
-    }
+  public staffSelect() {
+    this.router.navigate(['person-staff']);
   }
+
+  public clientSelect() {
+    this.router.navigate(['person-client']);
+  }
+
 }

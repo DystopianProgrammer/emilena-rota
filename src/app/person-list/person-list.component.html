@@ -14,7 +14,7 @@
 			<button class="btn btn-sm btn-secondary float-xs-right" (click)="reset()">Reset</button>
 			<div class="form-group">
 				<label for="filter">Filters <i class="fa fa-filter" aria-hidden="true"></i></label>
-				<input class="form-control" type="text" name="filter" placeholder="Person's name or part of..." [(ngModel)]="filterText"
+				<input class="form-control" type="text" name="filter" placeholder="Search..." [(ngModel)]="filterText"
 					(ngModelChange)="onChange($event)">
 			</div>
 			<label class="custom-control custom-checkbox ml-1">
@@ -40,7 +40,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12" *ngIf="!people || people.length == 0">
+	<div class="col-xs-12" *ngIf="!filterContainer || filterContainer.length === 0">
 		<p>No results found!</p>
 	</div>
 
@@ -50,18 +50,18 @@
 	<div *ngFor="let p of filterContainer, let i = index">
 		<div class="col-xs-12 col-md-6 col-lg-4">
 			<div class="card">
-				<div class="card-header mb-1">
+				<div class="card-header card-inverse">
 					<h4 class="card-title list-truncate">{{p.surname}}, {{p.forename}} <small class="text-muted">{{ p.personType | capitalizeFirst }}</small></h4>
 					<p class="card-text list-truncate">{{ p | address }} </p>
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item">
-						<i class="fa fa-circle-o" aria-hidden="true"></i>
+						<i [ngClass]="{'active-state': p.active, 'inactive-state': !p.active}" class="fa fa-circle" aria-hidden="true"></i>
 						<div class="item-label">Status:</div>
 						<span [ngSwitch]="p.active">
-							<span *ngSwitchCase="true" class="active"> Active</span>
-						<span *ngSwitchCase="false" class="inactive"> Inactive</span>
-						<span *ngSwitchDefault> Inactive</span>
+							<span *ngSwitchCase="true"> Active</span>
+							<span *ngSwitchCase="false"> Inactive</span>
+							<span *ngSwitchDefault> Inactive</span>
 						</span>
 					</li>
 					<li class="list-group-item">

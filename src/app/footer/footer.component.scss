@@ -1,0 +1,35 @@
+@import '../../emilena';
+
+.site-footer {
+    border-top: 1px solid $secondary-font-color;
+    background: $footer-bg-color;
+    z-index: 1030;
+}
+.site-footer, .content {
+    color: $secondary-font-color;
+    text-align: center;
+    font-size: 0.85em;
+    margin-top: 20px;
+}
+.site-footer-a {
+    text-decoration: none;
+    color: $secondary-font-color;
+    border-bottom: 1px dotted $secondary-font-color; 
+}
+.site-footer-a:hover {
+    text-decoration: none;
+    color: $secondary-font-color;
+}
+.site-footer-i {
+    text-decoration: none;
+    color: $secondary-font-color;
+    font-size: 2em;
+}
+.site-footer-i:hover {
+    text-decoration: none;
+    color: $secondary-font-color;
+}
+.footer-border {
+    padding-bottom: 2px;
+    background-color: rgba(0,0,0,0.1);
+}

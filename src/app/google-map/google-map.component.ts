@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
-  styleUrls: ['./google-map.component.css']
+  styleUrls: ['./google-map.component.scss']
 })
 export class GoogleMapComponent implements OnInit, OnDestroy {
 

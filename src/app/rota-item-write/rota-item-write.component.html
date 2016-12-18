@@ -1,4 +1,4 @@
-<button class="btn btn-outline-success btn-sm float-xs-right" (click)="lgModal.show()">
+<button class="btn btn-success btn-sm edit-btn" (click)="lgModal.show()">
 	<i class="fa" [ngClass]="{'fa-plus': !isEditMode, 'fa-pencil': isEditMode}" aria-hidden="true"></i>
 </button>
 <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

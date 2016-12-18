@@ -1,0 +1,15 @@
+@import '../../emilena';
+
+.day-title {
+    text-align: center;
+}
+
+:host /deep/ .nav-tabs {
+    .nav-link {
+        &.active {
+            color: $gray-light !important;
+            border-color: $gray-lighter $gray-lighter transparent;
+            background-color: $gray-dark !important;
+        }
+    }
+}

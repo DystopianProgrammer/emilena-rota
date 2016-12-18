@@ -1,0 +1,9 @@
+@import '../../emilena';
+
+.custom-card {
+    border-radius: 0 !important;
+    border-top: none !important;
+    border-left: 1px solid $gray-lighter;
+    border-right: 1px solid $gray-lighter;
+    border-bottom: 1px solid $gray-lighter;
+}

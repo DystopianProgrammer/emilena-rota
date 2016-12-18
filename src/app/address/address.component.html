@@ -36,8 +36,6 @@
 						<input class="form-control" type="text" name="postcode" placeholder="AA11 1AA" formControlName="postCode">
 						<small [hidden]="addressForm.controls.postCode.valid" class="text-danger">Postcode is required</small>
 					</div>
-
-					<! -- address lookup -->
 					<div *ngIf="addressNotFound" class="address-not-found">Address not found</div>
 					<div *ngIf="addresses" class="form-group">
 						<label for="addresses">Select address</label>
@@ -53,7 +51,7 @@
 		<div class="button-bar">
 			<button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
 			<button type="button" class="btn btn-secondary" (click)="backClicked()">Back</button>
-			<button type="submit" class="btn btn-primary" [disabled]="!addressForm.valid">Next</button>
+			<button type="submit" class="btn btn-secondary" [disabled]="!addressForm.valid">Next</button>
 		</div>
 	</form>
 </div>

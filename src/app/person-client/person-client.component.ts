@@ -25,7 +25,7 @@ import { ErrorService } from '../error.service';
 @Component({
   selector: 'app-person-client',
   templateUrl: './person-client.component.html',
-  styleUrls: ['./person-client.component.css'],
+  styleUrls: ['./person-client.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',
@@ -96,11 +96,19 @@ export class PersonClientComponent implements OnInit {
   }
 
   private buildForm(): void {
+
     this.personDetailsForm = this.formBuilder.group({
       forename: [this.person.forename, [Validators.required, Validators.minLength(2)]],
       surname: [this.person.surname, [Validators.required, Validators.minLength(2)]],
-      email: [this.person.email, [Validators.required, Validators.minLength(2)]],
-      phone: [this.person.telephoneNumber, [Validators.required, Validators.minLength(2)]],
+      email: [this.person.email, [Validators.required]],
+      phone: [this.person.telephoneNumber,
+      [
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(11),
+        Validators.pattern('^[0-9]*$')
+      ]
+      ],
       preferences: [this.person.preferences, []]
     });
   }

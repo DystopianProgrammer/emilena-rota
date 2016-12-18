@@ -1,6 +1,6 @@
 {
   "name": "emilena-rota",
-  "version": "0.0.0",
+  "version": "1.0.0-beta-2",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
@@ -35,7 +35,7 @@
   "devDependencies": {
     "@types/jasmine": "^2.2.30",
     "@types/node": "^6.0.42",
-    "angular-cli": "1.0.0-beta.17",
+    "angular-cli": "1.0.0-beta.18",
     "codelyzer": "~0.0.26",
     "jasmine-core": "2.4.1",
     "jasmine-spec-reporter": "2.5.0",

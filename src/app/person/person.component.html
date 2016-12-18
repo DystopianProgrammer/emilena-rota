@@ -8,16 +8,18 @@
 			Person Type
 		</div>
 		<div class="card-block">
-			<label class="custom-control custom-radio">
-				<input id="radio1" name="radio" [(ngModel)]="selection" (ngModelChange)="selectAction($event)" [value]="true" type="radio" class="custom-control-input">
-				<span class="custom-control-indicator"></span>
-				<span class="custom-control-description">{{staff}}</span>
-			</label>
-			<label class="custom-control custom-radio">
-				<input id="radio2" name="radio" [(ngModel)]="selection" (ngModelChange)="selectAction($event)" [value]="false" type="radio" class="custom-control-input">
-				<span class="custom-control-indicator"></span>
-				<span class="custom-control-description">{{client}}</span>
-			</label>
+			<div class="col-xs-6">
+				<div class="person-block" (click)="staffSelect()">
+					<i class="fa fa-user" aria-hidden="true"></i>
+					<div>Staff</div>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="person-block" (click)="clientSelect()">
+					<i class="fa fa-user" aria-hidden="true"></i>
+					<div>Client</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

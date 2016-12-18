@@ -1,0 +1,10 @@
+@import '../../variables';
+
+.form-control {
+    width: 65% !important;
+}
+.avail-outline {
+    border: 1px solid $gray-light;
+    padding: 1rem;
+    @include border-radius(4px);
+}

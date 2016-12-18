@@ -3,8 +3,8 @@
 	<div class="col-xs-12">
 		<div class="page-header">
 			<h4>Rota <small class="text-muted" *ngIf="rota"> Week {{ rota.weekStarting }}</small></h4>
-			<p>Both client and staff availability must be entered accurately. Anyone unavailable for this week should either be manually
-				removed from the rota, or deactivated. Availability and activation state can be amended from the directory.
+			<p>Client and staff availability must be entered accurately. Anyone unavailable for this week should either be manually removed
+				from the rota, or deactivated. Availability and activation state can be amended from the directory.
 			</p>
 		</div>
 	</div>
@@ -17,18 +17,9 @@
 	</div>
 	<div class="col-xs-12" [collapse]="isCollapsed">
 		<div class="ctrl-panel">
-			<div class="form-group">
-				<label for="saved">Saved Rotas</label>
-				<select class="form-control" name="saved" [(ngModel)]="rotaId" (ngModelChange)="onChange($event)">
-					<option disabled></option>
-					<option *ngFor="let r of rotas" [value]="r.id">{{ r.weekStarting }}, Revision: {{ r.id }}</option>
-				</select>
-			</div>
-			<div class="button-bar">
-				<button (click)="automate()" class="btn btn-success">New</button>
-				<button (click)="save()" class="btn btn-secondary">Save</button>
-				<app-allocation-modal *ngIf="rota && rota.id" [rotaId]="rota.id"></app-allocation-modal>
-			</div>
+			<button (click)="automate()" class="btn btn-sm btn-success">New</button>
+			<button (click)="save()" class="btn btn-sm btn-secondary">Save</button>
+			<app-allocation-modal *ngIf="rota && rota.id" [rotaId]="rota.id"></app-allocation-modal>
 		</div>
 	</div>
 	<div *ngIf="saved" class="col-xs-12 mt-1">

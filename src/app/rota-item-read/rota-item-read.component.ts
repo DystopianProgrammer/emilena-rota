@@ -5,7 +5,7 @@ import { ItemToRemove } from '../rota/rota.component';
 @Component({
   selector: 'app-rota-item-read',
   templateUrl: './rota-item-read.component.html',
-  styleUrls: ['./rota-item-read.component.css']
+  styleUrls: ['./rota-item-read.component.scss']
 })
 export class RotaItemReadComponent implements OnInit {
 

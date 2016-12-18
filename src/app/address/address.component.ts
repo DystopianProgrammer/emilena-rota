@@ -26,7 +26,7 @@ import { AddressService } from '../address.service';
 @Component({
   selector: 'app-address',
   templateUrl: './address.component.html',
-  styleUrls: ['./address.component.css'],
+  styleUrls: ['./address.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',

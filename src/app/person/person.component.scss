@@ -1,0 +1,27 @@
+@import '../../variables';
+@import '../../mixins';
+
+.address-not-found {
+    color: $brand-danger;
+}
+.availability-conflict {
+    color: $brand-danger;
+}
+.person-block {
+    .fa {
+        font-size: 2rem;
+    }
+    padding: 2rem;
+    background-color: $gray;
+    color: $gray-lighter;
+    text-align: center;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.person-block:hover {
+    background-color: $gray-lighter;
+    color: $gray;
+}

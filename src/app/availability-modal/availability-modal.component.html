@@ -1,17 +1,17 @@
-<button class="btn btn-outline-primary btn-block" (click)="lgModal.show()">Availability</button>
+<button class="btn btn-secondary btn-block" (click)="lgModal.show()">Availability</button>
 <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
-		<span aria-hidden="true">&times;</span>
-	</button>
+				<button type="button" class="close" (click)="lgModal.hide()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title">Availability</h4>
 				<p>{{person.surname}}, {{person.forename}}</p>
 			</div>
 			<div class="modal-body">
-				<div class="table-responsive">
-					<table class="table">
+
+
+			<div class="table-responsive">
+					<table class="table table-striped table-inverse">
 						<thead>
 							<tr>
 								<th>Day</th>

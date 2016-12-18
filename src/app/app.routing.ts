@@ -38,7 +38,7 @@ const appRoutes: Routes = [
     {
         path: 'info', component: HelpComponent, canActivate: [AuthGuard],
         children: [
-            { path: '', component: HelpPeopleManagementComponent },
+            { path: '' },
             { path: 'help-people-management', component: HelpPeopleManagementComponent, canActivate: [AuthGuard] },
             { path: 'help-rota', component: HelpRotaComponent, canActivate: [AuthGuard] },
             { path: 'help-invoicing', component: HelpInvoicingComponent, canActivate: [AuthGuard] },

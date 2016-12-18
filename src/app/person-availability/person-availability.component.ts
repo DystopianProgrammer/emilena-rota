@@ -23,7 +23,7 @@ import { TimeService } from '../time.service';
 @Component({
   selector: 'app-person-availability',
   templateUrl: './person-availability.component.html',
-  styleUrls: ['./person-availability.component.css'],
+  styleUrls: ['./person-availability.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',

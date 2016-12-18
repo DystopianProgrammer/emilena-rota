@@ -5,7 +5,7 @@
 			<p>Login</p>
 		</div>
 		<div class="card-block">
-			<form (ngSubmit)="login()">
+			<form (ngSubmit)="login()" autocomplete="off">
 				<alert *ngIf="attempts > 0" type="danger">
 					Invalid credentials, please try again.
 				</alert>

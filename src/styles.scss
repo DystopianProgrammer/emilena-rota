@@ -1,0 +1,78 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/font-awesome/css/font-awesome.css';
+@import 'emilena';
+
+html, body {
+    height: 96%;
+}
+body {
+    padding-top: 70px;
+}
+.item-line-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.page-wrap {
+    min-height: 100%;
+    margin-bottom: -142px;
+}
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+
+.page-header {
+    background-color: #4f5152;
+    padding: 20px;
+    @include border-radius(.25rem);
+    margin-bottom: 1rem;
+    border: 1px solid rgba(0,0,0,.125);
+}
+.app-loading {
+    position: absolute;
+    display: block;
+    top: 40%;
+    left: 40%;
+}
+.card {
+    @include box-shadow(4px, 2px, 5px, -2px, rgba(110,111,125,1));
+}
+.card .card-header {
+    background-color: $gray-dark;
+    border-color: $gray-dark;
+    color: $gray-lighter;
+}
+.button-bar {
+    padding: 1rem;
+    background-color: $gray-dark;
+    border: 1px solid $gray;
+    border-radius: 4px;
+}
+.ctrl-panel-dropdown {
+    background-color: $gray-dark;
+    cursor: pointer;
+    padding: 1rem 0;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,.125);
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    @include box-shadow(4px, 2px, 5px, -2px, rgba(110,111,125,1));
+}
+.ctrl-panel{
+    background-color: $gray;
+    padding: 1rem;
+    border: 1px solid rgba(0,0,0,.125);
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+    @include box-shadow(4px, 2px, 5px, -2px, rgba(110,111,125,1));
+}
+.site-footer, .page-wrap:after {
+    height: 160px; 
+}
+.modal-header {
+    background-color: $gray-dark !important;
+}
+.modal-content {
+    background-color: $gray !important;
+}

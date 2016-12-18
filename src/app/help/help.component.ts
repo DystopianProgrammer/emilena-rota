@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-help',
   templateUrl: './help.component.html',
-  styleUrls: ['./help.component.css'],
+  styleUrls: ['./help.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',

@@ -25,7 +25,7 @@ export class ItemToRemove {
 @Component({
   selector: 'app-rota',
   templateUrl: './rota.component.html',
-  styleUrls: ['./rota.component.css'],
+  styleUrls: ['./rota.component.scss'],
   animations: [
     trigger('navigationState', [
       state('*',
@@ -58,7 +58,7 @@ export class RotaComponent implements OnInit, OnDestroy {
   updated: string;
   selectedDate: string;
   weeks: any[];
-  isCollapsed: boolean = false;
+  isCollapsed: boolean = true;
 
   monday: RotaItem[] = [];
   tuesday: RotaItem[] = [];
