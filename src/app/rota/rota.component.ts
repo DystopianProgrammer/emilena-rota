@@ -50,14 +50,12 @@ export class ItemToRemove {
 export class RotaComponent implements OnInit, OnDestroy {
 
   rota: Rota;
-  rotas: Rota[];
   unallocated: any[];
 
   forDate: string;
   version: number;
   updated: string;
   selectedDate: string;
-  weeks: any[];
   isCollapsed: boolean = true;
 
   monday: RotaItem[] = [];
@@ -86,6 +84,7 @@ export class RotaComponent implements OnInit, OnDestroy {
   private _rotaUpdateSubscription: Subscription;
   private _rotaDeleteSubscription: Subscription;
   private _errorSubscription: Subscription;
+  private _rotaFindByWeekSubscription: Subscription;
 
 
   constructor(private rotaService: RotaService,
@@ -95,36 +94,23 @@ export class RotaComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    let initRota = () => {
+      this.updated = moment().format('HH:mm:ss');
+      this._staffSubscription = this.personService.staff().subscribe(res => this.staff = res);
+      this._clientSubscription = this.personService.clients().subscribe(res => this.clients = res);
+      this._rotaFindByWeekSubscription =
+        this.rotaService.findForCurrentWeek(moment().format('D-MM-YYYY')).subscribe(rota => {
+          this.rota = rota;
+          this.rota.rotaItems.forEach(item => {
+            this.add(item);
+          });
+      });
+      this.loading = false;
+    }
+
+    setTimeout(initRota, 500);
+
     this.loading = true;
-    this.updated = moment().format('HH:mm:ss');
-
-    this._staffSubscription = this.personService.staff().subscribe(res => this.staff = res);
-    this._clientSubscription = this.personService.clients().subscribe(res => this.clients = res);
-
-    this._rotaWeeksSubscription = this.rotaService.weeks().subscribe(weeks => {
-      this.weeks = weeks;
-    }, error => this.errorService.handleError(error));
-
-    this._rotaFetchAllSubscription = this.rotaService.fetchAll().subscribe(res => {
-      this.loading = false;
-      this.rotas = res;
-
-      let initialise = (index) => {
-        this.rota = res[index];
-        this.forDate = res[index].weekStarting;
-        this.version = res[index].id;
-        this.rota.rotaItems.forEach(item => {
-          this.add(item);
-        });
-      }
-      if (this.rotas.length > 0) {
-        // find the index for this week's rota
-        initialise(0);
-      }
-    }, err => {
-      this.loading = false;
-      this.errorService.handleError(err);
-    });
   }
 
   ngOnDestroy() {
@@ -136,24 +122,7 @@ export class RotaComponent implements OnInit, OnDestroy {
     if (this._rotaUpdateSubscription) { this._rotaUpdateSubscription.unsubscribe(); }
     if (this._rotaDeleteSubscription) { this._rotaDeleteSubscription.unsubscribe(); }
     if (this._errorSubscription) { this._errorSubscription.unsubscribe(); }
-  }
-
-  delete(rota: Rota) {
-    let start = rota.weekStarting;
-    this._rotaDeleteSubscription = this.rotaService.delete(rota).subscribe(res => {
-      this.alreadyExists = false;
-      let index = this.rotas.findIndex(r => r.id === rota.id);
-      this.rotas.splice(index, 1);
-      this.reset();
-      this.automate();
-    }, err => {
-      this.errorService.handleError(err);
-    });
-    this.isCollapsed = false;
-  }
-
-  noDelete(rota: Rota) {
-    this.alreadyExists = false;
+    if (this._rotaFindByWeekSubscription) { this._rotaFindByWeekSubscription.unsubscribe(); }
   }
 
   deleteRotaItem(item: any): void {
@@ -208,10 +177,6 @@ export class RotaComponent implements OnInit, OnDestroy {
       this.isCollapsed = false;
       this.saved = true;
       this.rota = res;
-      let item = this.rotas.filter(r => r.id === this.rota.id);
-      if (item.length === 0) {
-        this.rotas.push(this.rota);
-      }
     }, err => this.errorService.handleError(err));
   }
 
@@ -229,11 +194,12 @@ export class RotaComponent implements OnInit, OnDestroy {
     }, err => this.errorService.handleError(err));
   }
 
-  automate() {
+  newRota() {
     this.loading = true
-    this._rotaCreateSubscription = this.rotaService.create(this.weeks[0]).subscribe(res => {
+    let currentWeek = moment().format('D-MM-YYYY');
+    this._rotaCreateSubscription = this.rotaService.create(currentWeek).subscribe(res => {
       this.updated = moment().format('HH:mm:ss');
-      this.forDate = this.weeks[0];
+      this.forDate = currentWeek;
       this.reset();
       this.rota = res;
       this.rota.rotaItems.forEach(item => this.add(item));

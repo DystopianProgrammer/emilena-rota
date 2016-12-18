@@ -4,12 +4,12 @@
     <app-rota-item-write class="float-xs-right" [weekStarting]="rota.weekStarting" [clients]="clients" [staff]="staff" [day]="dayOfWeek" (addRotaItem)="createNewRotaItem($event)"></app-rota-item-write>
   </div>
   <div class="card-block">
-    <p class="card-text" *ngIf="!items || items.length == 0">Unallocated</p>
+    <p class="card-text" *ngIf="!items || items.length == 0">No entries.</p>
     <div *ngFor="let item of items; let i = index">
       <app-rota-item-read [clients]="clients" [staff]="staff" [item]="item" [index]="i" (complete)="completeRotaItem($event)" (remove)="removeRotaItem($event)"></app-rota-item-read>
     </div>
   </div>
   <div class="card-footer text-muted">
-    <p class="card-text"><small class="text-muted">Last updated 2 days ago</small></p>
+    <p class="card-text"><small class="text-muted">Last updated just now</small></p>
   </div>
 </div>

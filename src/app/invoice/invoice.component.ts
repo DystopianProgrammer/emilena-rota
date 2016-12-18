@@ -93,7 +93,7 @@ export class InvoiceComponent implements OnInit {
       });
     }
 
-    setTimeout(produceCB, 1000);
+    setTimeout(produceCB, 300);
   }
 
   issued() {
@@ -116,7 +116,7 @@ export class InvoiceComponent implements OnInit {
       });
     }
 
-    setTimeout(fetchCB, 1000);
+    setTimeout(fetchCB, 300);
   }
 
   markAsIssued(event: Invoice) {

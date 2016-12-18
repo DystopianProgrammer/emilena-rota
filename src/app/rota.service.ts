@@ -39,6 +39,11 @@ export class RotaService {
       .map((r: Response) => r.json() as Rota);
   }
 
+  findForCurrentWeek(week: string): Observable<Rota> {
+    return this.http.get(`/emilena-api/rota/find-by-week/${week}`, this.authService.requestOptionsWithJsonHeader())
+      .map((r: Response) => r.json() as Rota);
+  }
+
   findUnallocated(id: number): Observable<Person[]> {
     return this.http.get(`/emilena-api/rota/unallocated/${id}`, this.authService.requestOptionsWithJsonHeader())
       .map((r: Response) => r.json()).catch(error => Observable.throw('No unallocations'));

@@ -1,5 +1,5 @@
 <app-spinner *ngIf="loading"></app-spinner>
-<div class="row" *ngIf="!loading" [@navigationState]="navigationState">
+<div class="row mb-1" *ngIf="!loading" [@navigationState]="navigationState">
 	<div class="col-xs-12">
 		<div class="page-header">
 			<h4>Rota <small class="text-muted" *ngIf="rota"> Week {{ rota.weekStarting }}</small></h4>
@@ -17,7 +17,7 @@
 	</div>
 	<div class="col-xs-12" [collapse]="isCollapsed">
 		<div class="ctrl-panel">
-			<button (click)="automate()" class="btn btn-sm btn-success">New</button>
+			<button (click)="newRota()" class="btn btn-sm btn-success">New</button>
 			<button (click)="save()" class="btn btn-sm btn-secondary">Save</button>
 			<app-allocation-modal *ngIf="rota && rota.id" [rotaId]="rota.id"></app-allocation-modal>
 		</div>
@@ -27,21 +27,8 @@
 			Successfully saved!
 		</alert>
 	</div>
-	<div *ngIf="alreadyExists" class="col-xs-12 mt-1">
-		<alert (close)="alertDismissed()" dismissible="true" type="danger">
-			<p>
-				A rota for <strong>{{rota.weekStarting}} </strong> already exists. If you wish to recreate it, please delete it first.
-				Otherwise make manual amendments to the existing rota.
-			</p>
-			<div>
-				<p>Do you wish to delete it?</p>
-				<button (click)="delete(rota)" class="btn btn-outline-danger">Yes</button>
-				<button (click)="noDelete(rota)" class="btn btn-outline-danger">No</button>
-			</div>
-		</alert>
-	</div>
 </div>
-<div class="row mt-1" *ngIf="!loading && rota">
+<div class="row" *ngIf="!loading && rota">
 	<div class="col-xs-12">
 		<tabset>
 			<tab heading="Monday">
