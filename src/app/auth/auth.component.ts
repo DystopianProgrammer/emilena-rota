@@ -95,7 +95,7 @@ export class AuthComponent implements OnInit {
         this.attempts = this.attempts++;
       }
       this.loading = false;
-    }, 1000);
+    }, 5000);
     this.loading = true;
   }
 }

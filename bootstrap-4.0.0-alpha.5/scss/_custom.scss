@@ -66,3 +66,7 @@ $btn-success-border:             $btn-success-bg;
 $btn-warning-color:              #fff;
 $btn-warning-bg:                 $brand-warning;
 $btn-warning-border:             $btn-warning-bg;
+
+$link-color:            $gray-lighter;
+$link-decoration:       none;
+$link-hover-color:      darken($link-color, 15%);
