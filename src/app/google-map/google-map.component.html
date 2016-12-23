@@ -1,5 +1,5 @@
 <div class="item-line-truncate">
-	<strong>Client:&nbsp;</strong><a href="javascript:void(0)" (click)="showChildModal()">{{ person.surname }}, {{ person.forename }}</a>
+	<strong>Client:&nbsp;</strong><a class="map-link" href="javascript:void(0)" (click)="showChildModal()">{{ person.surname }}, {{ person.forename }}</a>
 </div>
 
 <div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="locationLabel" aria-hidden="true">

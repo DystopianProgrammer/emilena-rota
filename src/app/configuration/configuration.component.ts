@@ -48,6 +48,9 @@ export class ConfigurationComponent implements OnInit {
     this.configurationService.getConfiguration()
       .subscribe(res => {
         this.config = res;
+        let gdmKey = this.config.googleMapsDistanceMatrixApiKey.length;
+        this.config.googleMapsDistanceMatrixApiKey = this.config.googleMapsDistanceMatrixApiKey.replace(/[aA-zZ]/g, '#');
+        this.config.apiKey = this.config.apiKey.replace(/[aA-zZ]/g, '#');
         this.loading = false;
       }, err => this.errorService.handleError(err));
   }

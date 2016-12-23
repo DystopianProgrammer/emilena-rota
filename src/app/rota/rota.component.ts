@@ -56,7 +56,7 @@ export class RotaComponent implements OnInit, OnDestroy {
   version: number;
   updated: string;
   selectedDate: string;
-  isCollapsed: boolean = true;
+  isCollapsed: boolean = false;
 
   monday: RotaItem[] = [];
   tuesday: RotaItem[] = [];
