@@ -16,14 +16,7 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss'],
-  animations: [
-    trigger('collapseChanged', [
-      state('true', style({ height: '0px', border: 0 })),
-      state('false', style({ height: '*', border: 0 })),
-      transition('1 => 0', animate('100ms ease-in'))
-    ])
-  ]
+  styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit, OnDestroy {
 

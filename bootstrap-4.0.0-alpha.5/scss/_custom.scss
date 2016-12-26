@@ -2,71 +2,73 @@
 //
 // Copy variables from `_variables.scss` to this file to override default values
 // without modifying source files.
+$color1: rgba(84, 106, 118, 1);
+$color2: rgba(136, 160, 168, 1);
+$color3: rgba(180, 206, 179, 1);
+$color4: rgba(219, 211, 201, 1);
+$color5: rgba(250, 212, 216, 1);
+
 $gray-dark:                 #373a3c;
 $gray:                      #55595c;
 $gray-light:                #818a91;
 $gray-lighter:              #eceeef;
 $gray-lightest:             #f7f7f9;
 
-$brand-primary:             #333;
-$brand-success:             #5cb85c;
-$brand-info:                #5bc0de;
-$brand-warning:             #f0ad4e;
-$brand-danger:              #d9534f;
-
+$brand-primary:             $color1;
+$brand-secondary:           $color2;
+$brand-success:             $color2;
+$brand-info:                $color2;
+$brand-warning:             $color4;
+$brand-danger:              $color4;
+$brand-inverse:             $color3;
 
 // body
-
-$body-bg:    $gray;
-$body-color: $gray-lighter;
+$body-bg:    $gray-lightest;
+$body-color: $gray-lightest;
 
 // cards
+$card-border-color:        $gray-lighter;
+$card-cap-bg:              $color1;
+$card-bg:                  $color1;
+$card-link-hover-color:    $color5;
 
-$card-border-color:        rgba(0,0,0,.125);
-$card-cap-bg:              $gray;
-$card-bg:                  $gray-dark;
-$card-link-hover-color:    #fff;
-
+// links
+$link-color:            $gray-lightest;
+$link-decoration:       none;
+$link-hover-color:      darken($link-color, 15%);
+$link-hover-decoration: underline;
 
 // lists
-
-$list-group-bg:                 $gray-dark;
-$list-group-border-color:       $gray-dark;
+$list-group-bg:                 $brand-primary;
+$list-group-border-color:       $brand-primary;
 
 // jumbo
-
-$jumbotron-bg:                   $gray-dark;
+$jumbotron-bg:                  $brand-primary;
 
 // forms
-
-$input-bg:                       $gray;
-$input-bg-disabled:              $gray;
-$input-color:                    $gray-lighter;
-$input-bg-focus:                 $input-bg !default;
-$input-color-focus:              $input-color !default;
+$input-bg:                      $color2;
+$input-bg-disabled:             $color2;
+$input-color:                   $color5;
+$input-bg-focus:                $input-bg;
+$input-color-focus:             $input-color;
 
 // buttons
-
-$btn-primary-color:              #fff;
+$btn-primary-color:              $gray;
 $btn-primary-bg:                 $brand-primary;
 $btn-primary-border:             $btn-primary-bg;
 
 $btn-secondary-color:            $gray-lighter;
-$btn-secondary-bg:               $gray-dark;
-$btn-secondary-border:           $gray;
+$btn-secondary-bg:               $brand-secondary;
+$btn-secondary-border:           $color5;
 
-$btn-info-color:                 #fff;
+$btn-info-color:                 $gray;
 $btn-info-bg:                    $brand-info;
 $btn-info-border:                $btn-info-bg;
 
-$btn-success-color:              #fff;
-$btn-success-bg:                 $brand-success;
-$btn-success-border:             $btn-success-bg;
+$btn-success-color:              $gray-lighter;
+$btn-success-bg:                 $brand-secondary;
+$btn-success-border:             $color5;
 
-$btn-warning-color:              #fff;
+$btn-warning-color:              $gray;
 $btn-warning-bg:                 $brand-warning;
 $btn-warning-border:             $btn-warning-bg;
-
-$link-color:            $gray-lighter;
-$link-decoration:       none;
-$link-hover-color:      darken($link-color, 15%);

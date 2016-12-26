@@ -1,4 +1,4 @@
-@import '../../variables';
+@import '../../emilena';
 
 .sebm-google-map-container {
     height: 300px !important;
@@ -12,6 +12,6 @@ a:hover {
 }
 
 .map-link {
-    color: #f9ad22;
+    color: $color1;
 }
 

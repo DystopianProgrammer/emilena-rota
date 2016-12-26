@@ -1,32 +1,35 @@
-<div class="row">
+<div [@navigationState]="navigationState">
 	<div class="col-xs-12">
-		<div class="jumbotron" [@navigationState]="navigationState">
+		<div class="jumbotron">
 			<h1>Care Scheduler <small class="text-muted">(Demo)</small></h1>
 			<p class="lead">Manage scheduling appointments, contact information, addressing, as well as invoicing</p>
 			<hr class="my-2">
 			<p>Find the project on github. This is an open source project under an MIT style license.</p>
-			<p class="lead">
-				<a class="btn btn-secondary" [routerLink]="['/info']" role="button">Learn more</a>
-			</p>
 		</div>
 	</div>
-</div>
-<div class="row info-section">
-	<div class="col-xs-12 col-lg-6">
-		<div class="embed-responsive embed-responsive-16by9">
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/wtD0nHsuJDE" frameborder="0" allowfullscreen></iframe>
+	<div class="info-section">
+		<div class="col-xs-12 col-lg-6 mb-2">
+			<div class="embed-responsive embed-responsive-16by9">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/wtD0nHsuJDE" frameborder="0" allowfullscreen></iframe>
+			</div>
 		</div>
-		<h4 class="mt-1">Responsive Design</h4>
-		<p>Use from your mobile device, access client information while on the move.</p>
-	</div>
-	<div class="col-xs-12 col-lg-6">
-		<h4>Maximise Resource</h4>
-		<p>Cut down on time spent setting up weekly rotas and invoicing with speed and efficiency. Eliminate the need for manually
-			pairing clients (patients) and staff for hourly, daily and weekly appointments. Schedule your staff for any proximity.</p>
-		<h4>Customizable And Easy to Deploy</h4>
-		<p>Built with robust and powerful frameworks - Angular 2 and Dropwizard for Java. Open Sourced, free to use by all. Adapt
-			it to your organisation's requirements.</p>
-		<img src="assets/images/angularjs.png" alt="angular 2">
-		<img src="assets/images/openjdk.png" alt="open jdk">
+		<div class="col-xs-12 col-lg-6">
+			<div class="info-section-block">
+				<h4>Maximise Resource</h4>
+				<p>Cut down on time spent setting up weekly rotas and invoicing with speed and efficiency. Eliminate the need for manually
+					pairing clients (patients) and staff for hourly, daily and weekly appointments. Schedule your staff for any proximity.</p>
+			</div>
+			<div class="info-section-block">
+				<h4>Customizable And Easy to Deploy</h4>
+				<p>Built with robust and powerful frameworks - Angular 2 and Dropwizard for Java. Open Sourced, free to use by all. Adapt
+					it to your organisation's requirements.</p>
+				<img src="assets/images/angularjs.png" alt="angular 2">
+				<img src="assets/images/openjdk.png" alt="open jdk">
+			</div>
+			<div class="info-section-block">
+				<h4 class="mt-1">Responsive Design</h4>
+				<p>Use from your mobile device, access client information while on the move.</p>
+			</div>
+		</div>
 	</div>
 </div>

@@ -1,4 +1,4 @@
-@import '../../variables';
+@import '../../emilena';
 
 .list-truncate {
   white-space: nowrap;
@@ -7,11 +7,11 @@
 }
 
 .filter-list {
-  background-color: $gray-dark;
   padding: 1rem;
-  border-radius: 5px;
-  border: 1px solid $gray-light;
   margin-bottom: 1rem;
+  background-color: $brand-primary;
+  @include border-radius(4px);
+  @include box-shadow(4px, 2px, 5px, -2px, rgba(110,111,125,1));
 }
 
 .active-state {

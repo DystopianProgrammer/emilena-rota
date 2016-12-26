@@ -1,5 +1,4 @@
-@import '../../variables';
-@import '../../mixins';
+@import '../../emilena';
 
 .address-not-found {
     color: $brand-danger;
@@ -12,16 +11,12 @@
         font-size: 2rem;
     }
     padding: 2rem;
-    background-color: $gray;
-    color: $gray-lighter;
+    background-color: $color2;
+    color: $color5;
     text-align: center;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     border-radius: 10px;
     cursor: pointer;
-}
-.person-block:hover {
-    background-color: $gray-lighter;
-    color: $gray;
 }

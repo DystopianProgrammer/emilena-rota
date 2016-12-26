@@ -1,6 +1,8 @@
-<nav class="navbar navbar-dark bg-primary navbar-fixed-top">
+<nav class="navbar navbar-fixed-top">
 	<div [ngClass]="{'clearfix': !isMenuCollapsed}">
-		<button class="navbar-toggler hidden-lg-up float-xs-right" type="button" (click)="isMenuCollapsed = !isMenuCollapsed"></button>
+		<button class="navbar-toggler hidden-lg-up float-xs-right" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+			<i class="fa fa-bars" aria-hidden="true"></i>
+		</button>
 		<a class="navbar-brand" [routerLink]="['home']">Care Scheduler</a>
 	</div>
 	<div *ngIf="systemUser" class="collapse navbar-toggleable-md" id="navbarResponsive" [collapse]="isMenuCollapsed">

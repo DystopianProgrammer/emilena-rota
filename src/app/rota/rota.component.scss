@@ -5,11 +5,15 @@
 }
 
 :host /deep/ .nav-tabs {
+    .nav-item {
+        color: $brand-primary !important;
+    }
     .nav-link {
+        color: $brand-primary !important;
         &.active {
             color: $gray-light !important;
             border-color: $gray-lighter $gray-lighter transparent;
-            background-color: $gray-dark !important;
+            background-color: $brand-primary !important;
         }
     }
 }

@@ -41,7 +41,7 @@ import { PersonService } from '../person.service';
 })
 export class PersonComponent implements OnInit {
 
-  title: string = 'Add New Entry';
+  title: string = 'Create New Entry';
 
   constructor(private router: Router, private personService: PersonService) { }
 
