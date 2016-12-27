@@ -5,13 +5,16 @@
 }
 
 :host /deep/ .nav-tabs {
+    border-top-left-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+    background-color: $brand-secondary;
     .nav-item {
-        color: $brand-primary !important;
+        color: $gray-lighter !important;
     }
     .nav-link {
-        color: $brand-primary !important;
+        color: $gray-lighter !important;
         &.active {
-            color: $gray-light !important;
+            color: $gray-lightest !important;
             border-color: $gray-lighter $gray-lighter transparent;
             background-color: $brand-primary !important;
         }

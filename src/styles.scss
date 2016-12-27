@@ -23,7 +23,7 @@ body {
 }
 
 .page-header {
-    background-color: $brand-primary;
+    background-color: $color3;
     padding: 20px;
     @include border-radius(.25rem);
     margin-bottom: 1rem;
@@ -47,7 +47,7 @@ body {
     @include box-shadow(4px, 2px, 5px, -2px, rgba(110,111,125,1));
 }
 .ctrl-panel-dropdown {
-    background-color: $brand-primary;
+    background-color: $color3;
     cursor: pointer;
     padding: 1rem 0;
     text-align: center;
@@ -57,7 +57,7 @@ body {
     @include box-shadow(4px, 2px, 5px, -2px, rgba(110,111,125,1));
 }
 .ctrl-panel{
-    background-color: $brand-primary;
+    background-color: $color1;
     padding: 1rem;
     border: 1px solid rgba(0,0,0,.125);
     border-bottom-left-radius: .25rem;
@@ -71,5 +71,5 @@ body {
     background-color: $color1 !important;
 }
 .modal-content {
-    background-color: $color1 !important;
+    background-color: $gray-lighter !important;
 }
